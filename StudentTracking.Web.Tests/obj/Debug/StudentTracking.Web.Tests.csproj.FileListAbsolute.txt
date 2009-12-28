@@ -1,0 +1,14 @@
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.Tests.dll.config
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.Tests.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.Tests.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\SubSonic.Core.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Model.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\xVal.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\SubSonic.Core.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\SubSonic.Core.xml
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Model.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\obj\Debug\StudentTracking.Web.Tests.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\obj\Debug\StudentTracking.Web.Tests.pdb

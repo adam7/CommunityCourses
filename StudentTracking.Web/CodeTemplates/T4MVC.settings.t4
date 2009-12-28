@@ -1,0 +1,51 @@
+﻿<#+
+/*
+
+This file contains settings used by T4MVC.tt. The main goal is to avoid the need for users
+to fork the 'official' template in order to achieve what they want.
+ 
+*/
+
+
+// The prefix used for things like MVC.Dinners.Name and MVC.Dinners.Delete(Model.DinnerID)
+const string HelpersPrefix = "MVC";
+
+// The folder under the project that contains the controllers
+const string ControllersFolder = "Controllers";
+
+// The folder under the project that contains the views
+const string ViewsRootFolder = "Views";
+
+// The namespace that the links are generated in (e.g. "Links", as in Links.Content.nerd_jpg)
+const string LinksNamespace = "Links";
+
+// Folders containing static files for which links are generated (e.g. Links.Scripts.Map_js)
+readonly string[] StaticFilesFolders = new string[] {
+    "Scripts",
+    "Content",
+};
+
+// If true, the template marks itself as unsaved as part of its execution.
+// This way it will be saved and update itself next time the project is built.
+// Basically, it keeps marking itself as unsaved to make the next build work.
+// Note: this is certainly hacky, but is the best I could come up with so far.
+const bool AlwaysKeepTemplateDirty = true;
+
+void RenderAdditionalCode() {
+#>
+static class T4MVCHelpers {
+    // You can change the ProcessVirtualPath method to modify the path that gets returned to the client.
+    // e.g. you can prepend a domain, or append a query string:
+    //      return "http://localhost" + path + "?foo=bar";
+    public static string ProcessVirtualPath(string virtualPath) {
+        // The path that comes in starts with ~/ and must first be made absolute
+        string path = VirtualPathUtility.ToAbsolute(virtualPath);
+        
+        // Add your own modifications here before returning the path
+        return path;
+    }
+}
+
+<#+
+}
+#>

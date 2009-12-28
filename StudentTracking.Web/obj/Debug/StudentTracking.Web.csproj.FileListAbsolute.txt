@@ -1,0 +1,22 @@
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\xVal.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.xml
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.pdb
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Data.dll
+C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Data.pdb
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.dll
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.pdb
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.dll
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.pdb
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Data.dll
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.dll
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\xVal.dll
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.pdb
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\SubSonic.Core.xml
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Data.pdb
