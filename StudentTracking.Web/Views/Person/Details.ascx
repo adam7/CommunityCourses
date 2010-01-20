@@ -27,20 +27,15 @@
   </p>
   <p>
     Disability:
-    <%= Html.Encode(Model.DisabilityId) %>
+    <%= Html.Encode(Model.Disability.Name) %>
   </p>
   <p>
     Ethnicity:
-    <%= Html.Encode(Model.EthnicityId) %>
+    <%= Html.Encode(Model.Ethnicity.Name) %>
   </p>
   <p>
     Gender:
-    <%= Html.Encode(Model.GenderId) %>
+    <%= Html.Encode(Model.Gender.Name) %>
   </p>
 </fieldset>
 <% Html.RenderPartial("~/Views/Address/Details.ascx", Model.Address); %>
-<p>
-  <%=Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) %>
-  |
-  <%=Html.ActionLink("Back to List", "Index") %>
-</p>

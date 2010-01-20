@@ -8,5 +8,9 @@
 
     <h2>Details</h2>
     <% Html.RenderPartial("~/Views/Person/Details.ascx", Model.Person); %>
+    <p>
+        <%=Html.ActionLink("Edit", "Edit", new { id=Model.Id  }) %> |
+        <%=Html.ActionLink("Back to List", "Index") %>
+    </p>
 
 </asp:Content>

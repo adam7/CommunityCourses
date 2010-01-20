@@ -49,9 +49,6 @@ namespace StudentTracking.Web.Controllers
 			return View(new CentreRepository().Get(id));
 		}
 
-		//
-		// POST: /Centre/Edit/5
-
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Edit(Centre centre, Address address)
 		{

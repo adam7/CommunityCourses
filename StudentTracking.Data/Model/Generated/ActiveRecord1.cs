@@ -808,6 +808,18 @@ namespace StudentTracking.Data.Model
             }
         }
 
+        public IQueryable<TasterSession> TasterSessions
+        {
+            get
+            {
+                
+                  var repo=StudentTracking.Data.Model.TasterSession.GetRepo();
+                  return from items in repo.GetAll()
+                       where items.CentreId == _Id
+                       select items;
+            }
+        }
+
         public Person Contact      
 				{
             get
@@ -9333,6 +9345,17 @@ namespace StudentTracking.Data.Model
         }
         
         #region ' Foreign Keys '
+        public Centre Centre      
+				{
+            get
+            {
+                  var repo=StudentTracking.Data.Model.Centre.GetRepo();
+                  return (from items in repo.GetAll()
+                       where items.Id == _CentreId
+                       select items).SingleOrDefault();
+            }
+						set { CentreId = value.Id; }
+        }
         public IQueryable<StudentTasterSession> StudentTasterSessions
         {
             get

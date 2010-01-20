@@ -22,11 +22,11 @@
         Phone:</label>
       <%= Html.TextBox("Phone") %>
     </p>
-    <p>
+<%--    <p>
       <label for="ContactId">
         ContactId:</label>
       <%= Html.TextBox("ContactId") %>
-    </p>
+    </p>--%>
   </fieldset>
   <% Html.RenderPartial("~/Views/Address/Form.ascx", Model.Address ?? new Address()); %>
   <p>

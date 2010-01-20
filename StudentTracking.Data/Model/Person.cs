@@ -10,24 +10,6 @@ namespace StudentTracking.Data.Model
   [MetadataType(typeof(PersonValidation))]
   public partial class Person
   {
-    //public Gender Gender
-    //{
-    //  get { return Genders.FirstOrDefault(); }
-    //  set { GenderId = value.Id; }
-    //}
-
-    //public Disability Disability
-    //{
-    //  get { return Disabilities.FirstOrDefault(); }
-    //  set { DisabilityId = value.Id; }
-    //}
-
-    //public Address Address
-    //{
-    //  get { return Addresses.FirstOrDefault() ?? new Address(); }
-    //  set { AddressId = value.Id; }
-    //}
-
     public string Name
     {
       get { return string.Format("{0} {1} {2}", Title, FirstName, LastName); }
@@ -51,7 +33,6 @@ namespace StudentTracking.Data.Model
     [DataType(DataType.PhoneNumber)]
     public string Mobile;
 
-    [Required]
     [DataType(DataType.EmailAddress)]
     public string Email;
 

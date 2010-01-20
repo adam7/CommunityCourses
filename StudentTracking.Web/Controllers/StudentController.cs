@@ -82,7 +82,7 @@ namespace StudentTracking.Web.Controllers
     {
       try
       {
-        StudentService.Create(person, address);
+        StudentService.Update(person, address);
         return RedirectToAction(MVC.Person.Actions.Index);
       }
       catch

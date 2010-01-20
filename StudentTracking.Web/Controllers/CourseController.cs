@@ -67,7 +67,7 @@ namespace StudentTracking.Web.Controllers
     {
       try
       {
-        new CourseRepository().Update(course);
+				new CourseRepository().Update(course);
         TempData.SetMessage("Course updated");
         return RedirectToAction("Index");
       }

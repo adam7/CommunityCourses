@@ -7,6 +7,7 @@ using SubSonic.Repository;
 using SubSonic.DataProviders;
 using StudentTracking.Data.Model;
 using StudentTracking.Data.Extensions;
+using System.Reflection;
 
 namespace StudentTracking.Data.Repository
 {
@@ -46,7 +47,32 @@ namespace StudentTracking.Data.Repository
     {
       if (item.IsValid())
       {
-        item.Update();
+				T updatedItem = repository.GetByKey(item.KeyValue());
+
+				Type type = typeof(T);
+				PropertyInfo[] propertyInfos = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
+
+				foreach (PropertyInfo info in propertyInfos)
+				{
+					// Check if the type is a value type, a nullable value type, or a string. We don't want to update any complicated types
+					Type propertyType = info.PropertyType;
+					if (propertyType.IsValueType
+						|| (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+						|| propertyType == typeof(string))
+					{
+						// Make sure we don't update any audit columns
+						string upperName = info.Name.ToUpperInvariant();
+						if(upperName != "CREATEDBY" 
+							&& upperName != "CREATEDON"
+							&& upperName != "MODIFIEDBY"
+							&& upperName != "MODIFIEDON")
+						{
+							info.SetValue(updatedItem, info.GetValue(item, null), null);
+						}						
+					}
+				}
+
+        updatedItem.Update();
       }
       else
       {

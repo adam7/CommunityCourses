@@ -106,8 +106,10 @@
     <Content Include="Scripts\xVal.jquery.validate.js" />
     <Content Include="Views\Address\Details.ascx" />
     <Content Include="Views\Address\Form.ascx" />
+    <Content Include="Views\Centre\Details.aspx" />
     <Content Include="Views\Centre\Edit.aspx" />
     <Content Include="Views\Centre\Index.aspx" />
+    <Content Include="Views\Course\Details.aspx" />
     <Content Include="Views\Course\Edit.aspx" />
     <Content Include="Views\Course\Index.aspx" />
     <Content Include="Views\Person\Create.aspx" />
@@ -120,6 +122,7 @@
     <Content Include="Views\Student\Edit.aspx" />
     <Content Include="Views\Student\Index.aspx" />
     <Content Include="Views\Student\List.ascx" />
+    <Content Include="Views\TasterSession\Details.aspx" />
     <Content Include="Views\TasterSession\Edit.aspx" />
     <Content Include="Views\TasterSession\Index.aspx" />
     <Content Include="Views\Unit\Index.aspx" />
@@ -170,7 +173,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -193,6 +195,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

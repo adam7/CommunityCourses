@@ -57,7 +57,7 @@
 	<p>
 		<label for="CriminalRecordsBureauReferenceNumber">
 			CRB Reference Number</label>
-		<%= Html.TextBox("CriminalRecordsBureauReferenceNumber", Model.Email)%>	
+		<%= Html.TextBox("CriminalRecordsBureauReferenceNumber", Model.CriminalRecordsBureauReferenceNumber)%>	
 	</p>
 	<p>
 		<label for="Notes">

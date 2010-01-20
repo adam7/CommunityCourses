@@ -1951,7 +1951,7 @@ namespace StudentTracking.Data.Model {
 	                DataType = DbType.Int32,
 	                IsNullable = true,
 	                AutoIncrement = false,
-	                IsForeignKey = false,
+	                IsForeignKey = true,
 	                MaxLength = 0
                 });
 

@@ -1,6 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Data.Model.Course>" %>
 
 <%@ Import Namespace="xVal.Rules" %>
+<%@ Import Namespace="StudentTracking.Data.Model" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit
 </asp:Content>
@@ -47,13 +48,16 @@
 		</p>
 	</fieldset>
 	<% } %>
-	<%= Html.ClientSideValidation<StudentTracking.Data.Model.Course>() %>
+	<%= Html.ClientSideValidation<Course>() %>
+	<%
+		if (Model.Id != 0)
+		{ %>	
 	<fieldset>
 		<legend>Students</legend>
 		<% Html.RenderPartial("~/Views/Student/List.ascx", Model.Students); %>
 		<% using (Html.BeginForm("AddStudent", "Course"))
 		 { %>
-		<%= Html.Hidden("Id", Model.Id) %>
+		<%= Html.Hidden("Id", Model.Id)%>
 		<p>
 			<label for="AddStudentId">
 				Student:</label>
@@ -63,7 +67,8 @@
 		<%} %>
 	</fieldset>
 	<div>
-		<%=Html.ActionLink("Back to List", "Index") %>
+		<%=Html.ActionLink("Back to List", "Index")%>
 		| <a href="">Add Student</a>
 	</div>
+	<%} %>
 </asp:Content>

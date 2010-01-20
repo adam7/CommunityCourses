@@ -35,14 +35,16 @@
       <input type="submit" value="Save" />
     </p>
   </fieldset>
-  <% } %>
-  <%= Html.ClientSideValidation<StudentTracking.Data.Model.TasterSession>() %>
+  <% }
+		 if (Model.Id != 0)
+		 { %>
+  <%= Html.ClientSideValidation<StudentTracking.Data.Model.TasterSession>()%>
 	<fieldset>
 		<legend>Students</legend>
 		<% Html.RenderPartial("~/Views/Student/List.ascx", Model.Students); %>
 		<% using (Html.BeginForm("AddStudent", "TasterSession"))
 		 { %>
-		<%= Html.Hidden("Id", Model.Id) %>
+		<%= Html.Hidden("Id", Model.Id)%>
 		<p>
 			<label for="AddStudentId">
 				Student:</label>
@@ -52,7 +54,8 @@
 		<%} %>
 	</fieldset>
 	<div>
-		<%=Html.ActionLink("Back to List", "Index") %>
+		<%=Html.ActionLink("Back to List", "Index")%>
 		| <a href="">Add Student</a>
 	</div>
+	<%} %>
 </asp:Content>

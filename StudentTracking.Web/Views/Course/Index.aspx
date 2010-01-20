@@ -41,10 +41,10 @@
         <%= Html.Encode(item.Name) %>
       </td>
       <td>
-        <%= Html.Encode(item.UnitId) %>
+        <%= Html.Encode(item.Unit.Name) %>
       </td>
       <td>
-        <%= Html.Encode(item.CentreId) %>
+        <%= Html.Encode(item.Centre.Name) %>
       </td>
       <td>
         <%= Html.Encode(String.Format("{0:g}", item.StartDate)) %>

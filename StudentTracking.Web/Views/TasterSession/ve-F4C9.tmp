@@ -34,7 +34,7 @@
                 <%= Html.Encode(item.Name) %>
             </td>
             <td>
-                <%= Html.Encode(item.Centre.Name) %>
+                <%= Html.Encode(item.Centre.Address.FirstLine) %>
             </td>
             <td>
                 <%= Html.Encode(item.Tutor.Person.Name) %>

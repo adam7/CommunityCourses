@@ -152,6 +152,7 @@ namespace StudentTracking.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Details = "Details";
             public readonly string Edit = "Edit";
             public readonly string Index = "Index";
         }
@@ -207,6 +208,7 @@ namespace StudentTracking.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Details = "Details";
             public readonly string Edit = "Edit";
             public readonly string Index = "Index";
         }
@@ -391,6 +393,7 @@ namespace StudentTracking.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Details = "Details";
             public readonly string Edit = "Edit";
             public readonly string Index = "Index";
         }

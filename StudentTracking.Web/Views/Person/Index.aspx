@@ -71,7 +71,7 @@
                 <%= Html.Encode(item.LastName) %>
             </td>
             <td>
-                <%= Html.Encode(item.AddressId) %>
+                <%= Html.Encode(item.Addres) %>
             </td>
             <td>
                 <%= Html.Encode(item.Phone) %>
