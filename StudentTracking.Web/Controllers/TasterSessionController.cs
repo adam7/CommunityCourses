@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using StudentTracking.Data.Repository;
 using StudentTracking.Data;
 using StudentTracking.Data.Model;
+using System;
 
 namespace StudentTracking.Web.Controllers
 {
@@ -19,14 +15,13 @@ namespace StudentTracking.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult AddStudent(int id, int studentId)
 		{
-			TasterSessionRepository repo = new TasterSessionRepository();
-			repo.AddStudentToTasterSession(studentId, id);
+			TasterSession.AddStudentToTasterSession(studentId, id);
 
 			return RedirectToRoute(new { action = MVC.TasterSession.Actions.Edit, id = id });
 		}
 
 		public virtual ActionResult Create()
-		{
+		{			
 			PopulateViewData(null);
 			return View(MVC.TasterSession.Actions.Edit, new TasterSession());
 		}
@@ -36,7 +31,7 @@ namespace StudentTracking.Web.Controllers
 		{
 			try
 			{
-				new TasterSessionRepository().Add(tasterSession);
+				tasterSession.Add();
 				return RedirectToAction(MVC.TasterSession.Actions.Index);
 			}
 			catch (ValidationException validationException)
@@ -46,18 +41,26 @@ namespace StudentTracking.Web.Controllers
 			}
 		}
 
+		public virtual ActionResult Details(int id)
+		{
+			return View(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
+		}
+
 		public virtual ActionResult Edit(int id)
 		{
 			PopulateViewData(id);
-			return View(new TasterSessionRepository().Get(id));
+			return View(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(TasterSession tasterSession)
+		public virtual ActionResult Edit(FormCollection form)
 		{
 			try
 			{
-				new TasterSessionRepository().Update(tasterSession);
+				TasterSession tasterSession = TasterSession.SingleOrDefault(t => t.Id == Convert.ToInt32(form["Id"]));
+				UpdateModel(tasterSession);
+				tasterSession.Update();
+				TempData.SetMessage("Taster session updated");
 				return RedirectToAction(MVC.TasterSession.Actions.Index);
 			}
 			catch (ValidationException validationException)
@@ -69,15 +72,15 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(new TasterSessionRepository().GetAll());
+			return View(TasterSession.All());
 		}
 		// Private Methods (1) 
 
-		void PopulateViewData(int? courseId)
+		void PopulateViewData(int? tasterSessionId)
 		{
-			ViewData.SetCentres(new CentreRepository().GetAll());
-			ViewData.SetTutors(new TutorRepository().GetAll());
-			ViewData.SetPotentialStudents(new StudentRepository().GetPotentialStudentsForTasterSession(courseId).ToList());
+			ViewData.SetCentres(Centre.All().ToList());
+			ViewData.SetTutors(Tutor.All().ToList());
+			ViewData.SetPotentialStudents(Student.GetPotentialStudentsForTasterSession(tasterSessionId).ToList());
 		}
 
 		#endregion Methods 

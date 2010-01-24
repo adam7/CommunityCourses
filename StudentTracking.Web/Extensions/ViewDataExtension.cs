@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using StudentTracking.Data;
-using SubSonic.Schema;
+﻿using System.Collections.Generic;
 using StudentTracking.Data.Model;
 
 namespace System.Web.Mvc

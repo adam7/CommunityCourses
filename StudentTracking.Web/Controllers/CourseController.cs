@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
 using StudentTracking.Data;
-using StudentTracking.Data.Repository;
-using SubSonic.Query;
-using SubSonic.DataProviders;
 using StudentTracking.Data.Model;
+using System;
 
 namespace StudentTracking.Web.Controllers
 {
@@ -17,12 +11,12 @@ namespace StudentTracking.Web.Controllers
   {
     public virtual ActionResult Index()
     {
-      return View(new CourseRepository().GetAll());
+      return View(Course.All());
     }
 
     public virtual ActionResult Details(int id)
     {
-      return View(new CourseRepository().Get(id));
+      return View(Course.SingleOrDefault(course => course.Id == id));
     }
 
     public virtual ActionResult Create()
@@ -36,7 +30,7 @@ namespace StudentTracking.Web.Controllers
     {
       try
       {
-        new CourseRepository().Add(course);
+				course.Add();
         TempData.SetMessage("New course created");
         return RedirectToAction("Index");
       }
@@ -50,24 +44,25 @@ namespace StudentTracking.Web.Controllers
     public virtual ActionResult Edit(int id)
     {
       PopulateViewData(id);
-      return View(new CourseRepository().Get(id));
+			return View(Course.SingleOrDefault(course => course.Id == id));
     }
 
 		public virtual ActionResult AddStudent(int id, int studentId)
 		{
-			CourseRepository repo = new CourseRepository();
-			repo.AddStudentToCourse(studentId, id);
+			Course.AddStudentToCourse(studentId, id);
 
 			PopulateViewData(id);
 			return RedirectToRoute(new { action =	 MVC.Course.Actions.Edit, id = id });
 		}
 
     [AcceptVerbs(HttpVerbs.Post)]
-    public virtual ActionResult Edit(Course course)
+    public virtual ActionResult Edit(FormCollection form)
     {
       try
       {
-				new CourseRepository().Update(course);
+				Course course = Course.SingleOrDefault(c => c.Id == Convert.ToInt32(form["Id"]));
+				UpdateModel(course);
+				course.Update();
         TempData.SetMessage("Course updated");
         return RedirectToAction("Index");
       }
@@ -80,11 +75,11 @@ namespace StudentTracking.Web.Controllers
 
     void PopulateViewData(int? courseId)
     {
-      ViewData.SetCentres(new CentreRepository().GetAll());
-      ViewData.SetTutors(new TutorRepository().GetAll());
-      ViewData.SetUnits(new UnitRepository().GetAll());
-      ViewData.SetVerifiers(new VerifierRepository().GetAll());
-			ViewData.SetPotentialStudents(new StudentRepository().GetPotentialStudentsForCourse(courseId).ToList());
+      ViewData.SetCentres(Centre.All().ToList());
+			ViewData.SetTutors(Tutor.All().ToList());
+			ViewData.SetUnits(Unit.All().ToList());
+      ViewData.SetVerifiers(Verifier.All().ToList());
+			ViewData.SetPotentialStudents(Student.GetPotentialStudentsForCourse(courseId).ToList());
     }
   }
 }

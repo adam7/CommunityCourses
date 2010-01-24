@@ -84,10 +84,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CentreService.cs" />
-    <Compile Include="Service\PersonService.cs" />
-    <Compile Include="Service\StudentService.cs" />
-    <Compile Include="Service\TasterSessionService.cs" />
     <Compile Include="CodeTemplates\T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -368,6 +368,11 @@ namespace StudentTracking.Web.Controllers {
         }
 
         [NonAction]
+        public ActionResult Details() {
+            return new T4MVC_ActionResult(Name, Actions.Details);
+        }
+
+        [NonAction]
         public ActionResult Edit() {
             return new T4MVC_ActionResult(Name, Actions.Edit);
         }
@@ -383,6 +388,7 @@ namespace StudentTracking.Web.Controllers {
         public class ActionNames {
             public readonly string AddStudent = "AddStudent";
             public readonly string Create = "Create";
+            public readonly string Details = "Details";
             public readonly string Edit = "Edit";
             public readonly string Index = "Index";
         }
@@ -561,13 +567,7 @@ namespace T4MVC {
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }
-
-        public override System.Web.Mvc.ActionResult Edit(StudentTracking.Data.Model.Centre centre, StudentTracking.Data.Model.Address address) {
-            var callInfo = new T4MVC_ActionResult("Centre", Actions.Edit);
-            callInfo.RouteValues.Add("centre", centre);
-            callInfo.RouteValues.Add("address", address);
-            return callInfo;
-        }
+     
 
     }
     [CompilerGenerated]
@@ -609,11 +609,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(StudentTracking.Data.Model.Course course) {
-            var callInfo = new T4MVC_ActionResult("Course", Actions.Edit);
-            callInfo.RouteValues.Add("course", course);
-            return callInfo;
-        }
+  
 
     }
     [CompilerGenerated]
@@ -698,12 +694,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(StudentTracking.Data.Model.Person person, StudentTracking.Data.Model.Address address) {
-            var callInfo = new T4MVC_ActionResult("Student", Actions.Edit);
-            callInfo.RouteValues.Add("person", person);
-            callInfo.RouteValues.Add("address", address);
-            return callInfo;
-        }
+        
 
     }
     [CompilerGenerated]
@@ -728,15 +719,15 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(int id) {
-            var callInfo = new T4MVC_ActionResult("TasterSession", Actions.Edit);
+        public override System.Web.Mvc.ActionResult Details(int id) {
+            var callInfo = new T4MVC_ActionResult("TasterSession", Actions.Details);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(StudentTracking.Data.Model.TasterSession tasterSession) {
+        public override System.Web.Mvc.ActionResult Edit(int id) {
             var callInfo = new T4MVC_ActionResult("TasterSession", Actions.Edit);
-            callInfo.RouteValues.Add("tasterSession", tasterSession);
+            callInfo.RouteValues.Add("id", id);
             return callInfo;
         }
 

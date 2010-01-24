@@ -55,7 +55,6 @@
 	</fieldset>
 	<div>
 		<%=Html.ActionLink("Back to List", "Index")%>
-		| <a href="">Add Student</a>
 	</div>
 	<%} %>
 </asp:Content>

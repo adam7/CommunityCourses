@@ -3,7 +3,6 @@
 <%@ Import Namespace="StudentTracking.Data.Model" %>
 <fieldset>
 	<legend>Person</legend>
-	<%= Html.Hidden("Id", Model.Id) %>
 	<p>
 		<label for="Title">
 			Title:</label>

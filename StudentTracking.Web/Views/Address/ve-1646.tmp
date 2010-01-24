@@ -3,21 +3,20 @@
 <%@ Import Namespace="StudentTracking.Data.Model"%>
 <fieldset>
   <legend>Address</legend>
-  <%= Html.Hidden("AddressId", Model.Id)%>
   <p>
-    <label for="FirstLine">
+    <label for="AddressX">
       First Line:</label>
-    <%= Html.TextBox("FirstLine", Model.FirstLine)%>
+    <%= Html.TextArea("FirstLine", Model.FirstLine, new { rows = "4" })%>
   </p>
   <p>
     <label for="City">
       City:</label>
-    <%= Html.TextBox("City", Model.City)%>
+    <%= Html.TextBox("City", Model.City) %>
   </p>
   <p>
     <label for="PostCode">
       Postcode:</label>
-    <%= Html.TextBox("Postcode", Model.Postcode)%>
+    <%= Html.TextBox("Postcode", Model.Postcode) %>
   </p>
 </fieldset>
 <%= Html.ClientSideValidation<Address>() %>

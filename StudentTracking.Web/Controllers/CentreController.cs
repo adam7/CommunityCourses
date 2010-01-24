@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
 using StudentTracking.Data;
-using StudentTracking.Data.Repository;
 using StudentTracking.Data.Model;
+using System.Transactions;
+using SubSonic.DataProviders;
+using System;
 
 namespace StudentTracking.Web.Controllers
 {
@@ -15,12 +12,12 @@ namespace StudentTracking.Web.Controllers
 	{
 		public virtual ActionResult Index()
 		{
-			return View(new CentreRepository().GetAll());
+			return View(Centre.All());
 		}
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(new CentreRepository().Get(id));
+			return View(Centre.SingleOrDefault(centre => centre.Id == id));
 		}
 
 		public virtual ActionResult Create()
@@ -33,7 +30,7 @@ namespace StudentTracking.Web.Controllers
 		{
 			try
 			{
-				new CentreRepository().Add(centre, address);
+				Centre.Add(centre, address);
 				TempData.SetMessage("New centre created");
 				return RedirectToAction(MVC.Centre.Actions.Index);
 			}
@@ -44,22 +41,39 @@ namespace StudentTracking.Web.Controllers
 			}
 		}
 
+		[AcceptVerbs(HttpVerbs.Get)]
 		public virtual ActionResult Edit(int id)
 		{
-			return View(new CentreRepository().Get(id));
+			return View(Centre.SingleOrDefault(centre => centre.Id == id));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(Centre centre, Address address)
+		public virtual ActionResult Edit(int id, FormCollection form)
 		{
-			try
+			using (TransactionScope transactionScope = new TransactionScope())
 			{
-				new CentreRepository().Update(centre);
-				return RedirectToAction(MVC.Centre.Actions.Index);
-			}
-			catch
-			{
-				return View();
+				using (SharedDbConnectionScope connectionScope = new SharedDbConnectionScope())
+				{
+					try
+					{
+						Centre centre = Centre.SingleOrDefault(s => s.Id == Convert.ToInt32(id));
+						UpdateModel(centre, form.ToValueProvider());
+						centre.Update();
+
+						Address address = centre.Address;
+						UpdateModel(address, form.ToValueProvider());
+						address.Update();
+
+						transactionScope.Complete();
+						TempData.SetMessage("Centre updated");
+						return RedirectToAction(MVC.Centre.Actions.Index);
+					}
+					catch (ValidationException validationException)
+					{
+						validationException.CopyToModelState(ModelState, "centre");
+						return View();
+					}
+				}
 			}
 		}
 	}

@@ -13,6 +13,8 @@ using SubSonic;
 using SubSonic.Repository;
 using System.ComponentModel;
 using System.Data.Common;
+using StudentTracking.Data;
+using StudentTracking.Data.Extensions;
 
 namespace <#=Namespace #>
 {
@@ -419,12 +421,12 @@ namespace <#=Namespace #>
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
 <#if(tbl.Columns.Any(x=>x.Name=="ModifiedBy")){#>
             if(String.IsNullOrEmpty(this.ModifiedBy))
                 this.ModifiedBy=Environment.UserName;
@@ -443,14 +445,12 @@ namespace <#=Namespace #>
         }
         
         <#if(tbl.Columns.Any(x=>x.Name=="ModifiedBy")){#>
-        public void Update(string username){
-            
+        public void Update(string username){   
             this.ModifiedBy=username;
             Update();
 
         }
         public void Update(string username, IDataProvider provider){
-
             this.ModifiedBy=username;
             Update(provider);
         }
@@ -458,7 +458,7 @@ namespace <#=Namespace #>
 
        
         public void Add(IDataProvider provider){
-
+            Validate();
 <#if(tbl.Columns.Any(x=>x.Name=="CreatedOn")){#>
             
             this.CreatedOn=DateTime.Now;
@@ -488,13 +488,13 @@ namespace <#=Namespace #>
         
         <#if(tbl.Columns.Any(x=>x.Name=="CreatedBy")){#>
         public void Add(string username){
-            
+            Validate();
             this.CreatedBy=username;
             Add();
 
         }
         public void Add(string username, IDataProvider provider){
-
+            Validate();
             this.CreatedBy=username;
             Add(provider);
         }
@@ -601,6 +601,13 @@ namespace <#=Namespace #>
         }         
         <#}#>
 
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);

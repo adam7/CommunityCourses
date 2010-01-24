@@ -11,7 +11,6 @@
      {%>
   <fieldset>
     <legend>Centre</legend>
-    <%= Html.Hidden("Id") %>
     <p>
       <label for="Name">
         Name:</label>

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
-using xVal;
+using System.Linq;
 
 namespace StudentTracking.Data.Model
 {
@@ -14,6 +12,24 @@ namespace StudentTracking.Data.Model
     {
       get { return string.Format("{0} {1} {2}", Title, FirstName, LastName); }
     }
+
+		public static List<Person> GetAllTutors()
+		{
+			IQueryable<Person> query = from people in Person.All()
+																 join tutors in Tutor.All()
+																 on people.Id equals tutors.PersonId
+																 select people;
+			return query.ToList();
+		}
+
+		public static List<Person> GetAllVerifiers()
+		{
+			IQueryable<Person> query = from people in Person.All()
+																 join verifiers in Verifier.All()
+																 on people.Id equals verifiers.PersonId
+																 select people;
+			return query.ToList();
+		}
   }
 
   public partial class PersonValidation
@@ -26,6 +42,12 @@ namespace StudentTracking.Data.Model
 
     [Required]
     public string LastName;
+
+		[Required]
+		public int? EthnicityId;
+		
+		[Required]
+		public int? DisabilityId;
 
     [DataType(DataType.PhoneNumber)]
     public string Phone;

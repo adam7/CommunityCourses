@@ -15,6 +15,8 @@ using SubSonic;
 using SubSonic.Repository;
 using System.ComponentModel;
 using System.Data.Common;
+using StudentTracking.Data;
+using StudentTracking.Data.Extensions;
 
 namespace StudentTracking.Data.Model
 {
@@ -416,12 +418,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -435,7 +437,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -490,6 +492,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -954,12 +963,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -973,7 +982,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -1028,6 +1037,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -1552,12 +1568,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -1571,7 +1587,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -1626,6 +1642,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -2040,12 +2063,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -2059,7 +2082,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -2114,6 +2137,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -2547,12 +2577,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -2566,7 +2596,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -2621,6 +2651,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -2994,12 +3031,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -3013,7 +3050,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -3068,6 +3105,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -3441,12 +3485,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -3460,7 +3504,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -3515,6 +3559,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -3888,12 +3939,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -3907,7 +3958,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -3962,6 +4013,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -4365,12 +4423,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -4384,7 +4442,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -4439,6 +4497,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -5120,12 +5185,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -5139,7 +5204,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -5194,6 +5259,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -5664,12 +5736,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -5683,7 +5755,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -5738,6 +5810,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -6111,12 +6190,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -6130,7 +6209,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -6185,6 +6264,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -6558,12 +6644,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -6577,7 +6663,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -6632,6 +6718,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -7035,12 +7128,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -7054,7 +7147,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -7109,6 +7202,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -7529,12 +7629,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -7548,7 +7648,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -7603,6 +7703,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -8024,12 +8131,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -8043,7 +8150,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -8098,6 +8205,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -8500,12 +8614,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -8519,7 +8633,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -8574,6 +8688,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -8976,12 +9097,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -8995,7 +9116,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -9050,6 +9171,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -9502,12 +9630,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -9521,7 +9649,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -9576,6 +9704,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -9972,12 +10107,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -9991,7 +10126,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -10046,6 +10181,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -10443,12 +10585,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -10462,7 +10604,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -10517,6 +10659,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);
@@ -10901,12 +11050,12 @@ namespace StudentTracking.Data.Model
         }
        
         
-        public void Update(){
+        public void Update(){            
             Update(_db.DataProvider);
         }
         
         public void Update(IDataProvider provider){
-        
+            Validate();
             
             if(this._dirtyColumns.Count>0)
                 _repo.Update(this,provider);
@@ -10920,7 +11069,7 @@ namespace StudentTracking.Data.Model
         
        
         public void Add(IDataProvider provider){
-
+            Validate();
             
             var key=KeyValue();
             if(key==null){
@@ -10975,6 +11124,13 @@ namespace StudentTracking.Data.Model
         }
 
         
+        public void Validate()
+        {
+            if(!this.IsValid())
+            {
+                throw new ValidationException(this.GetErrors());
+            }
+        }
 
         public void Load(IDataReader rdr) {
             Load(rdr, true);

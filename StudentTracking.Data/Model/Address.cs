@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-using xVal;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StudentTracking.Data.Model
 {

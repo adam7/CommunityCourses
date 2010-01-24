@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using StudentTracking.Data.Model;
-using StudentTracking.Data.Repository;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentTracking.Data.Model
@@ -15,9 +11,17 @@ namespace StudentTracking.Data.Model
     {
       get
       {
-        return new StudentRepository().GetByTasterSession(Id);
+        return Student.GetByTasterSession(Id);
       }
     }
+
+		public static void AddStudentToTasterSession(int studentId, int id)
+		{
+			StudentTasterSession studentTasterSession =
+				new StudentTasterSession { StudentId = studentId, TasterSessionId = id, };
+
+			studentTasterSession.Add();
+		}
   }
 
   public class TasterSessionValidation

@@ -1,101 +1,127 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
 using StudentTracking.Data;
-using StudentTracking.Data.Repository;
-using StudentTracking.Web.Service;
-using SubSonic.DataProviders;
-using SubSonic.Linq;
-using SubSonic.Query;
 using StudentTracking.Data.Model;
+using System.Transactions;
+using SubSonic.DataProviders;
+using System;
 
 namespace StudentTracking.Web.Controllers
 {
 	[Authorize]
-  public partial class StudentController : Controller
-  {
-    //
-    // GET: /Student/
+	public partial class StudentController : Controller
+	{
+		const int pageSize = 50;
+		//
+		// GET: /Student/
 
-    //public virtual ActionResult Index(int page)
-    //{
-    //  return View(new StudentRepository().GetPaged(page));
-    //}
+		//public virtual ActionResult Index(int page)
+		//{
+		//  return View(new StudentRepository().GetPaged(page));
+		//}
 
 
-    public virtual ActionResult Index()
-    {
-      return View(new StudentRepository().GetPaged(1));
-    }
+		public virtual ActionResult Index()
+		{
+			return View(Student.GetPaged(1, pageSize));
+		}
 
-    //
-    // GET: /Student/Details/5
+		//
+		// GET: /Student/Details/5
 
-    public virtual ActionResult Details(int id)
-    {
-      return View(new StudentRepository().Get(id));
-    }
+		public virtual ActionResult Details(int id)
+		{
+			return View(Student.SingleOrDefault(student => student.Id == id));
+		}
 
-    //
-    // GET: /Student/Create
+		//
+		// GET: /Student/Create
 
-    public virtual ActionResult Create()
-    {
-      PopulateViewData();
-      return View(MVC.Student.Actions.Edit, new Student());
-    }
+		public virtual ActionResult Create()
+		{
+			PopulateViewData();
+			return View(MVC.Student.Actions.Edit, new Student());
+		}
 
-    //
-    // POST: /Student/Create
+		//
+		// POST: /Student/Create
 
-    [AcceptVerbs(HttpVerbs.Post)]
-    public virtual ActionResult Create(Person person, Address address)
-    {
-      try
-      {
-        StudentService.Create(person, address);
+		[AcceptVerbs(HttpVerbs.Post)]
+		public virtual ActionResult Create(Person person, Address address)
+		{
+			Student student = new Student();
 
-        return RedirectToAction("Index");
-      }
-      catch
-      {
-        return View();
-      }
-    }
+			using (TransactionScope transactionScope = new TransactionScope())
+			{
+				using (SharedDbConnectionScope connectionScope = new SharedDbConnectionScope())
+				{
+					try
+					{
+						address.Save();
+						person.AddressId = address.Id;
+						person.Save();
+						student.PersonId = person.Id;
+						student.Save();
 
-    //
-    // GET: /Student/Edit/5
-    [AcceptVerbs(HttpVerbs.Get)]
-    public virtual ActionResult Edit(int id)
-    {
-      PopulateViewData();
-      return View(new StudentRepository().Get(id));
-    }
+						transactionScope.Complete();
+					}
+					catch (ValidationException validationException)
+					{
+						validationException.CopyToModelState(ModelState, "student");
+						return View();
+					}
+				}
+			}
+			return RedirectToAction("Index");
+		}
 
-    //
-    // POST: /Student/Edit/5
-    [AcceptVerbs(HttpVerbs.Post)]
-    public virtual ActionResult Edit(Person person, Address address)
-    {
-      try
-      {
-        StudentService.Update(person, address);
-        return RedirectToAction(MVC.Person.Actions.Index);
-      }
-      catch
-      {
-        return View();
-      }
-    }
+		//
+		// GET: /Student/Edit/5
+		[AcceptVerbs(HttpVerbs.Get)]
+		public virtual ActionResult Edit(int id)
+		{
+			PopulateViewData();
+			return View(Student.SingleOrDefault(student => student.Id == id));
+		}
 
-    void PopulateViewData()
-    {
-      ViewData.SetEthnicities(Ethnicity.All().ToList());
-      ViewData.SetGenders(Gender.All().ToList());
-      ViewData.SetDisabilities(Disability.All().ToList());
-    }
-  }
+		//
+		// POST: /Student/Edit/5
+		[AcceptVerbs(HttpVerbs.Post)]
+		public virtual ActionResult Edit(int id, FormCollection form)
+		{
+			using (TransactionScope transactionScope = new TransactionScope())
+			{
+				using (SharedDbConnectionScope connectionScope = new SharedDbConnectionScope())
+				{
+					try
+					{
+						Student student = Student.SingleOrDefault(s => s.Id == Convert.ToInt32(id));
+						Person person = student.Person;
+						UpdateModel(person, form.ToValueProvider());
+						person.Update();
+
+						Address address = person.Address;
+						UpdateModel(address, form.ToValueProvider());
+						address.Update();
+
+						transactionScope.Complete();
+						TempData.SetMessage("Student updated");
+						return RedirectToAction(MVC.Person.Actions.Index);
+					}
+					catch (ValidationException validationException)
+					{
+						validationException.CopyToModelState(ModelState, "student");
+						return View();
+					}
+				}
+			}
+		}
+
+		void PopulateViewData()
+		{
+			ViewData.SetEthnicities(Ethnicity.All().ToList());
+			ViewData.SetGenders(Gender.All().ToList());
+			ViewData.SetDisabilities(Disability.All().ToList());
+		}
+	}
 }
