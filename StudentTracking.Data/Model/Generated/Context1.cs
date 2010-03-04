@@ -128,9 +128,9 @@ namespace StudentTracking.Data.Model
         public Query<CourseSession> CourseSessions { get; set; }
         public Query<Disability> Disabilities { get; set; }
         public Query<Ethnicity> Ethnicities { get; set; }
-        public Query<Gender> Genders { get; set; }
         public Query<Module> Modules { get; set; }
         public Query<Person> People { get; set; }
+        public Query<PersonDisability> PersonDisabilities { get; set; }
         public Query<Placement> Placements { get; set; }
         public Query<PlacementLocation> PlacementLocations { get; set; }
         public Query<PlacementType> PlacementTypes { get; set; }
@@ -253,9 +253,9 @@ namespace StudentTracking.Data.Model
             CourseSessions = new Query<CourseSession>(provider);
             Disabilities = new Query<Disability>(provider);
             Ethnicities = new Query<Ethnicity>(provider);
-            Genders = new Query<Gender>(provider);
             Modules = new Query<Module>(provider);
             People = new Query<Person>(provider);
+            PersonDisabilities = new Query<PersonDisability>(provider);
             Placements = new Query<Placement>(provider);
             PlacementLocations = new Query<PlacementLocation>(provider);
             PlacementTypes = new Query<PlacementType>(provider);
@@ -281,9 +281,9 @@ namespace StudentTracking.Data.Model
             	DataProvider.Schema.Tables.Add(new CourseSessionTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new DisabilityTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new EthnicityTable(DataProvider));
-            	DataProvider.Schema.Tables.Add(new GenderTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new ModuleTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new PersonTable(DataProvider));
+            	DataProvider.Schema.Tables.Add(new PersonDisabilityTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new PlacementTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new PlacementLocationTable(DataProvider));
             	DataProvider.Schema.Tables.Add(new PlacementTypeTable(DataProvider));

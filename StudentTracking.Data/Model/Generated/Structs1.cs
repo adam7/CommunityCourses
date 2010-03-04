@@ -529,7 +529,7 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -539,7 +539,7 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -699,69 +699,6 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.AnsiString,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = false,
-	                MaxLength = 50
-                });
-                    
-                
-                
-            }
-            
-            public IColumn Id{
-                get{
-                    return this.GetColumn("Id");
-                }
-            }
-				
-   			public static string IdColumn{
-			      get{
-        			return "Id";
-      			}
-		    }
-            
-            public IColumn Name{
-                get{
-                    return this.GetColumn("Name");
-                }
-            }
-				
-   			public static string NameColumn{
-			      get{
-        			return "Name";
-      			}
-		    }
-            
-                    
-        }
-        
-        /// <summary>
-        /// Table: Gender
-        /// Primary Key: Id
-        /// </summary>
-
-        public class GenderTable: DatabaseTable {
-            
-            public GenderTable(IDataProvider provider):base("Gender",provider){
-                ClassName = "Gender";
-                SchemaName = "dbo";
-                
-
-                Columns.Add(new DatabaseColumn("Id", this)
-                {
-	                IsPrimaryKey = true,
-	                DataType = DbType.Int32,
-	                IsNullable = false,
-	                AutoIncrement = true,
-	                IsForeignKey = true,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("Name", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.String,
 	                IsNullable = true,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
@@ -1000,19 +937,9 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.DateTime,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
-	                MaxLength = 0
-                });
-
-                Columns.Add(new DatabaseColumn("DisabilityId", this)
-                {
-	                IsPrimaryKey = false,
-	                DataType = DbType.Int32,
-	                IsNullable = true,
-	                AutoIncrement = false,
-	                IsForeignKey = true,
 	                MaxLength = 0
                 });
 
@@ -1020,7 +947,7 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -1030,9 +957,9 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
-	                IsForeignKey = true,
+	                IsForeignKey = false,
 	                MaxLength = 0
                 });
                     
@@ -1172,18 +1099,6 @@ namespace StudentTracking.Data.Model {
       			}
 		    }
             
-            public IColumn DisabilityId{
-                get{
-                    return this.GetColumn("DisabilityId");
-                }
-            }
-				
-   			public static string DisabilityIdColumn{
-			      get{
-        			return "DisabilityId";
-      			}
-		    }
-            
             public IColumn EthnicityId{
                 get{
                     return this.GetColumn("EthnicityId");
@@ -1205,6 +1120,91 @@ namespace StudentTracking.Data.Model {
    			public static string GenderIdColumn{
 			      get{
         			return "GenderId";
+      			}
+		    }
+            
+                    
+        }
+        
+        /// <summary>
+        /// Table: PersonDisability
+        /// Primary Key: Id
+        /// </summary>
+
+        public class PersonDisabilityTable: DatabaseTable {
+            
+            public PersonDisabilityTable(IDataProvider provider):base("PersonDisability",provider){
+                ClassName = "PersonDisability";
+                SchemaName = "dbo";
+                
+
+                Columns.Add(new DatabaseColumn("Id", this)
+                {
+	                IsPrimaryKey = true,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = true,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("PersonId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("DisabilityId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+                    
+                
+                
+            }
+            
+            public IColumn Id{
+                get{
+                    return this.GetColumn("Id");
+                }
+            }
+				
+   			public static string IdColumn{
+			      get{
+        			return "Id";
+      			}
+		    }
+            
+            public IColumn PersonId{
+                get{
+                    return this.GetColumn("PersonId");
+                }
+            }
+				
+   			public static string PersonIdColumn{
+			      get{
+        			return "PersonId";
+      			}
+		    }
+            
+            public IColumn DisabilityId{
+                get{
+                    return this.GetColumn("DisabilityId");
+                }
+            }
+				
+   			public static string DisabilityIdColumn{
+			      get{
+        			return "DisabilityId";
       			}
 		    }
             
@@ -1662,7 +1662,7 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -1672,19 +1672,29 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
                 });
 
-                Columns.Add(new DatabaseColumn("Passed", this)
+                Columns.Add(new DatabaseColumn("Complete", this)
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Boolean,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("CourseId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
 	                MaxLength = 0
                 });
                     
@@ -1728,15 +1738,27 @@ namespace StudentTracking.Data.Model {
       			}
 		    }
             
-            public IColumn Passed{
+            public IColumn Complete{
                 get{
-                    return this.GetColumn("Passed");
+                    return this.GetColumn("Complete");
                 }
             }
 				
-   			public static string PassedColumn{
+   			public static string CompleteColumn{
 			      get{
-        			return "Passed";
+        			return "Complete";
+      			}
+		    }
+            
+            public IColumn CourseId{
+                get{
+                    return this.GetColumn("CourseId");
+                }
+            }
+				
+   			public static string CourseIdColumn{
+			      get{
+        			return "CourseId";
       			}
 		    }
             
@@ -1769,7 +1791,7 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -1779,7 +1801,27 @@ namespace StudentTracking.Data.Model {
                 {
 	                IsPrimaryKey = false,
 	                DataType = DbType.Int32,
-	                IsNullable = true,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = true,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("Complete", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Boolean,
+	                IsNullable = false,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
+                Columns.Add(new DatabaseColumn("CourseId", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.Int32,
+	                IsNullable = false,
 	                AutoIncrement = false,
 	                IsForeignKey = true,
 	                MaxLength = 0
@@ -1822,6 +1864,30 @@ namespace StudentTracking.Data.Model {
    			public static string CourseSessionIdColumn{
 			      get{
         			return "CourseSessionId";
+      			}
+		    }
+            
+            public IColumn Complete{
+                get{
+                    return this.GetColumn("Complete");
+                }
+            }
+				
+   			public static string CompleteColumn{
+			      get{
+        			return "Complete";
+      			}
+		    }
+            
+            public IColumn CourseId{
+                get{
+                    return this.GetColumn("CourseId");
+                }
+            }
+				
+   			public static string CourseIdColumn{
+			      get{
+        			return "CourseId";
       			}
 		    }
             

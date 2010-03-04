@@ -55,17 +55,34 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xVal, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\StudentTracking.Dependencies\xVal.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Generated\ActiveRecord1.cs">
+    <Compile Include="ValidationException.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Centre.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Extensions\ActiveRecordExtension.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\TasterSession.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\Student.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Compile Include="Enum\Gender.cs" />
+    <Compile Include="Model\Generated\ActiveRecord.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ActiveRecord.tt</DependentUpon>
     </Compile>
+    <None Include="Model\Generated\ActiveRecord.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ActiveRecord.cs</LastGenOutput>
+    </None>
     <Compile Include="Model\Generated\Context1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,24 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Structs.tt</DependentUpon>
     </Compile>
-    <Compile Include="ValidationException.cs" />
-    <Compile Include="Model\Address.cs" />
-    <Compile Include="Model\Centre.cs" />
-    <Compile Include="Model\Course.cs" />
-    <Compile Include="Extensions\ActiveRecordExtension.cs" />
-    <Compile Include="Helpers\DataAnnotationsValidationRunner.cs" />
-    <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\TasterSession.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Student.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <Compile Include="ActiveRecordModelBinder.cs" />
-    <None Include="Model\Generated\ActiveRecord.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActiveRecord1.cs</LastGenOutput>
-    </None>
     <Compile Include="Model\Tutor.cs" />
     <Compile Include="Model\Unit.cs" />
     <Compile Include="Model\Verifier.cs" />

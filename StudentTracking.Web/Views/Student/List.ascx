@@ -1,5 +1,5 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<StudentTracking.Data.Model.Student>>" %>
-<table>
+<table class="st-table">
   <tr>
     <th>
     </th>

@@ -7,7 +7,6 @@ using SubSonic.DataProviders;
 
 namespace StudentTracking.Data.Model
 {
-  [MetadataType(typeof(CourseValidation))]
   public partial class Course
   {
     public IEnumerable<Student> Students
@@ -68,7 +67,7 @@ namespace StudentTracking.Data.Model
 					foreach (CourseModule courseModule in courseModules)
 					{
 						StudentCourseModule studentCourseModule =
-							new StudentCourseModule { CourseModuleId = courseModule.Id, StudentId = studentId };
+							new StudentCourseModule { CourseModuleId = courseModule.Id, StudentId = studentId, CourseId = courseId };
 						studentCourseModule.Add();
 					}
 
@@ -77,7 +76,7 @@ namespace StudentTracking.Data.Model
 					foreach (CourseSession courseSession in courseSessions)
 					{
 						StudentCourseSession studentCourseSession =
-							new StudentCourseSession { CourseSessionId = courseSession.Id, StudentId = studentId };
+							new StudentCourseSession { CourseSessionId = courseSession.Id, StudentId = studentId, CourseId = courseId };
 						studentCourseSession.Add();
 					}
 
@@ -85,24 +84,5 @@ namespace StudentTracking.Data.Model
 				}
 			}
 		}
-  }
-
-  public class CourseValidation
-  {
-    [Required]
-    public int? CentreId;
-
-    [Required]
-    public string Name;
-
-    [Required]
-    [DataType(DataType.Date)]
-    public DateTime StartDate;
-
-    [Required]
-    public int? UnitId;
-
-    [Required]
-    public int? TutorId;  
   }
 }

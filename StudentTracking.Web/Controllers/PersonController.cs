@@ -59,8 +59,6 @@ namespace StudentTracking.Web.Controllers
     void PopulateViewData()
     {
       ViewData.SetEthnicities(Ethnicity.All().ToList());
-      ViewData.SetGenders(Gender.All().ToList());
-      ViewData.SetDisabilities(Disability.All().ToList());
     }
   }
 }

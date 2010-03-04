@@ -1,108 +1,105 @@
 ﻿using System.Collections.Generic;
 using StudentTracking.Data.Model;
+using StudentTracking.Data.Enum;
+using StudentTracking.Web.ViewModel;
+using System.Linq;
 
 namespace System.Web.Mvc
 {
-  public static class ViewDataExtension
-  {
-		#region Fields (7) 
+	public static class ViewDataExtension
+	{
+		#region Fields (7)
 
-    static readonly string centresKey = "centres";
-    static readonly string disabilitiesKey = "disabilities";
-    static readonly string ethnicitiesKey = "ethnicities";
-    static readonly string gendersKey = "genders";
-    static readonly string tutorsKey = "tutors";
-    static readonly string unitsKey = "units";
-    static readonly string verifiersKey = "verifiers";
+		static readonly string centresKey = "centres";
+		static readonly string disabilitiesKey = "disabilities";
+		static readonly string ethnicitiesKey = "ethnicities";
+		static readonly string gendersKey = "genders";
+		static readonly string tutorsKey = "tutors";
+		static readonly string unitsKey = "units";
+		static readonly string verifiersKey = "verifiers";
 		static readonly string potentialStudentsKey = "potentialStudents";
 
 
-		#endregion Fields 
+		#endregion Fields
 
-		#region Methods (14) 
+		#region Methods (14)
 
 		// Public Methods (14) 
 
-    public static List<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[centresKey] as List<Centre>;
-    }
+		public static List<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[centresKey] as List<Centre>;
+		}
 
-    public static List<Disability> GetDisabilities(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[disabilitiesKey] as List<Disability>;
-    }
+		public static string[] GetDisabilities(this ViewDataDictionary viewDataDictionary)
+		{
+			return (from disability in Disability.All() select disability.Name).ToArray();
+		}
 
-    public static List<Ethnicity> GetEthnicities(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[ethnicitiesKey] as List<Ethnicity>;
-    }
+		public static List<Ethnicity> GetEthnicities(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[ethnicitiesKey] as List<Ethnicity>;
+		}
 
-    public static List<Gender> GetGenders(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[gendersKey] as List<Gender>;
-    }
+		//public static SelectList GetGenders(this ViewDataDictionary viewDataDictionary)
+		//{
+		//  var values = from Gender e in Enum.GetValues(typeof(Gender))
+		//               select new { ID = e, Name = e.ToString() };
 
-    public static List<Tutor> GetTutors(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[tutorsKey] as List<Tutor>;
-    }
+		//  return new SelectList(values, "Id", "Name", gender);
+		//  return new List<Gender> { Gender.Male, Gender.Female };
+		//}
 
-    public static List<Unit> GetUnits(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[unitsKey] as List<Unit>;
-    }
+		public static List<Tutor> GetTutors(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[tutorsKey] as List<Tutor>;
+		}
 
-    public static List<Verifier> GetVerifiers(this ViewDataDictionary viewDataDictionary)
-    {
-      return viewDataDictionary[verifiersKey] as List<Verifier>;
-    }
+		public static List<Unit> GetUnits(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[unitsKey] as List<Unit>;
+		}
+
+		public static List<Verifier> GetVerifiers(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[verifiersKey] as List<Verifier>;
+		}
 
 		public static List<Student> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
 		{
 			return viewDataDictionary[potentialStudentsKey] as List<Student>;
 		}
 
-    public static void SetCentres(this ViewDataDictionary viewDataDictionary, List<Centre> centres)
-    {
-      viewDataDictionary[centresKey] = centres;
-    }
+		public static void SetCentres(this ViewDataDictionary viewDataDictionary, List<Centre> centres)
+		{
+			viewDataDictionary[centresKey] = centres;
+		}
 
-    public static void SetDisabilities(this ViewDataDictionary viewDataDictionary, List<Disability> disabilities)
-    {
-      viewDataDictionary[disabilitiesKey] = disabilities;
-    }
+		public static void SetEthnicities(this ViewDataDictionary viewDataDictionary, List<Ethnicity> ethnicities)
+		{
+			viewDataDictionary[ethnicitiesKey] = ethnicities;
+		}
 
-    public static void SetEthnicities(this ViewDataDictionary viewDataDictionary, List<Ethnicity> ethnicities)
-    {
-      viewDataDictionary[ethnicitiesKey] = ethnicities;
-    }
+		public static void SetTutors(this ViewDataDictionary viewDataDictionary, List<Tutor> tutors)
+		{
+			viewDataDictionary[tutorsKey] = tutors;
+		}
 
-    public static void SetGenders(this ViewDataDictionary viewDataDictionary, List<Gender> genders)
-    {
-      viewDataDictionary[gendersKey] = genders;
-    }
+		public static void SetUnits(this ViewDataDictionary viewDataDictionary, List<Unit> units)
+		{
+			viewDataDictionary[unitsKey] = units;
+		}
 
-    public static void SetTutors(this ViewDataDictionary viewDataDictionary, List<Tutor> tutors)
-    {
-      viewDataDictionary[tutorsKey] = tutors;
-    }
-
-    public static void SetUnits(this ViewDataDictionary viewDataDictionary, List<Unit> units)
-    {
-      viewDataDictionary[unitsKey] = units;
-    }
-
-    public static void SetVerifiers(this ViewDataDictionary viewDataDictionary, List<Verifier> verifiers)
-    {
-      viewDataDictionary[verifiersKey] = verifiers;
-    }
+		public static void SetVerifiers(this ViewDataDictionary viewDataDictionary, List<Verifier> verifiers)
+		{
+			viewDataDictionary[verifiersKey] = verifiers;
+		}
 
 		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, List<Student> students)
 		{
 			viewDataDictionary[potentialStudentsKey] = students;
 		}
 
-		#endregion Methods 
-  }
+		#endregion Methods
+	}
 }

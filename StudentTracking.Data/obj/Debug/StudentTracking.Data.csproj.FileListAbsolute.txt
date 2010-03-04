@@ -8,7 +8,6 @@ C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\S
 C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.pdb
 C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\StudentTracking.Data.dll
 C:\Documents and Settings\Adam Cooper\My Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\StudentTracking.Data.pdb
-C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.dll.config
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.dll
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.pdb
@@ -16,5 +15,6 @@ C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\Stude
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\xVal.dll
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\SubSonic.Core.pdb
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\SubSonic.Core.xml
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\StudentTracking.Data.dll
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\obj\Debug\StudentTracking.Data.pdb

@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Data.Model.Centre>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Web.ViewModel.CentreViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Details
@@ -28,8 +28,8 @@
         </p>--%>
     </fieldset>
     <p>
-        <%=Html.ActionLink("Edit", "Edit", new { id=Model.Id }) %> |
-        <%=Html.ActionLink("Back to List", "Index") %>
+        <%=Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "st-button" })%>
+        <%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
     </p>
 
 </asp:Content>

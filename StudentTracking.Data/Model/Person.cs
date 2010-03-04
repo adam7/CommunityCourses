@@ -5,13 +5,12 @@ using System.Linq;
 
 namespace StudentTracking.Data.Model
 {
-  [MetadataType(typeof(PersonValidation))]
-  public partial class Person
-  {
-    public string Name
-    {
-      get { return string.Format("{0} {1} {2}", Title, FirstName, LastName); }
-    }
+	public partial class Person
+	{
+		public string Name
+		{
+			get { return string.Format("{0} {1} {2}", Title, FirstName, LastName); }
+		}
 
 		public static List<Person> GetAllTutors()
 		{
@@ -30,40 +29,38 @@ namespace StudentTracking.Data.Model
 																 select people;
 			return query.ToList();
 		}
-  }
 
-  public partial class PersonValidation
-  {
-    [Required]
-    public string Title;
+		public List<Disability> Disabilities
+		{
+			get
+			{
+				return (from disabilities in Disability.All()
+							 join personDisabilities in PersonDisability.All() on disabilities.Id equals personDisabilities.DisabilityId
+							 where personDisabilities.PersonId == Id
+							 select disabilities)
+							 .ToList();
+			}
+		}
 
-    [Required]
-    public string FirstName;
+		public void SetDisabilities(IEnumerable<string> disabilityNames)
+		{
+			// TODO: This here's pretty messy, should probably work out a way to clean and make it atomic
+			// and check whether anything needs updating before we go ahead .. ho hum
 
-    [Required]
-    public string LastName;
+			// Clear the existing disabilities for this person
+			PersonDisability.Delete(personDisability => personDisability.PersonId == Id);
 
-		[Required]
-		public int? EthnicityId;
-		
-		[Required]
-		public int? DisabilityId;
+			// Get all the disabilites that're specified
+			IList<Disability> disabilities = Disability.All()
+				.Where(disability => disabilityNames.Contains(disability.Name)).ToList(); 
 
-    [DataType(DataType.PhoneNumber)]
-    public string Phone;
-
-    [DataType(DataType.PhoneNumber)]
-    public string Mobile;
-
-    [DataType(DataType.EmailAddress)]
-    public string Email;
-
-    [Required]
-    [DataType(DataType.Date)]
-    public DateTime DateOfBirth;
-
-		[RegularExpression("[0-9]{12}")]
-		public string CriminalRecordsBureauReferenceNumber;
-  }
-
+			// Create a PersonDisability for each disability and save them all
+			IList<PersonDisability> personDisabilities = new List<PersonDisability>();
+			foreach (Disability disability in disabilities)
+			{
+				personDisabilities.Add(new PersonDisability { PersonId = Id, DisabilityId = disability.Id });
+			}
+			PersonDisability.GetRepo().Add(personDisabilities);
+		}
+	}
 }

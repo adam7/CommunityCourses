@@ -2,11 +2,11 @@
 ----------------------------------------------------------*/
 html {height:100%}
 body {background:#82d2f5 url(bg-main.png) center bottom repeat-x;font-size:.75em;font-family:"Trebuchet MS", Arial, sans-serif;margin:0 0 400px 0;padding:0;color:#696969;}
-a:link {color:#43d700;text-decoration:underline;}
+/* a:link {color:#43d700;text-decoration:underline;}
 a:visited {color:#579a39;}
 a:hover {color:#13ca00;text-decoration:none;}
-a:active {color:#009ee7;}
-p, ul {margin-bottom:20px;}
+a:active {color:#009ee7;} */
+p, ul { /* margin-bottom:20px; */}
 
 /* HEADINGS   
 ----------------------------------------------------------*/
@@ -46,7 +46,7 @@ ul#menu li.selected a {color:#000;}
 .error {color:Red;}
 #logindisplay a:link, #logindisplay a:visited {color:#fff;text-decoration:underline;}
 #logindisplay a:hover {color:#034af3;text-decoration:underline;}
-.field-validation-error {color:#ff0000;}
+.field-validation-error {margin-left: 5px; border: 1px solid #cd0a0a; background: #fef1ec url(smoothness/images/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
 .input-validation-error {border:1px solid #ff0000;background-color:#ffeeee;}
 .validation-summary-errors {font-weight:bold;color:#ff0000;}
 
@@ -57,3 +57,16 @@ td, th { padding: 2px 10px }
 label { display: block; }
 
 input[type="text"], textarea { width:300px; } 
+
+.st-table { }
+.st-button, .st-back-button 
+{
+	outline: 0; 
+	margin:0 4px 0 0; 
+	padding: .4em 1em; 
+	text-decoration:none !important; 
+	cursor:pointer; 
+	position: relative; 
+	text-align: center; 
+	zoom: 1; 
+ }

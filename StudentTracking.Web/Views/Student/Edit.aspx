@@ -1,6 +1,6 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Data.Model.Student>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Web.ViewModel.StudentViewModel>" %>
 
-<%@ Import Namespace="StudentTracking.Data.Model" %>
+<%@ Import Namespace="StudentTracking.Web.ViewModel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit Student
 </asp:Content>
@@ -11,10 +11,12 @@
 	<% 
 		using (Html.BeginForm())
 		{
-			Html.RenderPartial("~/Views/Person/Form.ascx", Model.Person ?? new Person());
-		}
+			Html.RenderPartial("~/Views/Person/Form.ascx", Model.Person ?? new PersonViewModel());
+			Html.RenderPartial("~/Views/Address/Form.ascx", Model.Address ?? new AddressViewModel());
 	%>
 	<p>
-		<%=Html.ActionLink("Back to List", "Index") %>
+		<input type="submit" value="Save" class="st-button" />
+		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
 	</p>
+	<%}%>	
 </asp:Content>

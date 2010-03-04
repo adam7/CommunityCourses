@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Taster Sessions</h2>
-    <table>
+    <table class="st-table">
         <tr>
             <th></th>
             <th>
@@ -47,9 +47,8 @@
     <% } %>
 
     </table>
-
     <p>
-        <%= Html.ActionLink("Create New", "Create") %>
+        <%= Html.ActionLink("Create New", "Create", null, new { @class = "st-back-button" })%>
     </p>
 
 </asp:Content>

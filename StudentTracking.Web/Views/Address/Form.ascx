@@ -1,23 +1,22 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<StudentTracking.Data.Model.Address>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<StudentTracking.Web.ViewModel.AddressViewModel>" %>
 <%@ Import Namespace="xVal.Rules"%>
-<%@ Import Namespace="StudentTracking.Data.Model"%>
+<%@ Import Namespace="StudentTracking.Web.ViewModel"%>
 <fieldset>
   <legend>Address</legend>
-  <%= Html.Hidden("AddressId", Model.Id)%>
   <p>
     <label for="FirstLine">
       First Line:</label>
-    <%= Html.TextBox("FirstLine", Model.FirstLine)%>
+    <%= Html.TextBox("Address.FirstLine", Model.FirstLine)%>
   </p>
   <p>
     <label for="City">
       City:</label>
-    <%= Html.TextBox("City", Model.City)%>
+    <%= Html.TextBox("Address.City", Model.City)%>
   </p>
   <p>
     <label for="PostCode">
       Postcode:</label>
-    <%= Html.TextBox("Postcode", Model.Postcode)%>
+    <%= Html.TextBox("Address.Postcode", Model.Postcode)%>
   </p>
 </fieldset>
-<%= Html.ClientSideValidation<Address>() %>
+<%= Html.ClientSideValidation<AddressViewModel>("Address") %>

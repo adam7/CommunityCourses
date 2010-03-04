@@ -1,6 +1,6 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<StudentTracking.Data.Person>>" %>
 
-<table>
+<table class="st-table">
   <tr>
     <th>
     </th>

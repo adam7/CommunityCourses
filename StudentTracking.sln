@@ -7,7 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracking.Web", "Stud
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentTracking.Web.Tests", "StudentTracking.Web.Tests\StudentTracking.Web.Tests.csproj", "{2D727B2D-AA74-4939-A329-E63D711DF230}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2835AB9-2006-442C-BA79-01669A28A84F}"
+	ProjectSection(SolutionItems) = preProject
+		StudentTracking.vsmdi = StudentTracking.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = StudentTracking.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

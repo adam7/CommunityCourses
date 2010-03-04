@@ -8,7 +8,7 @@
 
     <h2>Units</h2>
 
-    <table>
+    <table class="st-table">
         <tr>
             <th></th>
             <th>
@@ -39,7 +39,7 @@
     </table>
 
     <p>
-        <%= Html.ActionLink("Create New", "Create") %>
+        <%= Html.ActionLink("Create New", "Create", null, new { @class = "st-button" }) %>
     </p>
 
 </asp:Content>

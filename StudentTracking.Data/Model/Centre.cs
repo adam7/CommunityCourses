@@ -7,7 +7,6 @@ using xVal.ServerSide;
 
 namespace StudentTracking.Data.Model
 {
-	[MetadataType(typeof(CentreValidation))]
 	public partial class Centre
 	{
 		public static void Add(Centre centre, Address address)
@@ -25,14 +24,4 @@ namespace StudentTracking.Data.Model
 			}
 		}
 	}
-
-	public class CentreValidation
-	{
-		[Required]
-		public string Name;
-
-		[Required]
-		public string Phone;
-	}
-
 }

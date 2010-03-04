@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Data.Person>" %>
 
 <%@ Import Namespace="xVal.Rules" %>
-<%@ Import Namespace="StudentTracking.Data" %>
+<%@ Import Namespace="StudentTracking.Web.ViewModel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
   Create person
 </asp:Content>
@@ -83,8 +83,8 @@
     </p>
   </fieldset>
   <% } %>
-  <%= Html.ClientSideValidation<Person>() %>
+  <%= Html.ClientSideValidation<PersonViewModel>() %>
   <div>
-    <%=Html.ActionLink("Back to List", "Index") %>
+    <%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
   </div>
 </asp:Content>

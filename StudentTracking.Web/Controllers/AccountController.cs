@@ -41,6 +41,7 @@ namespace StudentTracking.Web.Controllers
 
     public virtual ActionResult LogOn()
     {
+			TempData.SetMessage("Please enter your username and password");
       return View();
     }
 

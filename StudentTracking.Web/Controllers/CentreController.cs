@@ -4,6 +4,8 @@ using StudentTracking.Data.Model;
 using System.Transactions;
 using SubSonic.DataProviders;
 using System;
+using StudentTracking.Web.ViewModel;
+using AutoMapper;
 
 namespace StudentTracking.Web.Controllers
 {
@@ -17,19 +19,22 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(Centre.SingleOrDefault(centre => centre.Id == id));
+			return View(Mapper.Map<Centre, CentreViewModel>(Centre.SingleOrDefault(centre => centre.Id == id)));
 		}
 
 		public virtual ActionResult Create()
 		{
-			return View(MVC.Centre.Actions.Edit, new Centre());
+			return View(MVC.Centre.Actions.Edit, new CentreViewModel());
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Create(Centre centre, Address address)
+		public virtual ActionResult Create(CentreViewModel centreViewModel)
 		{
 			try
 			{
+				Centre centre = Mapper.Map<CentreViewModel, Centre>(centreViewModel);
+				Address address = Mapper.Map<AddressViewModel, Address>(centreViewModel.Address);
+
 				Centre.Add(centre, address);
 				TempData.SetMessage("New centre created");
 				return RedirectToAction(MVC.Centre.Actions.Index);
@@ -44,11 +49,11 @@ namespace StudentTracking.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public virtual ActionResult Edit(int id)
 		{
-			return View(Centre.SingleOrDefault(centre => centre.Id == id));
+			return View(Mapper.Map<Centre, CentreViewModel>(Centre.SingleOrDefault(centre => centre.Id == id)));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(int id, FormCollection form)
+		public virtual ActionResult Edit(CentreViewModel centreViewModel)
 		{
 			using (TransactionScope transactionScope = new TransactionScope())
 			{
@@ -56,12 +61,12 @@ namespace StudentTracking.Web.Controllers
 				{
 					try
 					{
-						Centre centre = Centre.SingleOrDefault(s => s.Id == Convert.ToInt32(id));
-						UpdateModel(centre, form.ToValueProvider());
+						Centre centre = Centre.SingleOrDefault(s => s.Id == centreViewModel.Id);
+						Mapper.Map<CentreViewModel, Centre>(centreViewModel, centre);
 						centre.Update();
 
 						Address address = centre.Address;
-						UpdateModel(address, form.ToValueProvider());
+						Mapper.Map<AddressViewModel, Address>(centreViewModel.Address, address);
 						address.Update();
 
 						transactionScope.Complete();

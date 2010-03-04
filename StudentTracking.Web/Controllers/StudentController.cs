@@ -5,6 +5,10 @@ using StudentTracking.Data.Model;
 using System.Transactions;
 using SubSonic.DataProviders;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using StudentTracking.Web.ViewModel;
+using AutoMapper;
 
 namespace StudentTracking.Web.Controllers
 {
@@ -21,6 +25,7 @@ namespace StudentTracking.Web.Controllers
 		//}
 
 
+
 		public virtual ActionResult Index()
 		{
 			return View(Student.GetPaged(1, pageSize));
@@ -31,7 +36,7 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(Student.SingleOrDefault(student => student.Id == id));
+			return View(new StudentViewModel(Student.SingleOrDefault(student => student.Id == id)));
 		}
 
 		//
@@ -40,14 +45,14 @@ namespace StudentTracking.Web.Controllers
 		public virtual ActionResult Create()
 		{
 			PopulateViewData();
-			return View(MVC.Student.Actions.Edit, new Student());
+			return View(MVC.Student.Actions.Edit, new StudentViewModel());
 		}
 
 		//
 		// POST: /Student/Create
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Create(Person person, Address address)
+		public virtual ActionResult Create(StudentViewModel studentViewModel)
 		{
 			Student student = new Student();
 
@@ -57,9 +62,13 @@ namespace StudentTracking.Web.Controllers
 				{
 					try
 					{
+						Address address = Mapper.Map<AddressViewModel, Address>(studentViewModel.Address);
 						address.Save();
+
+						Person person = Mapper.Map<PersonViewModel, Person>(studentViewModel.Person);
 						person.AddressId = address.Id;
 						person.Save();
+
 						student.PersonId = person.Id;
 						student.Save();
 
@@ -81,13 +90,13 @@ namespace StudentTracking.Web.Controllers
 		public virtual ActionResult Edit(int id)
 		{
 			PopulateViewData();
-			return View(Student.SingleOrDefault(student => student.Id == id));
+			return View(new StudentViewModel(Student.SingleOrDefault(student => student.Id == id)));
 		}
 
 		//
 		// POST: /Student/Edit/5
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(int id, FormCollection form)
+		public virtual ActionResult Edit(StudentViewModel studentViewModel)
 		{
 			using (TransactionScope transactionScope = new TransactionScope())
 			{
@@ -95,16 +104,20 @@ namespace StudentTracking.Web.Controllers
 				{
 					try
 					{
-						Student student = Student.SingleOrDefault(s => s.Id == Convert.ToInt32(id));
+						// Get the student from the db
+						Student student = Student.SingleOrDefault(s => s.Id == studentViewModel.Id);
 						Person person = student.Person;
-						UpdateModel(person, form.ToValueProvider());
-						person.Update();
-
 						Address address = person.Address;
-						UpdateModel(address, form.ToValueProvider());
+						
+						Mapper.Map(studentViewModel.Person, person);
+						person.SetDisabilities(studentViewModel.Person.Disabilities);
+						person.Update();
+						
+						Mapper.Map(studentViewModel.Address, address);
 						address.Update();
 
 						transactionScope.Complete();
+
 						TempData.SetMessage("Student updated");
 						return RedirectToAction(MVC.Person.Actions.Index);
 					}
@@ -120,8 +133,6 @@ namespace StudentTracking.Web.Controllers
 		void PopulateViewData()
 		{
 			ViewData.SetEthnicities(Ethnicity.All().ToList());
-			ViewData.SetGenders(Gender.All().ToList());
-			ViewData.SetDisabilities(Disability.All().ToList());
 		}
 	}
 }

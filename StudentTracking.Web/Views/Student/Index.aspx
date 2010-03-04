@@ -11,7 +11,7 @@
        Html.RenderPartial(MVC.Student.Views.List);
        %>
   <p>
-    <%= Html.ActionLink("Create New", "Create") %>
+    <%= Html.ActionLink("Create New", "Create", null, new { @class = "st-back-button" })%>
   </p>
   <% } %>
 </asp:Content>

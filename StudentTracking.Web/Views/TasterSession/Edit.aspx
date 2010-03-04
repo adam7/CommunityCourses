@@ -3,6 +3,11 @@
 <%@ Import Namespace="xVal.Rules" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
   Edit Taster Session
+  <script type="text/javascript">
+  	$(".field-validation-error").validate({
+  		errorClass: "ui-state-error ui-corner-all"
+  	})
+  </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   <h2>
@@ -35,10 +40,10 @@
       <input type="submit" value="Save" />
     </p>
   </fieldset>
+  <%= Html.ClientSideValidation<StudentTracking.Data.Model.TasterSession>()%>
   <% }
 		 if (Model.Id != 0)
 		 { %>
-  <%= Html.ClientSideValidation<StudentTracking.Data.Model.TasterSession>()%>
 	<fieldset>
 		<legend>Students</legend>
 		<% Html.RenderPartial("~/Views/Student/List.ascx", Model.Students); %>
@@ -53,8 +58,8 @@
 		</p>
 		<%} %>
 	</fieldset>
-	<div>
-		<%=Html.ActionLink("Back to List", "Index")%>
-	</div>
+	<p>
+		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
+	</p>
 	<%} %>
 </asp:Content>
