@@ -31,35 +31,5 @@ namespace StudentTracking.Data.Extensions
 		{
 			return !GetErrors(instance).Any();
 		}
-
-		//public void UpdateModel() 
-		//{
-		//  // Get the item we're going to update
-		//  <#=tbl.ClassName#> updatedItem = 
-			
-		//  Type type = typeof(this);
-		//  PropertyInfo[] propertyInfos = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.SetProperty);
-
-		//  foreach (PropertyInfo info in propertyInfos)
-		//  {
-		//    // Check if the type is a value type, a nullable value type, or a string. We don't want to update any complicated types
-		//    Type propertyType = info.PropertyType;
-		//    if (propertyType.IsValueType
-		//      || (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-		//      || propertyType == typeof(string))
-		//    {
-		//      // Make sure we don't update any audit columns
-		//      string upperName = info.Name.ToUpperInvariant();
-		//      if (upperName != "CREATEDBY"
-		//        && upperName != "CREATEDON"
-		//        && upperName != "MODIFIEDBY"
-		//        && upperName != "MODIFIEDON")
-		//      {
-		//        info.SetValue(this, info.GetValue(item, null), null);
-		//      }
-		//    }
-		//  }
-		//  item = updatedItem;
-		//}
 	}
 }

@@ -52,62 +52,64 @@
 		{ %>
 	<fieldset>
 		<legend>Students</legend>
-		<div id="accordion">
+		<div id="Accordion">
 			<% foreach (CourseStudentViewModel student in Model.Students)
 			{ %>
 			<h3>
 				<a href="#">
 					<%= student.Name + " - " + student.Address%></a></h3>
 			<div>
-				<%= Html.ActionLink("Details", "Details", "Student", new { id = student.Id }, new { @class = "st-button" })%>
-				<h4>
-					Sessions</h4>
-				<table class="st-table">
-					<tr>
-						<th>
-							Name
-						</th>
-						<th>
-							Completed
-						</th>
-					</tr>
-					<% foreach (StudentCourseSessionViewModel studentSession in Model.Sessions.Where(module => module.StudentId == student.Id))
-				{ %>
-					<tr>
-						<td>
-							<%= studentSession.SessionName%>
-						</td>
-						<td>
-							<%= 
+				<div style="float: left">
+					<table class="st-table">
+						<tr>
+							<th>
+								Sessions
+							</th>
+							<th>
+								Completed
+							</th>
+						</tr>
+						<% foreach (StudentCourseSessionViewModel studentSession in Model.Sessions.Where(module => module.StudentId == student.Id))
+				 { %>
+						<tr>
+							<td>
+								<%= studentSession.SessionName%>
+							</td>
+							<td>
+								<%= 
 								Html.CheckBox("CheckBox", studentSession.Completed, new { onClick = "updateSessionComplete(" + Model.Id + "," + student.Id + "," + studentSession.SessionId + ",'" + !studentSession.Completed + "');" })%>
-						</td>
-					</tr>
-					<%} %>
-				</table>
-				<h4>
-					Modules</h4>
-				<table class="st-table">
-					<tr>
-						<th>
-							Name
-						</th>
-						<th>
-							Completed
-						</th>
-					</tr>
-					<% foreach (StudentCourseModuleViewModel studentModule in Model.Modules.Where(module => module.StudentId == student.Id))
-				{ %>
-					<tr>
-						<td>
-							<%= studentModule.ModuleName%>
-						</td>
-						<td>
-							<%= 
+							</td>
+						</tr>
+						<%} %>
+						<tr>
+							<th>
+								Modules
+							</th>
+							<th>
+								Completed
+							</th>
+						</tr>
+						<% foreach (StudentCourseModuleViewModel studentModule in Model.Modules.Where(module => module.StudentId == student.Id))
+				 { %>
+						<tr>
+							<td>
+								<%= studentModule.ModuleName%>
+							</td>
+							<td>
+								<%= 
 								Html.CheckBox("CheckBox", studentModule.Completed, new { onClick = "updateModuleComplete(" + Model.Id + "," + student.Id + "," + studentModule.ModuleId + ",'" + !studentModule.Completed + "');" })%>
-						</td>
-					</tr>
-					<%} %>
-				</table>
+							</td>
+						</tr>
+						<%} %>
+					</table>
+				</div>
+				<div style="float: left">
+					<ul>
+						<li>
+							<%= Ajax.ShowDetailsActionLink("Student", student.Id, "DetailsDialog", "ShowDetailsDialog")%>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<%} %>
 		</div>
@@ -126,11 +128,11 @@
 	<p>
 		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
 	</p>
+	<div id="DetailsDialog">
+	</div>
 
 	<script type="text/javascript">
-		$('#accordion').accordion({ collapsible: true, active: false });
-		function updateSessionComplete(courseId, studentId, courseSessionId, complete)
-		{
+		function updateSessionComplete(courseId, studentId, courseSessionId, complete) {
 			$.ajax(
 			{
 				type: "POST",

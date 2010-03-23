@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="82cc069f-9b74-446c-aa88-7af64cf2ba5d" name="Adam Cooper@IMAC-WINDOWS7 2010-02-25 16:38:05" runUser="iMac-Windows7\Adam Cooper" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="daaf6bf6-cf2d-40fb-918e-687396b12b17">
+    <Deployment runDeploymentRoot="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\TestResults\Adam Cooper_IMAC-WINDOWS7 2010-02-25 16_38_05">
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Dependencies\SubSonic.Core.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Dependencies\xVal.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2010-02-25T16:38:05.3899043+00:00" queuing="2010-02-25T16:38:14.0078311+00:00" start="2010-02-25T16:38:14.9351939+00:00" finish="2010-02-25T16:38:16.6843819+00:00" />
+  <TestDefinitions>
+    <UnitTest name="MappingTest" storage="c:\users\adam cooper\documents\visual studio 2008\projects\studenttracking\studenttracking.web.tests\bin\debug\studenttracking.web.tests.dll" id="9207f520-adf5-35c6-815a-090255c82bba">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="dbcc7cea-1288-4239-8928-7af4642e90ab" />
+      <TestMethod codeBase="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="StudentTracking.Web.Tests.AutoMapperTest, StudentTracking.Web.Tests" name="MappingTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+    <TestList name="AutoMapper" id="66051e9f-591c-4df4-a6a0-becc86a8a640" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+      <Description>Tests for mappings between objects</Description>
+      <TestLinks>
+        <TestLink id="9207f520-adf5-35c6-815a-090255c82bba" name="MappingTest" storage="c:\users\adam cooper\documents\visual studio 2008\projects\studenttracking\studenttracking.web.tests\bin\debug\studenttracking.web.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      </TestLinks>
+    </TestList>
+    <TestList name="Lists of Results" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9207f520-adf5-35c6-815a-090255c82bba" executionId="dbcc7cea-1288-4239-8928-7af4642e90ab" testListId="66051e9f-591c-4df4-a6a0-becc86a8a640" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="dbcc7cea-1288-4239-8928-7af4642e90ab" testId="9207f520-adf5-35c6-815a-090255c82bba" testName="MappingTest" computerName="IMAC-WINDOWS7" duration="00:00:00.3544500" startTime="2010-02-25T16:38:15.1951291+00:00" endTime="2010-02-25T16:38:16.4185835+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="66051e9f-591c-4df4-a6a0-becc86a8a640">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method StudentTracking.Web.Tests.AutoMapperTest.MappingTest threw exception:  AutoMapper.AutoMapperConfigurationException: The following 5 properties on StudentTracking.Data.Model.Course are not mapped: 
+	Centre
+	Tutor
+	Unit
+	Verifier
+	TestMode
+Add a custom mapping expression, ignore, or rename the property on StudentTracking.Web.ViewModel.CourseViewModel..</Message>
+          <StackTrace>    at AutoMapper.Configuration.AssertConfigurationIsValid(IEnumerable`1 typeMaps)
+   at AutoMapper.Configuration.AssertConfigurationIsValid()
+   at AutoMapper.Mapper.AssertConfigurationIsValid()
+   at StudentTracking.Web.MvcApplication.RegisterAutoMappings() in C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\Global.asax.cs:line 75
+   at StudentTracking.Web.Tests.AutoMapperTest.MappingTest() in C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\AutoMapperTest.cs:line 22
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

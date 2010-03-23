@@ -29,7 +29,7 @@
 			<td>
 				<%= Html.ActionLink("Edit", "Edit", new { id=item.Id  }) %>
 				|
-				<%= Html.ActionLink("Details", "Details", new { id=item.Id })%>
+				<%= Ajax.ShowDetailsActionLink("Course", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
 			</td>
 			<td>
 				<%= Html.Encode(item.Name) %>
@@ -46,6 +46,8 @@
 		</tr>
 		<% } %>
 	</table>
+	<div id="DetailsDialog">
+	</div>
 	<p>
 		<%= Html.ActionLink("Create New", "Create", null, new { @class = "st-button" })%>
 	</p>

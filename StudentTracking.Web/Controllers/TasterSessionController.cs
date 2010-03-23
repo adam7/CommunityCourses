@@ -43,7 +43,7 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
+			return PartialView(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
 		}
 
 		public virtual ActionResult Edit(int id)

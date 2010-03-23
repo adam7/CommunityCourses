@@ -19,7 +19,12 @@
 
 	<script src="../../Scripts/xVal.jquery.validate.js" type="text/javascript"></script>
 
+	<script src="../../Scripts/MicrosoftAjax.js" type="text/javascript"></script>
+
+	<script src="../../Scripts/MicrosoftMvcAjax.js" type="text/javascript"></script>
+
 	<script src="../../Scripts/StudentTracking.js" type="text/javascript"></script>
+
 </head>
 <body>
 	<div class="page">

@@ -1,13 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Data.Model.TasterSession>" %>
-
+<%@ Import Namespace="StudentTracking.Data.Model" %>
 <%@ Import Namespace="xVal.Rules" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
   Edit Taster Session
-  <script type="text/javascript">
-  	$(".field-validation-error").validate({
-  		errorClass: "ui-state-error ui-corner-all"
-  	})
-  </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   <h2>
@@ -40,13 +35,57 @@
       <input type="submit" value="Save" />
     </p>
   </fieldset>
-  <%= Html.ClientSideValidation<StudentTracking.Data.Model.TasterSession>()%>
+  <%= Html.ClientSideValidation<TasterSession>()%>
   <% }
 		 if (Model.Id != 0)
 		 { %>
 	<fieldset>
 		<legend>Students</legend>
-		<% Html.RenderPartial("~/Views/Student/List.ascx", Model.Students); %>
+		<table class="st-table">		
+		<tr>
+			<th>
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Address
+			</th>
+			<th>
+				Phone
+			</th>
+			<th>
+				Mobile
+			</th>
+			<th>
+				Email
+			</th>
+		</tr>
+		<%foreach (Student student in Model.Students)
+		{ %>
+		<tr>
+			<td>
+				<%= Ajax.ShowDetailsActionLink(student.Id, "DetailsDialog", "ShowDetailsDialog")%>
+			</td>
+			<td>
+				<%= Html.Encode(student.Person.Name)%>
+			</td>
+			<td>
+				<%= Html.Encode(student.Person.Address.ToSingleLine())%>
+			</td>
+			<td>
+				<%= Html.Encode(student.Person.Phone)%>
+			</td>
+			<td>
+				<%= Html.Encode(student.Person.Mobile)%>
+			</td>
+			<td>
+				<%= Html.Encode(student.Person.Email)%>
+			</td>
+		</tr>
+		<%
+		} %>
+		</table>
 		<% using (Html.BeginForm("AddStudent", "TasterSession"))
 		 { %>
 		<%= Html.Hidden("Id", Model.Id)%>
@@ -58,8 +97,10 @@
 		</p>
 		<%} %>
 	</fieldset>
+	<%} %>	
+	<div id="DetailsDialog">
+	</div>
 	<p>
 		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
 	</p>
-	<%} %>
 </asp:Content>

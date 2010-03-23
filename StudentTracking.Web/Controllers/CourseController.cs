@@ -21,7 +21,8 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(Course.SingleOrDefault(course => course.Id == id));
+			Course course = Course.SingleOrDefault(c => c.Id == id);
+			return PartialView(Mapper.Map<Course, CourseViewModel>(course));
 		}
 
 		public virtual ActionResult Create()

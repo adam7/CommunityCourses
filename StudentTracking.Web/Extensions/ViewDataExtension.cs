@@ -3,26 +3,25 @@ using StudentTracking.Data.Model;
 using StudentTracking.Data.Enum;
 using StudentTracking.Web.ViewModel;
 using System.Linq;
+using System.Collections;
 
 namespace System.Web.Mvc
 {
 	public static class ViewDataExtension
 	{
-		#region Fields (7)
+		#region Fields (7) 
 
 		static readonly string centresKey = "centres";
 		static readonly string disabilitiesKey = "disabilities";
 		static readonly string ethnicitiesKey = "ethnicities";
-		static readonly string gendersKey = "genders";
+		static readonly string potentialStudentsKey = "potentialStudents";
 		static readonly string tutorsKey = "tutors";
 		static readonly string unitsKey = "units";
 		static readonly string verifiersKey = "verifiers";
-		static readonly string potentialStudentsKey = "potentialStudents";
 
+		#endregion Fields 
 
-		#endregion Fields
-
-		#region Methods (14)
+		#region Methods (14) 
 
 		// Public Methods (14) 
 
@@ -41,14 +40,18 @@ namespace System.Web.Mvc
 			return viewDataDictionary[ethnicitiesKey] as List<Ethnicity>;
 		}
 
-		//public static SelectList GetGenders(this ViewDataDictionary viewDataDictionary)
-		//{
-		//  var values = from Gender e in Enum.GetValues(typeof(Gender))
-		//               select new { ID = e, Name = e.ToString() };
+		public static IEnumerable GetGenders(this ViewDataDictionary viewDataDictionary)
+		{
+			return from Gender gender in Enum.GetValues(typeof(Gender))
+						 select new { 
+							 Id = (int)gender, 
+							 Name = gender.ToString() };
+		}
 
-		//  return new SelectList(values, "Id", "Name", gender);
-		//  return new List<Gender> { Gender.Male, Gender.Female };
-		//}
+		public static List<Student> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
+		{
+			return viewDataDictionary[potentialStudentsKey] as List<Student>;
+		}
 
 		public static List<Tutor> GetTutors(this ViewDataDictionary viewDataDictionary)
 		{
@@ -65,11 +68,6 @@ namespace System.Web.Mvc
 			return viewDataDictionary[verifiersKey] as List<Verifier>;
 		}
 
-		public static List<Student> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
-		{
-			return viewDataDictionary[potentialStudentsKey] as List<Student>;
-		}
-
 		public static void SetCentres(this ViewDataDictionary viewDataDictionary, List<Centre> centres)
 		{
 			viewDataDictionary[centresKey] = centres;
@@ -78,6 +76,11 @@ namespace System.Web.Mvc
 		public static void SetEthnicities(this ViewDataDictionary viewDataDictionary, List<Ethnicity> ethnicities)
 		{
 			viewDataDictionary[ethnicitiesKey] = ethnicities;
+		}
+
+		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, List<Student> students)
+		{
+			viewDataDictionary[potentialStudentsKey] = students;
 		}
 
 		public static void SetTutors(this ViewDataDictionary viewDataDictionary, List<Tutor> tutors)
@@ -95,11 +98,6 @@ namespace System.Web.Mvc
 			viewDataDictionary[verifiersKey] = verifiers;
 		}
 
-		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, List<Student> students)
-		{
-			viewDataDictionary[potentialStudentsKey] = students;
-		}
-
-		#endregion Methods
+		#endregion Methods 
 	}
 }

@@ -119,10 +119,10 @@
     <Content Include="Scripts\xVal.jquery.validate.js" />
     <Content Include="Views\Address\Details.ascx" />
     <Content Include="Views\Address\Form.ascx" />
-    <Content Include="Views\Centre\Details.aspx" />
+    <Content Include="Views\Centre\Details.ascx" />
     <Content Include="Views\Centre\Edit.aspx" />
     <Content Include="Views\Centre\Index.aspx" />
-    <Content Include="Views\Course\Details.aspx" />
+    <Content Include="Views\Course\Details.ascx" />
     <Content Include="Views\Course\Edit.aspx" />
     <Content Include="Views\Course\Index.aspx" />
     <Content Include="Views\Person\Create.aspx" />
@@ -131,11 +131,10 @@
     <Content Include="Views\Person\Index.aspx" />
     <Content Include="Views\Person\List.ascx" />
     <Content Include="Views\Student\Create.aspx" />
-    <Content Include="Views\Student\Details.aspx" />
+    <Content Include="Views\Student\Details.ascx" />
     <Content Include="Views\Student\Edit.aspx" />
     <Content Include="Views\Student\Index.aspx" />
-    <Content Include="Views\Student\List.ascx" />
-    <Content Include="Views\TasterSession\Details.aspx" />
+    <Content Include="Views\TasterSession\Details.ascx" />
     <Content Include="Views\TasterSession\Edit.aspx" />
     <Content Include="Views\TasterSession\Index.aspx" />
     <Content Include="Views\Unit\Index.aspx" />
@@ -149,10 +148,7 @@
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Views\Account\ChangePassword.aspx" />
-    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
-    <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
@@ -190,7 +186,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AddressController.cs" />
-    <Compile Include="Extensions\EnumExtension.cs" />
+    <Compile Include="Extensions\AjaxHelperExtension.cs" />
     <Compile Include="ViewModel\AddressViewModel.cs" />
     <Compile Include="ViewModel\CentreViewModel.cs" />
     <Compile Include="ViewModel\StudentCourseModuleViewModel.cs" />

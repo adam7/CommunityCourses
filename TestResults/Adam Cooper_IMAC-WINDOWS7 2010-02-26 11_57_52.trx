@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="368d9ed4-92cb-4534-93d3-c9ef1b0af9ee" name="Adam Cooper@IMAC-WINDOWS7 2010-02-26 11:57:52" runUser="iMac-Windows7\Adam Cooper" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="a73bbfb1-b7ee-4ec9-bb3a-6e952ed01ade">
+    <Deployment userDeploymentRoot="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\TestResults" useDefaultDeploymentRoot="false" runDeploymentRoot="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\TestResults\Adam Cooper_IMAC-WINDOWS7 2010-02-26 11_57_52">
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\StudentTracking.Web.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Dependencies\SubSonic.Core.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Data\bin\Debug\StudentTracking.Data.dll" />
+      <DeploymentItem filename="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Dependencies\xVal.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2010-02-26T11:57:52.5773772+00:00" queuing="2010-02-26T11:57:55.9031291+00:00" start="2010-02-26T11:57:56.3741877+00:00" finish="2010-02-26T11:57:57.8342739+00:00" />
+  <TestDefinitions>
+    <UnitTest name="MappingTest" storage="c:\users\adam cooper\documents\visual studio 2008\projects\studenttracking\studenttracking.web.tests\bin\debug\studenttracking.web.tests.dll" id="9207f520-adf5-35c6-815a-090255c82bba">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a96c69de-2ef9-4588-b862-73bea3f7c6ce" />
+      <TestMethod codeBase="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web.Tests\bin\Debug\StudentTracking.Web.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="StudentTracking.Web.Tests.AutoMapperTest, StudentTracking.Web.Tests" name="MappingTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+    <TestList name="AutoMapper" id="66051e9f-591c-4df4-a6a0-becc86a8a640" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+      <Description>Tests for mappings between objects</Description>
+      <TestLinks>
+        <TestLink id="9207f520-adf5-35c6-815a-090255c82bba" name="MappingTest" storage="c:\users\adam cooper\documents\visual studio 2008\projects\studenttracking\studenttracking.web.tests\bin\debug\studenttracking.web.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+      </TestLinks>
+    </TestList>
+    <TestList name="Lists of Results" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9207f520-adf5-35c6-815a-090255c82bba" executionId="a96c69de-2ef9-4588-b862-73bea3f7c6ce" testListId="66051e9f-591c-4df4-a6a0-becc86a8a640" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="a96c69de-2ef9-4588-b862-73bea3f7c6ce" testId="9207f520-adf5-35c6-815a-090255c82bba" testName="MappingTest" computerName="IMAC-WINDOWS7" duration="00:00:00.3404580" startTime="2010-02-26T11:57:56.5403287+00:00" endTime="2010-02-26T11:57:57.5840851+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="66051e9f-591c-4df4-a6a0-becc86a8a640">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

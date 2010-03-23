@@ -50,17 +50,20 @@ namespace StudentTracking.Data.Model
 			// Clear the existing disabilities for this person
 			PersonDisability.Delete(personDisability => personDisability.PersonId == Id);
 
-			// Get all the disabilites that're specified
-			IList<Disability> disabilities = Disability.All()
-				.Where(disability => disabilityNames.Contains(disability.Name)).ToList(); 
-
-			// Create a PersonDisability for each disability and save them all
-			IList<PersonDisability> personDisabilities = new List<PersonDisability>();
-			foreach (Disability disability in disabilities)
+			if (disabilityNames != null && disabilityNames.Count() > 0)
 			{
-				personDisabilities.Add(new PersonDisability { PersonId = Id, DisabilityId = disability.Id });
+				// Get all the disabilites that're specified
+				IList<Disability> disabilities = Disability.All()
+					.Where(disability => disabilityNames.Contains(disability.Name)).ToList();
+
+				// Create a PersonDisability for each disability and save them all
+				IList<PersonDisability> personDisabilities = new List<PersonDisability>();
+				foreach (Disability disability in disabilities)
+				{
+					personDisabilities.Add(new PersonDisability { PersonId = Id, DisabilityId = disability.Id });
+				}
+				PersonDisability.GetRepo().Add(personDisabilities);
 			}
-			PersonDisability.GetRepo().Add(personDisabilities);
 		}
 	}
 }

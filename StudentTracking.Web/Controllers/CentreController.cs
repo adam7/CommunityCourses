@@ -19,7 +19,8 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(Mapper.Map<Centre, CentreViewModel>(Centre.SingleOrDefault(centre => centre.Id == id)));
+			Centre centre = Centre.SingleOrDefault(c => c.Id == id);
+			return PartialView(Mapper.Map<Centre, CentreViewModel>(centre));
 		}
 
 		public virtual ActionResult Create()

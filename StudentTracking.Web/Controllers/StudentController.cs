@@ -36,7 +36,7 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Details(int id)
 		{
-			return View(new StudentViewModel(Student.SingleOrDefault(student => student.Id == id)));
+			return PartialView(new StudentViewModel(Student.SingleOrDefault(student => student.Id == id)));
 		}
 
 		//

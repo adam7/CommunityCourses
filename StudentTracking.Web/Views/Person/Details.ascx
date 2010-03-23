@@ -3,7 +3,7 @@
 	<legend>Person</legend>
 	<p>
 		Name:
-		<%= Html.Encode(Model.FirstName + " " + Model.LastName) %>
+		<%= Html.Encode(Model.Title + " " + Model.FirstName + " " + Model.LastName) %>
 	</p>
 	<p>
 		Phone:
@@ -18,28 +18,25 @@
 		<%= Html.Encode(Model.Email) %>
 	</p>
 	<p>
-		Notes:
-		<%= Html.Encode(Model.Notes) %>
-	</p>
-	<p>
 		Date Of Birth:
 		<%= Html.Encode(String.Format("{0:d}", Model.DateOfBirth)) %>
 	</p>
 	<p>
 		Disabilities:
-		<ul>
-		<% foreach(string disability in Model.Disabilities) { %>
-		<li><%= Html.Encode(disability) %></li>
-		<%} %>
-		</ul>
 	</p>
+	<ul>
+		<% foreach (string disability in Model.Disabilities)
+		 { %>
+		<li>
+			<%= Html.Encode(disability) %></li>
+		<%} %>
+	</ul>
 	<p>
 		Ethnicity:
 		<%= Html.Encode(Model.EthnicityName) %>
 	</p>
-	<%--<p>
-		Gender:
-		<%= Html.Encode(Model.Gender.Name) %>
+	<p>
+		Notes:
+		<%= Html.Encode(Model.Notes) %>
 	</p>
-	--%>
 </fieldset>

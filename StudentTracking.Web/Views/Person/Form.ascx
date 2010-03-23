@@ -8,11 +8,11 @@
 			Title:</label>
 		<%= Html.TextBox("Person.Title", Model.Title) %>
 	</p>
-	<%--	<p>
+	<p>
 		<label for="GenderId">
 			Gender:</label>
-		<%= Html.DropDownList("GenderId", Gender.ToSelectList(), "Please choose") %>
-	</p>--%>
+		<%= Html.DropDownList("Person.GenderId", new SelectList(ViewData.GetGenders(), "Id", "Name", Model.GenderId), "Please choose") %>
+	</p>
 	<p>
 		<label for="FirstName">
 			First Name:</label>
