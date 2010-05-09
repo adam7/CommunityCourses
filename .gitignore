@@ -2,8 +2,8 @@ StudentTracking.Web.Tests/bin
 StudentTracking.Web.Tests/obj
 StudentTracking.Web/bin
 StudentTracking.Web/obj
-StudentTracking.Model/bin
-StudentTracking.Model/obj
+StudentTracking.Data/bin
+StudentTracking.Data/obj
 TestResults
 *.user
 *.suo
