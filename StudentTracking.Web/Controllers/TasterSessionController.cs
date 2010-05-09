@@ -17,13 +17,13 @@ namespace StudentTracking.Web.Controllers
 		{
 			TasterSession.AddStudentToTasterSession(studentId, id);
 
-			return RedirectToRoute(new { action = MVC.TasterSession.Actions.Edit, id = id });
+			return RedirectToRoute(new { action = MVC.TasterSession.Actions.Edit(id) });
 		}
 
 		public virtual ActionResult Create()
 		{			
 			PopulateViewData(null);
-			return View(MVC.TasterSession.Actions.Edit, new TasterSession());
+			return View(Views.Edit, new TasterSession());
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -32,7 +32,7 @@ namespace StudentTracking.Web.Controllers
 			try
 			{
 				tasterSession.Add();
-				return RedirectToAction(MVC.TasterSession.Actions.Index);
+				return RedirectToAction(MVC.TasterSession.Actions.Index());
 			}
 			catch (ValidationException validationException)
 			{
@@ -61,7 +61,7 @@ namespace StudentTracking.Web.Controllers
 				UpdateModel(tasterSession);
 				tasterSession.Update();
 				TempData.SetMessage("Taster session updated");
-				return RedirectToAction(MVC.TasterSession.Actions.Index);
+				return RedirectToAction(MVC.TasterSession.Actions.Index());
 			}
 			catch (ValidationException validationException)
 			{

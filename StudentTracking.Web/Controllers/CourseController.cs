@@ -16,7 +16,13 @@ namespace StudentTracking.Web.Controllers
 	{
 		public virtual ActionResult Index()
 		{
-			return View(Course.All());
+			List<CourseViewModel> courses = new List<CourseViewModel>();
+			foreach (Course course in Course.All())
+			{
+				courses.Add(Mapper.Map<Course, CourseViewModel>(course));
+			}
+
+			return View(courses);
 		}
 
 		public virtual ActionResult Details(int id)
@@ -28,7 +34,7 @@ namespace StudentTracking.Web.Controllers
 		public virtual ActionResult Create()
 		{
 			PopulateViewData(null);
-			return View(MVC.Course.Actions.Edit, new CourseViewModel());
+			return View(Views.Edit, new CourseViewModel());
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -85,16 +91,20 @@ namespace StudentTracking.Web.Controllers
 			Course.AddStudentToCourse(studentId, id);
 
 			PopulateViewData(id);
-			return RedirectToRoute(new { action = MVC.Course.Actions.Edit, id = id });
+			return RedirectToRoute(new { action = MVC.Course.Actions.Edit(id) });
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult UpdateSessionComplete(int courseId, int studentId, int courseSessionId, bool complete)
+		public virtual ActionResult UpdateSessionComplete(int courseId, int studentId, int sessionId, bool complete)
 		{
-			StudentCourseSession studentCourseSession = StudentCourseSession.SingleOrDefault(session =>
-				session.CourseId == courseId
-				&& session.StudentId == studentId
-				&& session.CourseSessionId == courseSessionId);
+			StudentCourseSession studentCourseSession =
+				(from studentCourseSessions in StudentCourseSession.All()
+				 join courseSessions in CourseSession.All() on studentCourseSessions.CourseSessionId equals courseSessions.Id
+				 where studentCourseSessions.CourseId == courseId
+					 && studentCourseSessions.StudentId == studentId
+					 && courseSessions.SessionId == sessionId
+				 select studentCourseSessions).First<StudentCourseSession>();
+
 			studentCourseSession.Complete = complete;
 			studentCourseSession.Update();
 
@@ -102,12 +112,16 @@ namespace StudentTracking.Web.Controllers
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult UpdateModuleComplete(int courseId, int studentId, int courseModuleId, bool complete)
+		public virtual ActionResult UpdateModuleComplete(int courseId, int studentId, int moduleId, bool complete)
 		{
-			StudentCourseModule studentCourseModule = StudentCourseModule.SingleOrDefault(module =>
-				module.CourseId == courseId
-				&& module.StudentId == studentId
-				&& module.CourseModuleId == courseModuleId);
+			StudentCourseModule studentCourseModule =
+				(from studentCourseModules in StudentCourseModule.All()
+				 join courseModules in CourseModule.All() on studentCourseModules.CourseModuleId equals courseModules.Id
+				 where studentCourseModules.CourseId == courseId
+					 && studentCourseModules.StudentId == studentId
+					 && courseModules.ModuleId == moduleId
+				 select studentCourseModules).First<StudentCourseModule>();
+
 			studentCourseModule.Complete = complete;
 			studentCourseModule.Update();
 
@@ -119,7 +133,8 @@ namespace StudentTracking.Web.Controllers
 		{
 			try
 			{
-				Course course = Mapper.Map<CourseViewModel, Course>(courseViewModel);
+				Course course = Course.SingleOrDefault(c => c.Id == courseViewModel.Id);				
+				Mapper.Map(courseViewModel, course);
 				course.Update();
 
 				TempData.SetMessage("Course updated");

@@ -2,26 +2,41 @@
 <fieldset>
 	<p>
 		Name:
-		<%= Html.Encode(Model.Name) %>
+		<%: Model.Name %>
 	</p>
 	<p>
 		Unit:
-		<%= Html.Encode(Model.UnitName) %>
+		<%: Model.UnitName%>
 	</p>
 	<p>
 		Centre:
-		<%= Html.Encode(Model.CentreName) %>
+		<%: Model.CentreName %>
 	</p>
 	<p>
 		Start Date:
-		<%= Html.Encode(String.Format("{0:d}", Model.StartDate)) %>
+		<%: String.Format("{0:d}", Model.StartDate) %>
+	</p>
+	<p>
+		End Date:
+		<%: String.Format("{0:d}", Model.EndDate) %>
+	</p>
+	<p>
+		Status:
+		<%: Model.Status %>
 	</p>
 	<p>
 		Tutor:
-		<%= Html.Encode(Model.TutorPersonName) %>
+		<%: Model.TutorPersonName %>
 	</p>
 	<p>
 		Verifier:
-		<%= Html.Encode(Model.VerifierPersonName) %>
+		<%: Model.VerifierPersonName %>
 	</p>
+<%--	<h3>Students</h3>
+	<ul>
+	<% foreach (CourseStudentViewModel student in Model.Students)
+		{ %>
+			<li><%: student.Name %></li>
+	<%} %>
+	</ul>--%>
 </fieldset>

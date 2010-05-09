@@ -7,48 +7,52 @@
 	<h2>
 		Taster Sessions</h2>
 	<table class="st-table">
-		<tr>
-			<th>
-			</th>
-			<th>
-				Name
-			</th>
-			<th>
-				Centre
-			</th>
-			<th>
-				Tutor
-			</th>
-			<th>
-				Date And Time
-			</th>
-		</tr>
-		<% foreach (var item in Model)
-		 { %>
-		<tr>
-			<td>
-				<%= Html.ActionLink("Edit", "Edit", new {  id=item.Id }) %>
-				|
-				<%= Ajax.ShowDetailsActionLink("TasterSession", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
-			</td>
-			<td>
-				<%= Html.Encode(item.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(item.Centre.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(item.Tutor.Person.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(String.Format("{0:g}", item.DateAndTime)) %>
-			</td>
-		</tr>
-		<% } %>
+		<thead>
+			<tr>
+				<th>
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Centre
+				</th>
+				<th>
+					Tutor
+				</th>
+				<th>
+					Date
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% foreach (var item in Model)
+			{ %>
+			<tr>
+				<td>
+					<%= Html.ActionLink("Edit", "Edit", new {  id=item.Id }) %>
+					|
+					<%= Ajax.ShowDetailsActionLink("TasterSession", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
+				</td>
+				<td>
+					<%= Html.Encode(item.Name) %>
+				</td>
+				<td>
+					<%= Html.Encode(item.Centre.Name) %>
+				</td>
+				<td>
+					<%= Html.Encode(item.Tutor.Person.Name) %>
+				</td>
+				<td>
+					<%= Html.Encode(String.Format("{0:d}", item.DateAndTime)) %>
+				</td>
+			</tr>
+			<% } %>
+		</tbody>
 	</table>
 	<div id="DetailsDialog">
 	</div>
 	<p>
-		<%= Html.ActionLink("Create New", "Create", null, new { @class = "st-back-button" })%>
+		<%= Html.ActionLink("Create New", "Create", null, new { @class = "st-button" })%>
 	</p>
 </asp:Content>

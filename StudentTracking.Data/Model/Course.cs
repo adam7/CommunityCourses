@@ -4,18 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Transactions;
 using StudentTracking.Data.Extensions;
 using SubSonic.DataProviders;
+using StudentTracking.Data.Enum;
 
 namespace StudentTracking.Data.Model
 {
-  public partial class Course
-  {
-    public IEnumerable<Student> Students
-    {
-      get
-      {
-        return Student.GetByCourse(Id);
-      }
-    }
+	public partial class Course
+	{
+		public IEnumerable<Student> Students
+		{
+			get
+			{
+				return Student.GetByCourse(Id);
+			}
+		}
 		public void Add(Course course)
 		{
 			// If the course is valid save it and add all the course modules and units to it
@@ -54,7 +55,7 @@ namespace StudentTracking.Data.Model
 				throw new ValidationException(course.GetErrors());
 			}
 		}
-
+		
 		// TODO: This should become AddStudent(Student student);
 		public static void AddStudentToCourse(int studentId, int courseId)
 		{
@@ -84,5 +85,5 @@ namespace StudentTracking.Data.Model
 				}
 			}
 		}
-  }
+	}
 }

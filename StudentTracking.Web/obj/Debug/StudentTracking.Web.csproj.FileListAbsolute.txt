@@ -21,3 +21,4 @@ C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\Stude
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.dll
 C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\obj\Debug\StudentTracking.Web.pdb
+C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.Web\bin\Elmah.dll

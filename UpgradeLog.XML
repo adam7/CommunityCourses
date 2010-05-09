@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="StudentTracking">
+</Property><Property Name="Solution File" Value="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\StudentTracking\StudentTracking.sln">
+</Property><Property Name="Date" Value="24 April 2010">
+</Property><Property Name="Time" Value="19:50">
+</Property></Properties><Event ErrorLevel="0" Project="StudentTracking.Data" Source="StudentTracking.Data\StudentTracking.Data.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StudentTracking.Data" Source="StudentTracking.Data\StudentTracking.Data.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StudentTracking.Web" Source="StudentTracking.Web\StudentTracking.Web.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StudentTracking.Web" Source="StudentTracking.Web\StudentTracking.Web.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StudentTracking.Web.Tests" Source="StudentTracking.Web.Tests\StudentTracking.Web.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StudentTracking.Web.Tests" Source="StudentTracking.Web.Tests\StudentTracking.Web.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="StudentTracking.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="StudentTracking.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StudentTracking.Data" Source="StudentTracking.Data\StudentTracking.Data.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StudentTracking.Web" Source="StudentTracking.Web\StudentTracking.Web.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="3" Project="" Source="StudentTracking.vsmdi" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="StudentTracking.vsmdi" Description="The file was converted to the current format.">
+</Event><Event ErrorLevel="0" Project="StudentTracking.Web.Tests" Source="StudentTracking.Web.Tests\StudentTracking.Web.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

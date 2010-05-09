@@ -28,11 +28,11 @@
     </p>
     <p>
       <label for="DateAndTime">
-        Date And Time:</label>
-      <%= Html.TextBox("DateAndTime", String.Format("{0:g}", Model.DateAndTime)) %>
+        Date:</label>
+      <%= Html.TextBox("DateAndTime", String.Format("{0:d}", Model.DateAndTime), new { @class = "st-date" })%>
     </p>
     <p>
-      <input type="submit" value="Save" />
+      <input type="submit" value="Save" class="st-button" />
     </p>
   </fieldset>
   <%= Html.ClientSideValidation<TasterSession>()%>
@@ -65,7 +65,7 @@
 		{ %>
 		<tr>
 			<td>
-				<%= Ajax.ShowDetailsActionLink(student.Id, "DetailsDialog", "ShowDetailsDialog")%>
+				<%= Ajax.ShowDetailsActionLink("Student", student.Id, "DetailsDialog", "ShowDetailsDialog")%>
 			</td>
 			<td>
 				<%= Html.Encode(student.Person.Name)%>
@@ -93,7 +93,7 @@
 			<label for="AddStudentId">
 				Student:</label>
 			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Person.Name"), "Please choose")%>
-			<input type="submit" value="Add" />
+			<input type="submit" value="Add" class="st-button" />
 		</p>
 		<%} %>
 	</fieldset>

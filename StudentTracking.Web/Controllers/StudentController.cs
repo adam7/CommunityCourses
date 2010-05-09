@@ -45,7 +45,7 @@ namespace StudentTracking.Web.Controllers
 		public virtual ActionResult Create()
 		{
 			PopulateViewData();
-			return View(MVC.Student.Actions.Edit, new StudentViewModel());
+			return View(Views.Edit, new StudentViewModel());
 		}
 
 		//
@@ -119,7 +119,7 @@ namespace StudentTracking.Web.Controllers
 						transactionScope.Complete();
 
 						TempData.SetMessage("Student updated");
-						return RedirectToAction(MVC.Person.Actions.Index);
+						return RedirectToAction(MVC.Student.Actions.Index());
 					}
 					catch (ValidationException validationException)
 					{

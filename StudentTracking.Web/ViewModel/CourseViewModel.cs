@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using StudentTracking.Data.Enum;
 
 namespace StudentTracking.Web.ViewModel
 {
+
+
 	public class CourseViewModel
 	{
 		public int Id { get; set; }
@@ -15,12 +18,39 @@ namespace StudentTracking.Web.ViewModel
 
 		public string CentreName { get; set; }
 
+		public CourseStatus Status
+		{
+			get
+			{
+				DateTime today = DateTime.Today;
+				if (StartDate > today)
+				{
+					return CourseStatus.Upcoming;
+				}
+				else
+				{
+					if (StartDate < today && EndDate > today)
+					{
+						return CourseStatus.Started;
+					}
+					else
+					{
+						return CourseStatus.Finished;
+					}
+				}
+			}
+		}
+
 		[Required]
 		public string Name { get; set; }
 
 		[Required]
 		[DataType(DataType.Date)]
-		public DateTime StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
+
+		[Required]
+		[DataType(DataType.Date)]
+		public DateTime? EndDate { get; set; }
 
 		[Required]
 		public int UnitId { get; set; }

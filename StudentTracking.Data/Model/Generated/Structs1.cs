@@ -297,6 +297,16 @@ namespace StudentTracking.Data.Model {
 	                MaxLength = 0
                 });
 
+                Columns.Add(new DatabaseColumn("EndDate", this)
+                {
+	                IsPrimaryKey = false,
+	                DataType = DbType.DateTime,
+	                IsNullable = true,
+	                AutoIncrement = false,
+	                IsForeignKey = false,
+	                MaxLength = 0
+                });
+
                 Columns.Add(new DatabaseColumn("StartDate", this)
                 {
 	                IsPrimaryKey = false,
@@ -376,6 +386,18 @@ namespace StudentTracking.Data.Model {
    			public static string CentreIdColumn{
 			      get{
         			return "CentreId";
+      			}
+		    }
+            
+            public IColumn EndDate{
+                get{
+                    return this.GetColumn("EndDate");
+                }
+            }
+				
+   			public static string EndDateColumn{
+			      get{
+        			return "EndDate";
       			}
 		    }
             

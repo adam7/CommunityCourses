@@ -17,7 +17,7 @@ namespace StudentTracking.Web.Controllers
     public virtual ActionResult Create()
     {
       PopulateViewData();
-      return View(MVC.Person.Actions.Edit, new Person());
+      return  View(Views.Create, new Person());
     }
 
     [AcceptVerbs(HttpVerbs.Post)]
@@ -27,7 +27,7 @@ namespace StudentTracking.Web.Controllers
       {
         person.Save();
         TempData.SetMessage("New person created");
-        return RedirectToAction(MVC.Person.Actions.Index);
+        return RedirectToAction(MVC.Person.Actions.Index());
       }
       catch
       {
@@ -48,7 +48,7 @@ namespace StudentTracking.Web.Controllers
       try
       {
         person.Save();
-        return RedirectToAction(MVC.Person.Actions.Index);
+        return RedirectToAction(MVC.Person.Actions.Index());
       }
       catch
       {

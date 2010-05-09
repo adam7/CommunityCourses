@@ -9,7 +9,7 @@ namespace System.Web.Mvc
 {
 	public static class AjaxHelperExtension
 	{
-		public static string ShowDetailsActionLink(this AjaxHelper ajaxHelper, string controller, int itemId, string updateTargetId, string onComplete)
+		public static MvcHtmlString ShowDetailsActionLink(this AjaxHelper ajaxHelper, string controller, int itemId, string updateTargetId, string onComplete)
 		{
 			return ajaxHelper.ActionLink("Details", "Details", controller, new { id = itemId }, 
 				new AjaxOptions { HttpMethod = "Get", UpdateTargetId = updateTargetId, OnComplete = onComplete });

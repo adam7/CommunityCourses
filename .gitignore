@@ -1,0 +1,10 @@
+StudentTracking.Web.Tests/bin
+StudentTracking.Web.Tests/obj
+StudentTracking.Web/bin
+StudentTracking.Web/obj
+StudentTracking.Model/bin
+StudentTracking.Model/obj
+TestResults
+*.user
+*.suo
+*.sln.cache

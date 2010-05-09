@@ -25,7 +25,7 @@ namespace StudentTracking.Web.Controllers
 
 		public virtual ActionResult Create()
 		{
-			return View(MVC.Centre.Actions.Edit, new CentreViewModel());
+			return View(Views.Edit, new CentreViewModel());
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -38,7 +38,7 @@ namespace StudentTracking.Web.Controllers
 
 				Centre.Add(centre, address);
 				TempData.SetMessage("New centre created");
-				return RedirectToAction(MVC.Centre.Actions.Index);
+				return RedirectToAction(MVC.Centre.Actions.Index());
 			}
 			catch (ValidationException validationException)
 			{
@@ -72,7 +72,7 @@ namespace StudentTracking.Web.Controllers
 
 						transactionScope.Complete();
 						TempData.SetMessage("Centre updated");
-						return RedirectToAction(MVC.Centre.Actions.Index);
+						return RedirectToAction(MVC.Centre.Actions.Index());
 					}
 					catch (ValidationException validationException)
 					{

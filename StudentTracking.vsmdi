@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <TestList name="AutoMapper" id="66051e9f-591c-4df4-a6a0-becc86a8a640" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <Description>Tests for mappings between objects</Description>
     <TestLinks>

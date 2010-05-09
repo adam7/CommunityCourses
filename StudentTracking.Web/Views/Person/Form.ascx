@@ -26,7 +26,7 @@
 	<p>
 		<label for="DateOfBirth">
 			Date Of Birth:</label>
-		<%= Html.TextBox("Person.DateOfBirth", String.Format("{0:d}", Model.DateOfBirth))%>
+		<%= Html.TextBox("Person.DateOfBirth", String.Format("{0:d}", Model.DateOfBirth), new { @class = "st-date" })%>
 	</p>
 	<p>
 		<label for="Phone">

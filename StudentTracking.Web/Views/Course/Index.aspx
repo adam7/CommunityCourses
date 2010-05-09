@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<StudentTracking.Data.Model.Course>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<StudentTracking.Web.ViewModel.CourseViewModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Courses
@@ -7,44 +7,60 @@
 	<h2>
 		Courses</h2>
 	<table class="st-table">
-		<tr>
-			<th>
-			</th>
-			<th>
-				Name
-			</th>
-			<th>
-				Unit
-			</th>
-			<th>
-				Centre
-			</th>
-			<th>
-				Start Date/Time
-			</th>
-		</tr>
-		<% foreach (var item in Model)
-		 { %>
-		<tr>
-			<td>
-				<%= Html.ActionLink("Edit", "Edit", new { id=item.Id  }) %>
-				|
-				<%= Ajax.ShowDetailsActionLink("Course", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
-			</td>
-			<td>
-				<%= Html.Encode(item.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(item.Unit.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(item.Centre.Name) %>
-			</td>
-			<td>
-				<%= Html.Encode(String.Format("{0:g}", item.StartDate)) %>
-			</td>
-		</tr>
-		<% } %>
+		<thead>
+			<tr>
+				<th>
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Unit
+				</th>
+				<th>
+					Centre
+				</th>
+				<th>
+					Start Date
+				</th>
+				<th>
+					End Date
+				</th>
+				<th>
+					Status
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% foreach (var item in Model)
+			{ %>
+			<tr>
+				<td>
+					<%= Html.ActionLink("Edit", "Edit", new { id=item.Id  }) %>
+					|
+					<%= Ajax.ShowDetailsActionLink("Course", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
+				</td>
+				<td>
+					<%: item.Name %>
+				</td>
+				<td>
+					<%: item.UnitName %>
+				</td>
+				<td>
+					<%: item.CentreName %>
+				</td>
+				<td>
+					<%: String.Format("{0:d}", item.StartDate) %>
+				</td>
+				<td>
+					<%: String.Format("{0:d}", item.EndDate) %>
+				</td>
+				<td class="<%: item.Status.ToString().ToLower() %>">
+					<%: item.Status %>
+				</td>
+			</tr>
+			<% } %>
+		</tbody>
 	</table>
 	<div id="DetailsDialog">
 	</div>

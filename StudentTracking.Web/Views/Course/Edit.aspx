@@ -1,7 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<StudentTracking.Web.ViewModel.CourseViewModel>" %>
 
-<%@ Import Namespace="xVal.Rules" %>
-<%@ Import Namespace="StudentTracking.Web.ViewModel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit
 </asp:Content>
@@ -15,32 +13,37 @@
 		<p>
 			<label for="Name">
 				Name:</label>
-			<%= Html.TextBox("Name", Model.Name) %>
+			<%= Html.TextBoxFor(m => m.Name) %>
 		</p>
 		<p>
 			<label for="UnitId">
 				Unit:</label>
-			<%= Html.DropDownList("UnitId", new SelectList(ViewData.GetUnits(), "Id", "Name", Model.UnitId), "Please choose")%>
+			<%= Html.DropDownListFor(m => m.UnitId, new SelectList(ViewData.GetUnits(), "Id", "Name", Model.UnitId), "Please choose")%>
 		</p>
 		<p>
 			<label for="CentreId">
 				Centre:</label>
-			<%= Html.DropDownList("CentreId", new SelectList(ViewData.GetCentres(), "Id", "Name", Model.CentreId), "Please choose")%>
+			<%= Html.DropDownListFor(m => m.CentreId, new SelectList(ViewData.GetCentres(), "Id", "Name", Model.CentreId), "Please choose")%>
 		</p>
 		<p>
 			<label for="StartDate">
 				Start Date:</label>
-			<%= Html.TextBox("StartDate", String.Format("{0:g}", Model.StartDate)) %>
+			<%= Html.TextBox("StartDate", String.Format("{0:d}", Model.StartDate), new { @class = "st-date" })%>
+		</p>
+		<p>
+			<label for="EndDate">
+				End Date:</label>
+			<%= Html.TextBox("EndDate", String.Format("{0:d}", Model.EndDate), new { @class = "st-date" })%>
 		</p>
 		<p>
 			<label for="TutorId">
 				Tutor:</label>
-			<%= Html.DropDownList("TutorId", new SelectList(ViewData.GetTutors(), "Id",  "Person.Name", Model.TutorId), "Please choose") %>
+			<%= Html.DropDownListFor(m => m.TutorId, new SelectList(ViewData.GetTutors(), "Id", "Person.Name", Model.TutorId), "Please choose")%>
 		</p>
 		<p>
 			<label for="VerifierId">
 				Verifier:</label>
-			<%= Html.DropDownList("VerifierId", new SelectList(ViewData.GetVerifiers(), "Id", "Person.Name", Model.VerifierId), "Please choose")%>
+			<%= Html.DropDownListFor(m => m.VerifierId, new SelectList(ViewData.GetVerifiers(), "Id", "Person.Name", Model.VerifierId), "Please choose")%>
 		</p>
 		<p>
 			<input type="submit" value="Save" class="st-button" />
@@ -77,7 +80,7 @@
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentSession.Completed, new { onClick = "updateSessionComplete(" + Model.Id + "," + student.Id + "," + studentSession.SessionId + ",'" + !studentSession.Completed + "');" })%>
+								Html.CheckBox("CheckBox", studentSession.Completed, new { onClick = "updateSessionComplete(" + Model.Id + "," + student.Id + "," + studentSession.SessionId + "," + (!studentSession.Completed).ToString().ToLowerInvariant() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -97,7 +100,7 @@
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentModule.Completed, new { onClick = "updateModuleComplete(" + Model.Id + "," + student.Id + "," + studentModule.ModuleId + ",'" + !studentModule.Completed + "');" })%>
+								Html.CheckBox("CheckBox", studentModule.Completed, new { onClick = "updateModuleComplete(" + Model.Id + "," + student.Id + "," + studentModule.ModuleId + "," + (!studentModule.Completed).ToString().ToLowerInvariant() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -120,7 +123,7 @@
 			<label for="AddStudentId">
 				Student:</label>
 			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Person.Name"), "Please choose")%>
-			<input type="submit" value="Add" />
+			<input type="submit" value="Add" class="st-button" />
 		</p>
 		<%} %>
 	</fieldset>
@@ -130,26 +133,24 @@
 	</p>
 	<div id="DetailsDialog">
 	</div>
-
 	<script type="text/javascript">
-		function updateSessionComplete(courseId, studentId, courseSessionId, complete) {
+		function updateSessionComplete(courseId, studentId, sessionId, complete) {
 			$.ajax(
 			{
 				type: "POST",
 				url: "/Course/UpdateSessionComplete",
-				data: "courseId=" + courseId + "&studentId=" + studentId + "&courseSessionId=" + courseSessionId + "&complete=" + complete.toString().toLowerCase(),
-				success: function(result) { /* Should do something here */ }
+				data: "courseId=" + courseId + "&studentId=" + studentId + "&sessionId=" + sessionId + "&complete=" + complete,
+				success: function (result) { /* Should do something here */ }
 			});
 		}
-		function updateModuleComplete(courseId, studentId, courseModuleId, complete) {
+		function updateModuleComplete(courseId, studentId, moduleId, complete) {
 			$.ajax(
 			{
 				type: "POST",
 				url: "/Course/UpdateModuleComplete",
-				data: "courseId=" + courseId + "&studentId=" + studentId + "&courseModuleId=" + courseModuleId + "&complete=" + complete.toString().toLowerCase(),
-				success: function(result) { /* Should do something here */ }
+				data: "courseId=" + courseId + "&studentId=" + studentId + "&moduleId=" + moduleId + "&complete=" + complete,
+				success: function (result) { /* Should do something here */ }
 			});
 		}
 	</script>
-
 </asp:Content>

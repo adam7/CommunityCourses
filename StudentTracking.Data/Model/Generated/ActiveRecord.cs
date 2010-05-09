@@ -1510,6 +1510,25 @@ namespace StudentTracking.Data.Model
             }
         }
 
+        DateTime? _EndDate;
+        public DateTime? EndDate
+        {
+            get { return _EndDate; }
+            set
+            {
+                if(_EndDate!=value){
+                    _EndDate=value;
+                    var col=tbl.Columns.SingleOrDefault(x=>x.Name=="EndDate");
+                    if(col!=null){
+                        if(!_dirtyColumns.Any(x=>x.Name==col.Name) && _isLoaded){
+                            _dirtyColumns.Add(col);
+                        }
+                    }
+                    OnChanged();
+                }
+            }
+        }
+
         DateTime? _StartDate;
         public DateTime? StartDate
         {
