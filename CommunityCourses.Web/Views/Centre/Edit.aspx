@@ -1,26 +1,25 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<CommunityCourses.Web.ViewModel.CentreViewModel>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<CommunityCourses.Web.Model.Centre>" %>
 
-<%@ Import Namespace="xVal.Rules" %>
-<%@ Import Namespace="CommunityCourses.Web.ViewModel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit centre
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 	<h2>
 		Edit centre</h2>
+	<% Html.EnableClientValidation(); %>
 	<% using (Html.BeginForm())
 		{%>
 	<fieldset>
 		<legend>Centre</legend>
 		<p>
-			<label for="Name">
-				Name:</label>
-			<%= Html.TextBox("Name", Model.Name) %>
+			<%= Html.LabelFor(m => m.Name) %>
+			<%= Html.TextBoxFor(m => m.Name) %>
+			<%= Html.ValidationMessageFor(m => m.Name) %>
 		</p>
 		<p>
-			<label for="Phone">
-				Phone:</label>
-			<%= Html.TextBox("Phone", Model.Phone) %>
+			<%= Html.LabelFor(m => m.Phone) %>
+			<%= Html.TextBoxFor(m => m.Phone)%>
+			<%= Html.ValidationMessageFor(m => m.Phone)%>
 		</p>
 		<%--    <p>
       <label for="ContactId">
@@ -28,10 +27,9 @@
       <%= Html.TextBox("ContactId") %>
     </p>--%>
 	</fieldset>
-	<%= Html.ClientSideValidation<CentreViewModel>()%>
-	<% Html.RenderPartial("~/Views/Address/Form.ascx", Model.Address ?? new AddressViewModel()); %>
+	<% Html.RenderPartial("~/Views/Address/Form.ascx", Model.Address ?? new CommunityCourses.Web.Model.Address()); %>
 	<p>
-		<input type="submit" value="Save" class="st-button" />		
+		<input type="submit" value="Save" class="st-button" />
 	</p>
 	<p>
 		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" }) %>

@@ -1,25 +1,25 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.ViewModel.PersonViewModel>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.Model.Person>" %>
 <fieldset>
 	<legend>Person</legend>
 	<p>
 		Name:
-		<%= Html.Encode(Model.Title + " " + Model.FirstName + " " + Model.LastName) %>
+		<%: Model.Title + " " + Model.FirstName + " " + Model.LastName %>
 	</p>
 	<p>
 		Phone:
-		<%= Html.Encode(Model.Phone) %>
+		<%: Model.Phone %>
 	</p>
 	<p>
 		Mobile:
-		<%= Html.Encode(Model.Mobile) %>
+		<%: Model.Mobile %>
 	</p>
 	<p>
 		Email:
-		<%= Html.Encode(Model.Email) %>
+		<%: Model.Email %>
 	</p>
 	<p>
 		Date Of Birth:
-		<%= Html.Encode(String.Format("{0:d}", Model.DateOfBirth)) %>
+		<%: String.Format("{0:d}", Model.DateOfBirth) %>
 	</p>
 	<p>
 		Disabilities:
@@ -28,15 +28,22 @@
 		<% foreach (string disability in Model.Disabilities)
 		 { %>
 		<li>
-			<%= Html.Encode(disability) %></li>
+			<%: disability %></li>
 		<%} %>
 	</ul>
 	<p>
 		Ethnicity:
-		<%= Html.Encode(Model.EthnicityName) %>
+		<%: Model.Ethnicity %>
 	</p>
 	<p>
 		Notes:
-		<%= Html.Encode(Model.Notes) %>
+		<%: Model.Notes %>
+	</p>
+	<p>
+		Roles:
+		<% foreach(string role in Model.Roles){
+					Response.Write(role + " ");}%>
 	</p>
 </fieldset>
+<% Html.RenderPartial("~/Views/Address/Details.ascx", Model.Address); %>
+

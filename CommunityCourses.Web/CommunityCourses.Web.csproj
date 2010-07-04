@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentTracking.Web</RootNamespace>
-    <AssemblyName>StudentTracking.Web</AssemblyName>
+    <RootNamespace>CommunityCourses.Web</RootNamespace>
+    <AssemblyName>CommunityCourses.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
@@ -42,12 +42,16 @@
     <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=1.0.0.155, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StudentTracking.Dependencies\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\StudentTracking.Dependencies\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CommunityCourses.Dependencies\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CommunityCourses.Dependencies\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
     <Reference Include="SubSonic.Core, Version=3.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,10 +79,6 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StudentTracking.Dependencies\xVal.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeTemplates\AccountController.generated.cs">
@@ -105,9 +105,6 @@
     <Compile Include="CodeTemplates\SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="CodeTemplates\StudentController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="CodeTemplates\T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,18 +113,13 @@
     <Compile Include="CodeTemplates\TasterSessionController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="CodeTemplates\UnitController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CentreController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TasterSessionController.cs" />
-    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -138,6 +130,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Centre.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\CourseModule.cs" />
+    <Compile Include="Model\CourseSession.cs" />
+    <Compile Include="Model\Disabilities.cs" />
+    <Compile Include="Model\Ethnicities.cs" />
+    <Compile Include="Model\Genders.cs" />
+    <Compile Include="Model\Module.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Roles.cs" />
+    <Compile Include="Model\Session.cs" />
+    <Compile Include="Model\TasterSession.cs" />
+    <Compile Include="Model\Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +168,6 @@
     <Content Include="Content\smoothness\jquery-ui-1.8.custom.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.custom.min.js" />
     <Content Include="Scripts\jquery.tablesorter.min.js" />
@@ -174,30 +177,24 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\CommunityCourses.js" />
-    <Content Include="Scripts\xVal.AspNetNative.js" />
-    <Content Include="Scripts\xVal.jquery.validate.js" />
     <Content Include="Views\Address\Details.ascx" />
     <Content Include="Views\Address\Form.ascx" />
     <Content Include="Views\Centre\Details.ascx" />
     <Content Include="Views\Centre\Edit.aspx" />
     <Content Include="Views\Centre\Index.aspx" />
+    <Content Include="Views\Course\Create.aspx" />
     <Content Include="Views\Course\Details.ascx" />
     <Content Include="Views\Course\Edit.aspx" />
     <Content Include="Views\Course\Index.aspx" />
     <Content Include="Views\Error\Index.aspx" />
+    <Content Include="Views\Person\Form.ascx" />
     <Content Include="Views\Person\Create.aspx" />
     <Content Include="Views\Person\Details.ascx" />
-    <Content Include="Views\Person\Form.ascx" />
+    <Content Include="Views\Person\Edit.aspx" />
     <Content Include="Views\Person\Index.aspx" />
-    <Content Include="Views\Person\List.ascx" />
-    <Content Include="Views\Student\Create.aspx" />
-    <Content Include="Views\Student\Details.ascx" />
-    <Content Include="Views\Student\Edit.aspx" />
-    <Content Include="Views\Student\Index.aspx" />
     <Content Include="Views\TasterSession\Details.ascx" />
     <Content Include="Views\TasterSession\Edit.aspx" />
     <Content Include="Views\TasterSession\Index.aspx" />
-    <Content Include="Views\Unit\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\MicrosoftAjax.js" />
@@ -217,12 +214,6 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommunityCourses.Data\CommunityCourses.Data.csproj">
-      <Project>{41B15876-653D-4889-804A-07354081AAC6}</Project>
-      <Name>CommunityCourses.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="CodeTemplates\AddView\Create.tt" />
     <None Include="CodeTemplates\AddView\Details.tt">
     </None>
@@ -234,14 +225,7 @@
     </None>
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Extensions\AjaxHelperExtension.cs" />
-    <Compile Include="ViewModel\AddressViewModel.cs" />
-    <Compile Include="ViewModel\CentreViewModel.cs" />
-    <Compile Include="ViewModel\StudentCourseModuleViewModel.cs" />
-    <Compile Include="ViewModel\StudentCourseSessionViewModel.cs" />
-    <Compile Include="ViewModel\CourseStudentViewModel.cs" />
     <Compile Include="ViewModel\CourseViewModel.cs" />
-    <Compile Include="ViewModel\PersonViewModel.cs" />
-    <Compile Include="ViewModel\StudentViewModel.cs" />
     <None Include="CodeTemplates\T4MVC.settings.t4" />
     <None Include="CodeTemplates\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -250,7 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

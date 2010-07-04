@@ -35,19 +35,17 @@ namespace System.Web.Mvc
       return sb.ToString();
     }
 
-		public static string CheckBoxList(this HtmlHelper helper, IList<string> selectedDisabilities, 
-			IList<string> allDisabilities, string propertyName)
+		public static string CheckBoxList(this HtmlHelper helper, IList<string> selectedItems, 
+			IEnumerable<string> items, string propertyName)
 		{
 			StringBuilder stringBuilder = new StringBuilder();
 
-			foreach(string disability in allDisabilities)
+			foreach (string item in items)
 			{
-				bool selected = selectedDisabilities != null && selectedDisabilities.Contains(disability);
+				bool selected = selectedItems != null && selectedItems.Contains(item);
 				// Add the checkbox
-				stringBuilder.AppendFormat("<input name=\"{0}\" id=\"{0}\" type=\"checkbox\" value=\"{1}\" {2} />",
-					propertyName, disability, selected ? "checked" : "");
-				// Add the name and a line break
-				stringBuilder.AppendFormat("{0}<br />", disability);
+				stringBuilder.AppendFormat("<input name=\"{0}\" id=\"{0}\" type=\"checkbox\" value=\"{1}\" {2}>{1}</input><br />",
+					propertyName, item, selected ? "checked" : "");
 			}
 
 			return stringBuilder.ToString();

@@ -1,66 +1,67 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<CommunityCourses.Web.ViewModel.CourseViewModel>" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 	<h2>
 		Edit Course</h2>
+	<% Html.EnableClientValidation(); %>
 	<% using (Html.BeginForm())
 		{%>
 	<fieldset>
 		<legend>Course Details</legend>
 		<p>
-			<label for="Name">
-				Name:</label>
+			<%= Html.LabelFor(m => m.Name) %>
 			<%= Html.TextBoxFor(m => m.Name) %>
+			<%= Html.ValidationMessageFor(m => m.Name) %>
 		</p>
 		<p>
-			<label for="UnitId">
-				Unit:</label>
-			<%= Html.DropDownListFor(m => m.UnitId, new SelectList(ViewData.GetUnits(), "Id", "Name", Model.UnitId), "Please choose")%>
+			<label>
+				Unit:&nbsp;<%: Model.Unit.Name %></label>
+			<%: Html.HiddenFor(m => m.UnitId) %>
 		</p>
 		<p>
-			<label for="CentreId">
-				Centre:</label>
+			<%= Html.LabelFor(m => m.CentreId)%>
 			<%= Html.DropDownListFor(m => m.CentreId, new SelectList(ViewData.GetCentres(), "Id", "Name", Model.CentreId), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.CentreId)%>
 		</p>
 		<p>
-			<label for="StartDate">
-				Start Date:</label>
-			<%= Html.TextBox("StartDate", String.Format("{0:d}", Model.StartDate), new { @class = "st-date" })%>
+			<%= Html.LabelFor(m => m.StartDate)%>
+			<%= Html.TextBoxFor(m =>  m.StartDate, new { @class = "st-date" })%>
+			<%= Html.ValidationMessageFor(m => m.StartDate)%>
 		</p>
 		<p>
-			<label for="EndDate">
-				End Date:</label>
-			<%= Html.TextBox("EndDate", String.Format("{0:d}", Model.EndDate), new { @class = "st-date" })%>
+			<%= Html.LabelFor(m => m.EndDate)%>
+			<%= Html.TextBoxFor(m => m.EndDate, new { @class = "st-date" })%>
+			<%= Html.ValidationMessageFor(m => m.EndDate)%>
 		</p>
 		<p>
-			<label for="TutorId">
-				Tutor:</label>
-			<%= Html.DropDownListFor(m => m.TutorId, new SelectList(ViewData.GetTutors(), "Id", "Person.Name", Model.TutorId), "Please choose")%>
+			<%= Html.LabelFor(m => m.TutorId)%>
+			<%= Html.DropDownListFor(m => m.TutorId, new SelectList(ViewData.GetTutors(), "Id", "Name", Model.TutorId), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.TutorId)%>
 		</p>
 		<p>
-			<label for="VerifierId">
-				Verifier:</label>
-			<%= Html.DropDownListFor(m => m.VerifierId, new SelectList(ViewData.GetVerifiers(), "Id", "Person.Name", Model.VerifierId), "Please choose")%>
+			<%= Html.LabelFor(m => m.VerifierId)%>
+			<%= Html.DropDownListFor(m => m.VerifierId, new SelectList(ViewData.GetVerifiers(), "Id", "Name", Model.VerifierId), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.VerifierId)%>
 		</p>
 		<p>
 			<input type="submit" value="Save" class="st-button" />
 		</p>
 	</fieldset>
-	<% } %>
-	<%= Html.ClientSideValidation<CourseViewModel>() %>
-	<% if (Model.Id != 0)
+	<% for (int count = 0; count < Model.StudentIds.Count; count++)
 		{ %>
+	<%= Html.Hidden(string.Format("StudentIds[{0}]", count), Model.StudentIds[count]) %>
+	<% } %>
+	<% } %>
 	<fieldset>
 		<legend>Students</legend>
 		<div id="Accordion">
-			<% foreach (CourseStudentViewModel student in Model.Students)
+			<% foreach (Person student in Model.Students)
 			{ %>
 			<h3>
 				<a href="#">
-					<%= student.Name + " - " + student.Address%></a></h3>
+					<%= student.Name + " - " + student.Address.ToSingleLine() %></a></h3>
 			<div>
 				<div style="float: left">
 					<table class="st-table">
@@ -72,15 +73,15 @@
 								Completed
 							</th>
 						</tr>
-						<% foreach (StudentCourseSessionViewModel studentSession in Model.Sessions.Where(module => module.StudentId == student.Id))
+						<% foreach (CourseSession studentSession in student.CourseSessions.Where(session => session.CourseId == Model.Id))
 				 { %>
 						<tr>
 							<td>
-								<%= studentSession.SessionName%>
+								<%= studentSession.Name%>
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentSession.Completed, new { onClick = "updateSessionComplete(" + Model.Id + "," + student.Id + "," + studentSession.SessionId + "," + (!studentSession.Completed).ToString().ToLowerInvariant() + ");" })%>
+								Html.CheckBox("CheckBox", studentSession.Complete, new { onClick = "updateSessionComplete('" + Model.Id + "','" + student.Id + "','" + studentSession.Name + "'," + (!studentSession.Complete).ToString().ToLower() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -92,15 +93,15 @@
 								Completed
 							</th>
 						</tr>
-						<% foreach (StudentCourseModuleViewModel studentModule in Model.Modules.Where(module => module.StudentId == student.Id))
+						<% foreach (CourseModule studentModule in student.CourseModules.Where(module => module.CourseId == Model.Id))
 				 { %>
 						<tr>
 							<td>
-								<%= studentModule.ModuleName%>
+								<%= studentModule.Name%>
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentModule.Completed, new { onClick = "updateModuleComplete(" + Model.Id + "," + student.Id + "," + studentModule.ModuleId + "," + (!studentModule.Completed).ToString().ToLowerInvariant() + ");" })%>
+								Html.CheckBox("CheckBox", studentModule.Complete, new { onClick = "updateModuleComplete('" + Model.Id + "','" + student.Id + "','" + studentModule.Name + "'," + (!studentModule.Complete).ToString().ToLower() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -122,12 +123,11 @@
 		<p>
 			<label for="AddStudentId">
 				Student:</label>
-			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Person.Name"), "Please choose")%>
+			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Name"), "Please choose")%>
 			<input type="submit" value="Add" class="st-button" />
 		</p>
 		<%} %>
 	</fieldset>
-	<% } %>
 	<p>
 		<%=Html.ActionLink("Back to List", "Index", null, new { @class = "st-back-button" })%>
 	</p>

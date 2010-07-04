@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CommunityCourses.Data.Model.Centre>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CommunityCourses.Web.Model.Centre>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Centres
@@ -44,7 +44,7 @@
 					<%= Html.Encode(item.Address.ToSingleLine()) %>
 				</td>
 				<td>
-					<%= Html.Encode(item.ContactId) %>
+					<%= "" /* Html.Encode(item.Contact.FirstName) */ %>
 				</td>
 			</tr>
 			<% } %>

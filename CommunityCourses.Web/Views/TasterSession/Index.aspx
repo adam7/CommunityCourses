@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CommunityCourses.Data.Model.TasterSession>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<CommunityCourses.Web.Model.TasterSession>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Taster Sessions
@@ -41,7 +41,7 @@
 					<%= Html.Encode(item.Centre.Name) %>
 				</td>
 				<td>
-					<%= Html.Encode(item.Tutor.Person.Name) %>
+					<%= Html.Encode(item.Tutor.Name) %>
 				</td>
 				<td>
 					<%= Html.Encode(String.Format("{0:d}", item.DateAndTime)) %>

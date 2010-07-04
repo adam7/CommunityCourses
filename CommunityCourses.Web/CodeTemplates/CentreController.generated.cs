@@ -83,7 +83,7 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Details(int id) {
+        public override System.Web.Mvc.ActionResult Details(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
@@ -94,21 +94,21 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Web.ViewModel.CentreViewModel centreViewModel) {
+        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Web.Model.Centre centre) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("centreViewModel", centreViewModel);
+            callInfo.RouteValueDictionary.Add("centre", centre);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(int id) {
+        public override System.Web.Mvc.ActionResult Edit(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(CommunityCourses.Web.ViewModel.CentreViewModel centreViewModel) {
+        public override System.Web.Mvc.ActionResult Edit(CommunityCourses.Web.Model.Centre centre) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("centreViewModel", centreViewModel);
+            callInfo.RouteValueDictionary.Add("centre", centre);
             return callInfo;
         }
 

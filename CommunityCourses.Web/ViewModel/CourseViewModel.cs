@@ -1,73 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
-using CommunityCourses.Data.Enum;
+﻿using System.Collections.Generic;
+using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.ViewModel
 {
-
-
-	public class CourseViewModel
+	public class CourseViewModel : Course
 	{
-		public int Id { get; set; }
-
-		[Required]
-		public int CentreId { get; set; }
-
-		public string CentreName { get; set; }
-
-		public CourseStatus Status
+		public CourseViewModel()
 		{
-			get
-			{
-				DateTime today = DateTime.Today;
-				if (StartDate > today)
-				{
-					return CourseStatus.Upcoming;
-				}
-				else
-				{
-					if (StartDate < today && EndDate > today)
-					{
-						return CourseStatus.Started;
-					}
-					else
-					{
-						return CourseStatus.Finished;
-					}
-				}
-			}
+			Unit = new Unit();
+			Centre = new Centre();
+			Tutor = new Person();
+			Verifier = new Person();
+			Students = new List<Person>();
 		}
 
-		[Required]
-		public string Name { get; set; }
-
-		[Required]
-		[DataType(DataType.Date)]
-		public DateTime? StartDate { get; set; }
-
-		[Required]
-		[DataType(DataType.Date)]
-		public DateTime? EndDate { get; set; }
-
-		[Required]
-		public int UnitId { get; set; }
-
-		public string UnitName { get; set; }
-
-		[Required]
-		public int TutorId { get; set; }
-
-		public string TutorPersonName { get; set; }
-
-		public int? VerifierId { get; set; }
-
-		public string VerifierPersonName { get; set; }
-
-		public IList<CourseStudentViewModel> Students { get; set; }
-		public IEnumerable<StudentCourseModuleViewModel> Modules { get; set; }
-		public IEnumerable<StudentCourseSessionViewModel> Sessions { get; set; }
+		public Unit Unit { get; set; }
+		public Centre Centre { get; set; }
+		public Person Tutor { get; set; }
+		public Person Verifier { get; set; }
+		public IList<Person> Students { get; set; }
 	}
 }

@@ -1,8 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
-using CommunityCourses.Data;
-using CommunityCourses.Data.Model;
-using System;
+using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -13,15 +11,17 @@ namespace CommunityCourses.Web.Controllers
 
 		// Public Methods (6) 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult AddStudent(int id, int studentId)
+		public virtual ActionResult AddStudent(string id, string studentId)
 		{
-			TasterSession.AddStudentToTasterSession(studentId, id);
+			TasterSession tasterSession = MvcApplication.CurrentSession.Load<TasterSession>(id);
+			tasterSession.Students.Add(MvcApplication.CurrentSession.Load<Person>(studentId));
+			MvcApplication.CurrentSession.Store(tasterSession);
 
 			return RedirectToRoute(new { action = MVC.TasterSession.Actions.Edit(id) });
 		}
 
 		public virtual ActionResult Create()
-		{			
+		{
 			PopulateViewData(null);
 			return View(Views.Edit, new TasterSession());
 		}
@@ -29,58 +29,56 @@ namespace CommunityCourses.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Create(TasterSession tasterSession)
 		{
-			try
+			if(ModelState.IsValid)
 			{
-				tasterSession.Add();
+				tasterSession.Centre = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId);
+				tasterSession.Tutor = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId);
+				MvcApplication.CurrentSession.Store(tasterSession);
 				return RedirectToAction(MVC.TasterSession.Actions.Index());
 			}
-			catch (ValidationException validationException)
+			else
 			{
-				validationException.CopyToModelState(ModelState, "tasterSession");
-				return View();
+				return View(MVC.TasterSession.Views.Edit, tasterSession);
 			}
 		}
 
-		public virtual ActionResult Details(int id)
+		public virtual ActionResult Details(string id)
 		{
-			return PartialView(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
+			return PartialView(MvcApplication.CurrentSession.Load<TasterSession>(id));
 		}
 
-		public virtual ActionResult Edit(int id)
+		public virtual ActionResult Edit(string id)
 		{
 			PopulateViewData(id);
-			return View(TasterSession.SingleOrDefault(tasterSession => tasterSession.Id == id));
+			return View(MvcApplication.CurrentSession.Load<TasterSession>(id));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(FormCollection form)
+		public virtual ActionResult Edit(TasterSession tasterSession)
 		{
-			try
+			if(ModelState.IsValid)
 			{
-				TasterSession tasterSession = TasterSession.SingleOrDefault(t => t.Id == Convert.ToInt32(form["Id"]));
-				UpdateModel(tasterSession);
-				tasterSession.Update();
+				tasterSession.Centre = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId);
+				tasterSession.Tutor = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId);
+				MvcApplication.CurrentSession.Store(tasterSession);
 				TempData.SetMessage("Taster session updated");
 				return RedirectToAction(MVC.TasterSession.Actions.Index());
 			}
-			catch (ValidationException validationException)
+			else
 			{
-				validationException.CopyToModelState(ModelState, "tasterSession");
-				return View();
+				return View(tasterSession);
 			}
 		}
 
 		public virtual ActionResult Index()
 		{
-			return View(TasterSession.All());
+			return View(MvcApplication.CurrentSession.Query<TasterSession>("AllTasterSessions"));
 		}
 		// Private Methods (1) 
 
-		void PopulateViewData(int? tasterSessionId)
+		void PopulateViewData(string tasterSessionId)
 		{
-			ViewData.SetCentres(Centre.All().ToList());
-			ViewData.SetTutors(Tutor.All().ToList());
-			ViewData.SetPotentialStudents(Student.GetPotentialStudentsForTasterSession(tasterSessionId).ToList());
+			ViewData.SetPotentialStudents(MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList());
 		}
 
 		#endregion Methods 

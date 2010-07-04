@@ -86,6 +86,7 @@ namespace CommunityCourses.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Create = "~/Views/Course/Create.aspx";
             public readonly string Details = "~/Views/Course/Details.ascx";
             public readonly string Edit = "~/Views/Course/Edit.aspx";
             public readonly string Index = "~/Views/Course/Index.aspx";
@@ -101,7 +102,7 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Details(int id) {
+        public override System.Web.Mvc.ActionResult Details(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
@@ -112,26 +113,26 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Web.ViewModel.CourseViewModel courseViewModel) {
+        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Web.Model.Course course) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("courseViewModel", courseViewModel);
+            callInfo.RouteValueDictionary.Add("course", course);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(int id) {
+        public override System.Web.Mvc.ActionResult Edit(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult AddStudent(int id, int studentId) {
+        public override System.Web.Mvc.ActionResult AddStudent(string id, string studentId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddStudent);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("studentId", studentId);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdateSessionComplete(int courseId, int studentId, int sessionId, bool complete) {
+        public override System.Web.Mvc.ActionResult UpdateSessionComplete(string courseId, string studentId, string sessionId, bool complete) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateSessionComplete);
             callInfo.RouteValueDictionary.Add("courseId", courseId);
             callInfo.RouteValueDictionary.Add("studentId", studentId);
@@ -140,7 +141,7 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdateModuleComplete(int courseId, int studentId, int moduleId, bool complete) {
+        public override System.Web.Mvc.ActionResult UpdateModuleComplete(string courseId, string studentId, string moduleId, bool complete) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateModuleComplete);
             callInfo.RouteValueDictionary.Add("courseId", courseId);
             callInfo.RouteValueDictionary.Add("studentId", studentId);
@@ -149,9 +150,9 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(CommunityCourses.Web.ViewModel.CourseViewModel courseViewModel) {
+        public override System.Web.Mvc.ActionResult Edit(CommunityCourses.Web.Model.Course course) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("courseViewModel", courseViewModel);
+            callInfo.RouteValueDictionary.Add("course", course);
             return callInfo;
         }
 

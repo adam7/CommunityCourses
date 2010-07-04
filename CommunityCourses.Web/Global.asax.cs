@@ -1,17 +1,38 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
-using AutoMapper;
+using CommunityCourses.Web.Model;
 using CommunityCourses.Web.ViewModel;
-using CommunityCourses.Data.Model;
+using Raven.Client;
+using Raven.Client.Document;
 using System.Collections.Generic;
 
 namespace CommunityCourses.Web
 {
-	// Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-	// visit http://go.microsoft.com/?LinkId=9394801
-
 	public class MvcApplication : System.Web.HttpApplication
 	{
+		private const string RavenSessionKey = "Raven.Session";
+		private static DocumentStore _documentStore;
+
+		public MvcApplication()
+		{
+			BeginRequest += (sender, args) => HttpContext.Current.Items[RavenSessionKey] = _documentStore.OpenSession();
+			EndRequest += (o, eventArgs) =>
+			{
+				CurrentSession.SaveChanges();
+				var disposable = HttpContext.Current.Items[RavenSessionKey] as IDisposable;
+				if (disposable != null)
+					disposable.Dispose();
+			};
+		}
+
+		public static IDocumentSession CurrentSession
+		{
+			get { return HttpContext.Current.Items[RavenSessionKey] as IDocumentSession; }
+		}
+
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -37,119 +58,89 @@ namespace CommunityCourses.Web
 
 		}
 
-		public class DisabilityToStringConverter : TypeConverter<Disability, string>
-		{
-			protected override string ConvertCore(Disability disability)
-			{
-				return disability.Name;
-			}
-		}
-
-		public class StudentToCourseStudentViewModelConverter : TypeConverter<Student, CourseStudentViewModel>
-		{
-			protected override CourseStudentViewModel ConvertCore(Student student)
-			{
-				return new CourseStudentViewModel { Id = student.Id, Name = student.Person.Name, Address = student.Person.Address.FirstLine };
-			}
-		}
-
-		public class StudentCourseModuleToCourseStudentSessionViewModel : TypeConverter<StudentCourseModule, StudentCourseModuleViewModel>
-		{
-			protected override StudentCourseModuleViewModel ConvertCore(StudentCourseModule studentCourseModule)
-			{
-				return new StudentCourseModuleViewModel
-				{
-					CourseId = studentCourseModule.Id,
-					ModuleId = studentCourseModule.CourseModule.ModuleId,
-					ModuleName = studentCourseModule.CourseModule.Module.Name,
-					StudentId = studentCourseModule.StudentId,
-					StudentName = studentCourseModule.Student.Person.Name,
-					Completed = studentCourseModule.Complete
-				};
-			}
-		}
-
-		public class StudentCourseSessionToCourseStudentSessionViewModel : TypeConverter<StudentCourseSession, StudentCourseSessionViewModel>
-		{
-			protected override StudentCourseSessionViewModel ConvertCore(StudentCourseSession studentCourseSession)
-			{
-				return new StudentCourseSessionViewModel
-				{
-					Completed = studentCourseSession.Complete,
-					CourseId = studentCourseSession.CourseId,
-					SessionId = studentCourseSession.CourseSession.SessionId,
-					SessionName = studentCourseSession.CourseSession.Session.Name,
-					StudentId = studentCourseSession.StudentId,
-					StudentName = studentCourseSession.Student.Person.Name
-				};
-			}
-		}
-		
-		public static void RegisterAutoMappings()
-		{
-			// Map Disability/string
-			Mapper.CreateMap<Disability, string>()
-				.ConvertUsing<DisabilityToStringConverter>();
-
-			// Map Address/AddressViewModel
-			Mapper.CreateMap<AddressViewModel, Address>()
-				.ForMember(destination => destination.TestMode, option => option.Ignore())
-				.ForMember(destination => destination.Id, option => option.Ignore());
-			Mapper.CreateMap<Address, AddressViewModel>();
-
-			// Map Person/PersonViewModel
-			Mapper.CreateMap<PersonViewModel, Person>()
-				.ForMember(destination => destination.AddressId, option => option.Ignore())
-				.ForMember(destination => destination.Ethnicity, option => option.Ignore())
-				.ForMember(destination => destination.Address, option => option.Ignore())
-				.ForMember(destination => destination.TestMode, option => option.Ignore())
-				.ForMember(destination => destination.Id, option => option.Ignore())
-				.ForMember(destination => destination.Disabilities, option => option.Ignore());
-
-			Mapper.CreateMap<Person, PersonViewModel>();
-
-			// Map Course/CourseViewModel
-			Mapper.CreateMap<CourseViewModel, Course>()
-				.ForMember(destination => destination.Centre, option => option.Ignore())
-				.ForMember(destination => destination.Tutor, option => option.Ignore())
-				.ForMember(destination => destination.Unit, option => option.Ignore())
-				.ForMember(destination => destination.TestMode, option => option.Ignore())
-				.ForMember(destination => destination.Verifier, option => option.Ignore());
-
-			Mapper.CreateMap<Course, CourseViewModel>()
-				.ForMember(destination => destination.Sessions, option => option.MapFrom(source => source.StudentCourseSessions))
-				.ForMember(destination => destination.Modules, option => option.MapFrom(source => source.StudentCourseModules));
-
-			// Map Centre/CentreViewModel
-			Mapper.CreateMap<CentreViewModel, Centre>()
-				.ForMember(destination => destination.TestMode, option => option.Ignore())
-				.ForMember(destination => destination.Contact, option => option.Ignore())
-				.ForMember(destination => destination.ContactId, option => option.Ignore())
-				.ForMember(destination => destination.Id, option => option.Ignore())
-				.ForMember(destination => destination.Address, option => option.Ignore())
-				.ForMember(destination => destination.AddressId, option => option.Ignore());
-
-			Mapper.CreateMap<Centre, CentreViewModel>();
-
-			// Map Student/CourseStudentViewModel
-			Mapper.CreateMap<Student, CourseStudentViewModel>()
-				.ConvertUsing<StudentToCourseStudentViewModelConverter>();
-
-			// Map StudentCourseSession/StudentCourseSessionViewModel
-			Mapper.CreateMap<StudentCourseSession, StudentCourseSessionViewModel>()
-				.ConvertUsing<StudentCourseSessionToCourseStudentSessionViewModel>();
-
-			// Map StudentCourseModule/StudentCourseModuleViewModel
-			Mapper.CreateMap<StudentCourseModule, StudentCourseModuleViewModel>()
-				.ConvertUsing<StudentCourseModuleToCourseStudentSessionViewModel>();
-			
-			Mapper.AssertConfigurationIsValid();
-		}
-
 		protected void Application_Start()
 		{
+			_documentStore = new DocumentStore { Url = "http://localhost:8080/" };
+			_documentStore.Conventions.IdentityPartsSeparator = "-";
+			_documentStore.Initialize();
+
+			CreateIndexes();
+
 			RegisterRoutes(RouteTable.Routes);
-			RegisterAutoMappings();
+		}
+
+		void CreateIndexes()
+		{
+			//_documentStore.DatabaseCommands.PutIndex(
+			//    "AllCentres",
+			//    new IndexDefinition<Centre>()
+			//    {
+			//      Map = centres => from centre in centres select new { centre }
+			//    });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//    "AllTasterSessions",
+			//    new IndexDefinition<TasterSession>()
+			//    {
+			//      Map = tasterSessions => from tasterSession in tasterSessions select new { tasterSession }
+			//    });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//    "AllPeople",
+			//    new IndexDefinition<Person>()
+			//    {
+			//      Map = people => from person in people select new { person }
+			//    });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllTutors",
+			//  new IndexDefinition<Person>()
+			//  {
+			//    Map = people => from person in people
+			//                    where person.Roles.Contains(Roles.Tutor)
+			//                    select new { person }
+			//  });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllStudents",
+			//  new IndexDefinition<Person>()
+			//  {
+			//    Map = people => from person in people
+			//                    where person.Roles.Contains<string>(Roles.Student)
+			//                    select new { person }
+			//  });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllVolunteers",
+			//  new IndexDefinition<Person>()
+			//  {
+			//    Map = people => from person in people
+			//                    where person.Roles.Contains<string>(Roles.Volunteer)
+			//                    select new { person }
+			//  });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllVerifiers",
+			//  new IndexDefinition<Person>()
+			//  {
+			//    Map = people => from person in people
+			//                    where person.Roles.Contains<string>(Roles.Verifier)
+			//                    select new { person }
+			//  });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//    "AllCourses",
+			//    new IndexDefinition<Course>()
+			//    {
+			//      Map = courses => from course in courses select new { course }
+			//    });
+
+			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllUnits",
+			//  new IndexDefinition<Unit>()
+			//  {
+			//    Map = units => from unit in units select new { unit }
+			//  });
 		}
 	}
 }

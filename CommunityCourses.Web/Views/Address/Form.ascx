@@ -1,22 +1,19 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.ViewModel.AddressViewModel>" %>
-<%@ Import Namespace="xVal.Rules"%>
-<%@ Import Namespace="CommunityCourses.Web.ViewModel"%>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.Model.Address>" %>
 <fieldset>
   <legend>Address</legend>
   <p>
-    <label for="FirstLine">
-      First Line:</label>
-    <%= Html.TextBox("Address.FirstLine", Model.FirstLine)%>
+			<%= Html.Label("Address.FirstLine")%>
+			<%= Html.TextBox("Address.FirstLine", Model.FirstLine)%>
+			<%= Html.ValidationMessage("Address.FirstLine")%>
   </p>
   <p>
-    <label for="City">
-      City:</label>
-    <%= Html.TextBox("Address.City", Model.City)%>
+			<%= Html.Label("Address.City")%>
+			<%= Html.TextBox("Address.City", Model.City)%>
+			<%= Html.ValidationMessage("Address.City")%>
   </p>
   <p>
-    <label for="PostCode">
-      Postcode:</label>
-    <%= Html.TextBox("Address.Postcode", Model.Postcode)%>
+			<%= Html.Label("Address.Postcode")%>
+			<%= Html.TextBox("Address.Postcode", Model.Postcode)%>
+			<%= Html.ValidationMessage("Address.Postcode")%>
   </p>
 </fieldset>
-<%= Html.ClientSideValidation<AddressViewModel>("Address") %>

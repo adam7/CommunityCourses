@@ -1,6 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<CommunityCourses.Data.Model.TasterSession>" %>
-<%@ Import Namespace="CommunityCourses.Data.Model" %>
-<%@ Import Namespace="xVal.Rules" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<CommunityCourses.Web.Model.TasterSession>" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
   Edit Taster Session
 </asp:Content>
@@ -9,35 +7,35 @@
     Edit Taster Session</h2>
   <% using (Html.BeginForm())
      {%>
+	<% Html.EnableClientValidation(); %>
   <fieldset>
     <%= Html.Hidden("Id", Model.Id) %>
     <p>
-      <label for="Name">
-        Name:</label>
-      <%= Html.TextBox("Name", Model.Name) %>
+			<%= Html.LabelFor(m => m.Name) %>
+			<%= Html.TextBoxFor(m => m.Name) %>
+			<%= Html.ValidationMessageFor(m => m.Name) %>
     </p>
     <p>
-      <label for="CentreId">
-        Centre:</label>
-      <%= Html.DropDownList("CentreId", new SelectList(ViewData.GetCentres(), "Id", "Name"), "Please choose") %>
+			<%= Html.LabelFor(m => m.CentreId)%>
+			<%= Html.DropDownListFor(m => m.CentreId, new SelectList(ViewData.GetCentres(), "Id", "Name"), "Please choose") %>
+			<%= Html.ValidationMessageFor(m => m.CentreId)%>
     </p>
     <p>
-      <label for="TutorId">
-        Tutor:</label>
-      <%= Html.DropDownList("TutorId", new SelectList(ViewData.GetTutors(), "Id", "Person.Name"), "Please choose") %>
+			<%= Html.LabelFor(m => m.TutorId)%>
+			<%= Html.DropDownListFor(m => m.TutorId, new SelectList(ViewData.GetTutors(), "Id", "Name"), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.TutorId)%>
     </p>
     <p>
-      <label for="DateAndTime">
-        Date:</label>
-      <%= Html.TextBox("DateAndTime", String.Format("{0:d}", Model.DateAndTime), new { @class = "st-date" })%>
+			<%= Html.LabelFor(m => m.DateAndTime) %>
+			<%= Html.TextBoxFor(m => m.DateAndTime, new { @class = "st-date" })%>
+			<%= Html.ValidationMessageFor(m => m.DateAndTime) %>
     </p>
     <p>
       <input type="submit" value="Save" class="st-button" />
     </p>
   </fieldset>
-  <%= Html.ClientSideValidation<TasterSession>()%>
   <% }
-		 if (Model.Id != 0)
+		 if (Model.Id != null)
 		 { %>
 	<fieldset>
 		<legend>Students</legend>
@@ -61,26 +59,26 @@
 				Email
 			</th>
 		</tr>
-		<%foreach (Student student in Model.Students)
+		<%foreach (Person student in Model.Students)
 		{ %>
 		<tr>
 			<td>
-				<%= Ajax.ShowDetailsActionLink("Student", student.Id, "DetailsDialog", "ShowDetailsDialog")%>
+				<%= Ajax.ShowDetailsActionLink("Student", student.Id, "DetailsDialog", "ShowDetailsDialog") %>
 			</td>
 			<td>
-				<%= Html.Encode(student.Person.Name)%>
+				<%: student.Name %>
 			</td>
 			<td>
-				<%= Html.Encode(student.Person.Address.ToSingleLine())%>
+				<%: student.Address.ToSingleLine() %>
 			</td>
 			<td>
-				<%= Html.Encode(student.Person.Phone)%>
+				<%: student.Phone %>
 			</td>
 			<td>
-				<%= Html.Encode(student.Person.Mobile)%>
+				<%: student.Mobile %>
 			</td>
 			<td>
-				<%= Html.Encode(student.Person.Email)%>
+				<%: student.Email %>
 			</td>
 		</tr>
 		<%
@@ -92,7 +90,7 @@
 		<p>
 			<label for="AddStudentId">
 				Student:</label>
-			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Person.Name"), "Please choose")%>
+			<%= Html.DropDownList("StudentId", new SelectList(ViewData.GetPotentialStudents(), "Id", "Name"), "Please choose")%>
 			<input type="submit" value="Add" class="st-button" />
 		</p>
 		<%} %>

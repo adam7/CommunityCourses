@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.ViewModel.CentreViewModel>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.Model.Centre>" %>
 <fieldset>
 	<p>
 		Name:
@@ -10,7 +10,7 @@
 	</p>
 	<p>
 		Address:
-		<%= Html.Encode(Model.Address.FirstLine) %>
+		<%= Html.Encode(Model.Address.ToSingleLine()) %>
 	</p>
 <%--	<p>
       Contact:

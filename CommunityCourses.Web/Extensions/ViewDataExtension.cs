@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using CommunityCourses.Data.Model;
-using CommunityCourses.Data.Enum;
 using CommunityCourses.Web.ViewModel;
 using System.Linq;
 using System.Collections;
+using CommunityCourses.Web.Model;
+using CommunityCourses.Web;
 
 namespace System.Web.Mvc
 {
@@ -11,13 +11,7 @@ namespace System.Web.Mvc
 	{
 		#region Fields (7) 
 
-		static readonly string centresKey = "centres";
-		static readonly string disabilitiesKey = "disabilities";
-		static readonly string ethnicitiesKey = "ethnicities";
 		static readonly string potentialStudentsKey = "potentialStudents";
-		static readonly string tutorsKey = "tutors";
-		static readonly string unitsKey = "units";
-		static readonly string verifiersKey = "verifiers";
 
 		#endregion Fields 
 
@@ -25,79 +19,40 @@ namespace System.Web.Mvc
 
 		// Public Methods (14) 
 
-		public static List<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<string> GetRoles(this ViewDataDictionary viewDataDictionary)
 		{
-			return viewDataDictionary[centresKey] as List<Centre>;
+			return Roles.All();
 		}
 
-		public static string[] GetDisabilities(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
 		{
-			return (from disability in Disability.All() select disability.Name).ToArray();
+			return MvcApplication.CurrentSession.Query<Centre>("AllCentres");
 		}
 
-		public static List<Ethnicity> GetEthnicities(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<Person> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
 		{
-			return viewDataDictionary[ethnicitiesKey] as List<Ethnicity>;
+			return viewDataDictionary[potentialStudentsKey] as IEnumerable<Person>;
 		}
 
-		public static IEnumerable GetGenders(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<Person> GetTutors(this ViewDataDictionary viewDataDictionary)
 		{
-			return from Gender gender in Enum.GetValues(typeof(Gender))
-						 select new { 
-							 Id = (int)gender, 
-							 Name = gender.ToString() };
+			return MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList().Where(p => p.Roles.Contains(Roles.Tutor));
 		}
 
-		public static List<Student> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<Unit> GetUnits(this ViewDataDictionary viewDataDictionary)
 		{
-			return viewDataDictionary[potentialStudentsKey] as List<Student>;
+			return MvcApplication.CurrentSession.Query<Unit>("AllUnits");
 		}
 
-		public static List<Tutor> GetTutors(this ViewDataDictionary viewDataDictionary)
+		public static IEnumerable<Person> GetVerifiers(this ViewDataDictionary viewDataDictionary)
 		{
-			return viewDataDictionary[tutorsKey] as List<Tutor>;
+			return MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList().Where(p => p.Roles.Contains(Roles.Verifier));
 		}
 
-		public static List<Unit> GetUnits(this ViewDataDictionary viewDataDictionary)
-		{
-			return viewDataDictionary[unitsKey] as List<Unit>;
-		}
-
-		public static List<Verifier> GetVerifiers(this ViewDataDictionary viewDataDictionary)
-		{
-			return viewDataDictionary[verifiersKey] as List<Verifier>;
-		}
-
-		public static void SetCentres(this ViewDataDictionary viewDataDictionary, List<Centre> centres)
-		{
-			viewDataDictionary[centresKey] = centres;
-		}
-
-		public static void SetEthnicities(this ViewDataDictionary viewDataDictionary, List<Ethnicity> ethnicities)
-		{
-			viewDataDictionary[ethnicitiesKey] = ethnicities;
-		}
-
-		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, List<Student> students)
+		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, IEnumerable<Person> students)
 		{
 			viewDataDictionary[potentialStudentsKey] = students;
-		}
-
-		public static void SetTutors(this ViewDataDictionary viewDataDictionary, List<Tutor> tutors)
-		{
-			viewDataDictionary[tutorsKey] = tutors;
-		}
-
-		public static void SetUnits(this ViewDataDictionary viewDataDictionary, List<Unit> units)
-		{
-			viewDataDictionary[unitsKey] = units;
-		}
-
-		public static void SetVerifiers(this ViewDataDictionary viewDataDictionary, List<Verifier> verifiers)
-		{
-			viewDataDictionary[verifiersKey] = verifiers;
-		}
-
+		}		
 		#endregion Methods 
 	}
 }

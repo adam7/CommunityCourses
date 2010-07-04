@@ -1,159 +1,276 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using CommunityCourses.Data;
-using CommunityCourses.Data.Model;
-using System;
+using CommunityCourses.Web.Model;
 using CommunityCourses.Web.ViewModel;
-using AutoMapper;
-using System.Transactions;
-using SubSonic.DataProviders;
-using System.Collections.Generic;
 
 namespace CommunityCourses.Web.Controllers
 {
 	[Authorize]
 	public partial class CourseController : Controller
 	{
-		public virtual ActionResult Index()
+		CourseViewModel ConvertToCourseViewModel(Course course)
 		{
-			List<CourseViewModel> courses = new List<CourseViewModel>();
-			foreach (Course course in Course.All())
+			CourseViewModel courseViewModel = new CourseViewModel
 			{
-				courses.Add(Mapper.Map<Course, CourseViewModel>(course));
+				Centre = MvcApplication.CurrentSession.Load<Centre>(course.CentreId),
+				CentreId = course.CentreId,
+				EndDate = course.EndDate,
+				Id = course.Id,
+				Name = course.Name,
+				StartDate = course.StartDate,
+				StudentIds = course.StudentIds,
+				Tutor = MvcApplication.CurrentSession.Load<Person>(course.TutorId),
+				TutorId = course.TutorId,
+				Unit = MvcApplication.CurrentSession.Load<Unit>(course.UnitId),
+				UnitId = course.UnitId,				
+				VerifierId = course.VerifierId
+			};
+
+			if (course.VerifierId != null)
+			{
+				courseViewModel.Verifier = MvcApplication.CurrentSession.Load<Person>(course.VerifierId);
 			}
 
-			return View(courses);
+			foreach (string studentId in course.StudentIds)
+			{
+				courseViewModel.Students.Add(MvcApplication.CurrentSession.Load<Person>(studentId));
+			}
+
+			return courseViewModel;
 		}
 
-		public virtual ActionResult Details(int id)
+
+		public virtual ActionResult Index()
 		{
-			Course course = Course.SingleOrDefault(c => c.Id == id);
-			return PartialView(Mapper.Map<Course, CourseViewModel>(course));
+			// CreateUnits();
+
+			List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
+			foreach (Course course in MvcApplication.CurrentSession.Query<Course>("AllCourses"))
+			{
+				courseViewModels.Add(ConvertToCourseViewModel(course));
+			}
+
+			return View(courseViewModels);
+		}
+
+		public virtual ActionResult Details(string id)
+		{
+			Course course = MvcApplication.CurrentSession.Load<Course>(id);
+			return PartialView(ConvertToCourseViewModel(course));
 		}
 
 		public virtual ActionResult Create()
 		{
 			PopulateViewData(null);
-			return View(Views.Edit, new CourseViewModel());
+			return View(Views.Create, new CourseViewModel());
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Create(CourseViewModel courseViewModel)
+		public virtual ActionResult Create(Course course)
 		{
-			try
+			if(ModelState.IsValid)
 			{
-				Course course = Mapper.Map<CourseViewModel, Course>(courseViewModel);
-				using (TransactionScope transactionScope = new TransactionScope())
-				{
-					using (SharedDbConnectionScope connectionScope = new SharedDbConnectionScope())
-					{
-						course.Add();
-
-						// Add all the CourseModules for the selected Unit
-						IList<Module> modules = Module.Find(module => module.UnitId == course.UnitId);
-						foreach (Module module in modules)
-						{
-							CourseModule courseModule =
-								new CourseModule { CourseId = course.Id, ModuleId = module.Id };
-							courseModule.Add();
-						}
-
-						// Add all the CourseSessions for the selected Unit
-						IList<Session> sessions = CommunityCourses.Data.Model.Session.Find(session => session.UnitId == course.UnitId);
-						foreach (Session session in sessions)
-						{
-							CourseSession courseSession =
-								new CourseSession { CourseId = course.Id, SessionId = session.Id };
-							courseSession.Add();
-						}
-
-						transactionScope.Complete();
-					}
-				}
+				MvcApplication.CurrentSession.Store(course);
+				MvcApplication.CurrentSession.SaveChanges();
+				
 				TempData.SetMessage("New course created");
 				return RedirectToAction("Index");
 			}
-			catch (ValidationException validationException)
+			else
 			{
-				validationException.CopyToModelState(ModelState, "course");
 				return View();
 			}
 		}
 
-		public virtual ActionResult Edit(int id)
+		public virtual ActionResult Edit(string id)
 		{
 			PopulateViewData(id);
-			return View(Mapper.Map<Course, CourseViewModel>(Course.SingleOrDefault(course => course.Id == id)));
+			Course course = MvcApplication.CurrentSession.Load<Course>(id);
+			return View(ConvertToCourseViewModel(course));
 		}
 
-		public virtual ActionResult AddStudent(int id, int studentId)
+		public virtual ActionResult AddStudent(string id, string studentId)
 		{
-			Course.AddStudentToCourse(studentId, id);
+			// Add the student to the course
+			Course course = MvcApplication.CurrentSession.Load<Course>(id);
+			course.StudentIds.Add(studentId);
+			MvcApplication.CurrentSession.Store(course);
 
-			PopulateViewData(id);
-			return RedirectToRoute(new { action = MVC.Course.Actions.Edit(id) });
-		}
+			// Add the course sessions/modules to the student
+			Person student = MvcApplication.CurrentSession.Load<Person>(studentId);
 
-		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult UpdateSessionComplete(int courseId, int studentId, int sessionId, bool complete)
-		{
-			StudentCourseSession studentCourseSession =
-				(from studentCourseSessions in StudentCourseSession.All()
-				 join courseSessions in CourseSession.All() on studentCourseSessions.CourseSessionId equals courseSessions.Id
-				 where studentCourseSessions.CourseId == courseId
-					 && studentCourseSessions.StudentId == studentId
-					 && courseSessions.SessionId == sessionId
-				 select studentCourseSessions).First<StudentCourseSession>();
-
-			studentCourseSession.Complete = complete;
-			studentCourseSession.Update();
-
-			return null;
-		}
-
-		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult UpdateModuleComplete(int courseId, int studentId, int moduleId, bool complete)
-		{
-			StudentCourseModule studentCourseModule =
-				(from studentCourseModules in StudentCourseModule.All()
-				 join courseModules in CourseModule.All() on studentCourseModules.CourseModuleId equals courseModules.Id
-				 where studentCourseModules.CourseId == courseId
-					 && studentCourseModules.StudentId == studentId
-					 && courseModules.ModuleId == moduleId
-				 select studentCourseModules).First<StudentCourseModule>();
-
-			studentCourseModule.Complete = complete;
-			studentCourseModule.Update();
-
-			return null;
-		}
-
-		[AcceptVerbs(HttpVerbs.Post)]
-		public virtual ActionResult Edit(CourseViewModel courseViewModel)
-		{
-			try
+			Unit unit = MvcApplication.CurrentSession.Load<Unit>(course.UnitId);
+			foreach (Session session in unit.Sessions)
 			{
-				Course course = Course.SingleOrDefault(c => c.Id == courseViewModel.Id);				
-				Mapper.Map(courseViewModel, course);
-				course.Update();
+				student.CourseSessions.Add(
+					new CourseSession
+					{
+						CourseId = course.Id,
+						Complete = false,
+						Name = session.Name
+					});
+			}
+
+			foreach (Module module in unit.Modules)
+			{
+				student.CourseModules.Add(
+					new CourseModule
+					{
+						CourseId = course.Id,
+						Complete = false,
+						Name = module.Name
+					});
+			}
+
+			return RedirectToAction(MVC.Course.Actions.Edit(id));
+		}
+
+		[AcceptVerbs(HttpVerbs.Post)]
+		public virtual ActionResult UpdateSessionComplete(string courseId, string studentId, string sessionId, bool complete)
+		{
+			Person student = MvcApplication.CurrentSession.Load<Person>(studentId);
+			CourseSession session = student.CourseSessions
+				.Where(courseSession => courseSession.CourseId == courseId && courseSession.Name == sessionId)
+				.First();
+
+			session.Complete = complete;
+			MvcApplication.CurrentSession.Store(session);
+
+			return null;
+		}
+
+		[AcceptVerbs(HttpVerbs.Post)]
+		public virtual ActionResult UpdateModuleComplete(string courseId, string studentId, string moduleId, bool complete)
+		{
+			Person student = MvcApplication.CurrentSession.Load<Person>(studentId);
+			CourseModule module = student.CourseModules
+				.Where(courseModule => courseModule.CourseId == courseId && courseModule.Name == moduleId)
+				.First();
+
+			module.Complete = complete;
+			MvcApplication.CurrentSession.Store(module);
+
+			return null;
+		}
+
+		[AcceptVerbs(HttpVerbs.Post)]
+		public virtual ActionResult Edit(Course course)
+		{
+			if(ModelState.IsValid)
+			{
+				MvcApplication.CurrentSession.Store(course);
 
 				TempData.SetMessage("Course updated");
 				return RedirectToAction("Index");
 			}
-			catch (ValidationException validationException)
+			else
 			{
-				validationException.CopyToModelState(ModelState, "course");
 				return View();
 			}
 		}
 
-		void PopulateViewData(int? courseId)
+		void PopulateViewData(string courseId)
 		{
-			ViewData.SetCentres(Centre.All().ToList());
-			ViewData.SetTutors(Tutor.All().ToList());
-			ViewData.SetUnits(Unit.All().ToList());
-			ViewData.SetVerifiers(Verifier.All().ToList());
-			ViewData.SetPotentialStudents(Student.GetPotentialStudentsForCourse(courseId).ToList());
+			ViewData.SetPotentialStudents(
+				MvcApplication.CurrentSession.Query<Person>("AllPeople")
+					.ToList()
+					.Where(p => p.Roles.Contains(Roles.Student) && 
+						!p.CourseSessions.Any(courseSesion => courseSesion.CourseId != courseId)));
 		}
+
+		protected void CreateUnits()
+		{
+			Unit IntroductionToFacePainting = new Unit
+			{
+				Name = "1 - Introduction to Face Painting",
+				Sessions = new List<Session>
+				{
+					new Session{ Name = "Session 1" },
+					new Session{ Name = "Session 2" },
+					new Session{ Name = "Session 3" },
+					new Session{ Name = "Session 4" },
+					new Session{ Name = "Session 5" },
+					new Session{ Name = "Session 6" },
+				},
+				Modules = new List<Module>
+				{
+					new Module{ Name = "Health & Safety" },
+					new Module{ Name = "Communications" },
+					new Module{ Name = "Design" },
+					new Module{ Name = "Technique" }
+				}
+			};
+			MvcApplication.CurrentSession.Store(IntroductionToFacePainting);
+
+			Unit IntermediateFacePainting = new Unit
+			{
+				Name = "2 - Intermediate Face Painting",
+				Sessions = new List<Session>
+				{
+					new Session{ Name = "Session 1" },
+					new Session{ Name = "Session 2" },
+					new Session{ Name = "Session 3" },
+					new Session{ Name = "Session 4" },
+					new Session{ Name = "Session 5" },
+					new Session{ Name = "Session 6" },
+				},
+				Modules = new List<Module>
+				{
+					new Module{ Name = "Health & Safety" },
+					new Module{ Name = "Communications" },
+					new Module{ Name = "Design" },
+					new Module{ Name = "Technique" }
+				}
+			};
+			MvcApplication.CurrentSession.Store(IntermediateFacePainting);
+
+			Unit DesignDevelopment = new Unit
+			{
+				Name = "3 - Design Development",
+				Sessions = new List<Session>
+				{
+					new Session{ Name = "Session 1" },
+					new Session{ Name = "Session 2" },
+					new Session{ Name = "Session 3" },
+					new Session{ Name = "Session 4" },
+					new Session{ Name = "Session 5" },
+					new Session{ Name = "Session 6" },
+				},
+				Modules = new List<Module>
+				{
+					new Module{ Name = "Health & Safety" },
+					new Module{ Name = "Communications" },
+					new Module{ Name = "Design" },
+					new Module{ Name = "Technique" }
+				}
+			};
+			MvcApplication.CurrentSession.Store(DesignDevelopment);
+
+			Unit FacePaintingAtEventsVolunteerProgramme = new Unit
+			{
+				Name = "4 - Face Painting at Events Volunteer Programme",
+				Sessions = new List<Session>
+				{
+					new Session{ Name = "Session 1" },
+					new Session{ Name = "Session 2" },
+					new Session{ Name = "Session 3" },
+					new Session{ Name = "Session 4" },
+					new Session{ Name = "Session 5" },
+					new Session{ Name = "Session 6" },
+				},
+				Modules = new List<Module>
+				{
+					new Module{ Name = "Health & Safety" },
+					new Module{ Name = "Communications" },
+					new Module{ Name = "Design" },
+					new Module{ Name = "Technique" }
+				}
+			};
+			MvcApplication.CurrentSession.Store(FacePaintingAtEventsVolunteerProgramme);
+
+			MvcApplication.CurrentSession.SaveChanges();
+		}
+
 	}
 }

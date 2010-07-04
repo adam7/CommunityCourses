@@ -14,5 +14,11 @@ namespace System.Web.Mvc
 			return ajaxHelper.ActionLink("Details", "Details", controller, new { id = itemId }, 
 				new AjaxOptions { HttpMethod = "Get", UpdateTargetId = updateTargetId, OnComplete = onComplete });
 		}
+
+		public static MvcHtmlString ShowDetailsActionLink(this AjaxHelper ajaxHelper, string controller, string itemId, string updateTargetId, string onComplete)
+		{
+			return ajaxHelper.ActionLink("Details", "Details", controller, new { id = itemId },
+				new AjaxOptions { HttpMethod = "Get", UpdateTargetId = updateTargetId, OnComplete = onComplete });
+		}
 	}
 }

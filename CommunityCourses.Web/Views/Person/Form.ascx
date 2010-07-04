@@ -1,67 +1,69 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.ViewModel.PersonViewModel>" %>
-<%@ Import Namespace="xVal.Rules" %>
-<%@ Import Namespace="CommunityCourses.Web.ViewModel" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.Model.Person>" %>
+<%@ Import Namespace="CommunityCourses.Web.Model" %>
 <fieldset>
 	<legend>Person</legend>
 	<p>
-		<label for="Title">
-			Title:</label>
-		<%= Html.TextBox("Person.Title", Model.Title) %>
+			<%= Html.LabelFor(m => m.Title)%>
+			<%= Html.TextBoxFor(m => m.Title)%>
+			<%= Html.ValidationMessageFor(m => m.Title)%>
 	</p>
 	<p>
-		<label for="GenderId">
-			Gender:</label>
-		<%= Html.DropDownList("Person.GenderId", new SelectList(ViewData.GetGenders(), "Id", "Name", Model.GenderId), "Please choose") %>
+			<%= Html.LabelFor(m => m.Gender)%>
+			<%= Html.DropDownListFor(m => m.Gender, new SelectList(Genders.All() , Model.Gender), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.Gender)%>
 	</p>
 	<p>
-		<label for="FirstName">
-			First Name:</label>
-		<%= Html.TextBox("Person.FirstName", Model.FirstName)%>
+			<%= Html.LabelFor(m => m.FirstName)%>
+			<%= Html.TextBoxFor(m => m.FirstName)%>
+			<%= Html.ValidationMessageFor(m => m.FirstName)%>
 	</p>
 	<p>
-		<label for="LastName">
-			Last Name:</label>
-		<%= Html.TextBox("Person.LastName", Model.LastName)%>
+			<%= Html.LabelFor(m => m.LastName)%>
+			<%= Html.TextBoxFor(m => m.LastName)%>
+			<%= Html.ValidationMessageFor(m => m.LastName)%>
 	</p>
 	<p>
-		<label for="DateOfBirth">
-			Date Of Birth:</label>
-		<%= Html.TextBox("Person.DateOfBirth", String.Format("{0:d}", Model.DateOfBirth), new { @class = "st-date" })%>
+		<label for="Roles">Roles</label>
+		<%= Html.CheckBoxList(Model.Roles, ViewData.GetRoles(), "Roles")%>
 	</p>
 	<p>
-		<label for="Phone">
-			Phone:</label>
-		<%= Html.TextBox("Person.Phone", Model.Phone)%>
+			<%= Html.LabelFor(m => m.DateOfBirth)%>
+			<%= Html.TextBoxFor(m => m.DateOfBirth, new { @class = "st-date" })%>
+			<%= Html.ValidationMessageFor(m => m.DateOfBirth)%>
 	</p>
 	<p>
-		<label for="Mobile">
-			Mobile:</label>
-		<%= Html.TextBox("Person.Mobile", Model.Mobile)%>
+			<%= Html.LabelFor(m => m.Phone)%>
+			<%= Html.TextBoxFor(m => m.Phone)%>
+			<%= Html.ValidationMessageFor(m => m.Phone)%>
 	</p>
 	<p>
-		<label for="Email">
-			Email:</label>
-		<%= Html.TextBox("Person.Email", Model.Email)%>
+			<%= Html.LabelFor(m => m.Mobile)%>
+			<%= Html.TextBoxFor(m => m.Mobile)%>
+			<%= Html.ValidationMessageFor(m => m.Mobile)%>
 	</p>
 	<p>
-		<label for="EthnicityId">
-			Ethnicity:</label>
-		<%= Html.DropDownList("Person.EthnicityId", new SelectList(ViewData.GetEthnicities(), "Id", "Name", Model.EthnicityId), "Please choose")%>
+			<%= Html.LabelFor(m => m.Email)%>
+			<%= Html.TextBoxFor(m => m.Email)%>
+			<%= Html.ValidationMessageFor(m => m.Email)%>
+	</p>
+	<p>
+			<%= Html.LabelFor(m => m.Ethnicity)%>
+			<%= Html.DropDownListFor(m => m.Ethnicity, new SelectList(Ethnicities.All(), Model.Ethnicity), "Please choose")%>
+			<%= Html.ValidationMessageFor(m => m.Ethnicity)%>
 	</p>
 	<p>
 		<label>
 			Disabilities:</label>
-		<%= Html.CheckBoxList(Model.Disabilities, ViewData.GetDisabilities(), "Person.Disabilities") %>
+		<%= Html.CheckBoxList(Model.Disabilities, Disabilities.All(), "Disabilities")%>
 	</p>
 	<p>
-		<label for="CriminalRecordsBureauReferenceNumber">
-			CRB Reference Number</label>
-		<%= Html.TextBox("Person.CriminalRecordsBureauReferenceNumber", Model.CriminalRecordsBureauReferenceNumber)%>
+			<%= Html.LabelFor(m => m.CriminalRecordsBureauReferenceNumber)%>
+			<%= Html.TextBoxFor(m => m.CriminalRecordsBureauReferenceNumber)%>
+			<%= Html.ValidationMessageFor(m => m.CriminalRecordsBureauReferenceNumber)%>
 	</p>
 	<p>
-		<label for="Notes">
-			Notes:</label>
-		<%= Html.TextArea("Person.Notes", Model.Notes, new { rows = "8" })%>
+			<%= Html.LabelFor(m => m.Notes)%>
+			<%= Html.TextAreaFor(m => m.Notes, new { rows = "8" })%>
+			<%= Html.ValidationMessageFor(m => m.Notes)%>
 	</p>
 </fieldset>
-<%= Html.ClientSideValidation<PersonViewModel>("Person") %>

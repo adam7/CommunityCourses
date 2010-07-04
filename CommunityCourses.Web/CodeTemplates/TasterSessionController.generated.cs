@@ -84,7 +84,7 @@ namespace CommunityCourses.Web.Controllers {
     public class T4MVC_TasterSessionController: CommunityCourses.Web.Controllers.TasterSessionController {
         public T4MVC_TasterSessionController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult AddStudent(int id, int studentId) {
+        public override System.Web.Mvc.ActionResult AddStudent(string id, string studentId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddStudent);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("studentId", studentId);
@@ -96,27 +96,27 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Data.Model.TasterSession tasterSession) {
+        public override System.Web.Mvc.ActionResult Create(CommunityCourses.Web.Model.TasterSession tasterSession) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
             callInfo.RouteValueDictionary.Add("tasterSession", tasterSession);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Details(int id) {
+        public override System.Web.Mvc.ActionResult Details(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Details);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(int id) {
+        public override System.Web.Mvc.ActionResult Edit(string id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(System.Web.Mvc.FormCollection form) {
+        public override System.Web.Mvc.ActionResult Edit(CommunityCourses.Web.Model.TasterSession tasterSession) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("form", form);
+            callInfo.RouteValueDictionary.Add("tasterSession", tasterSession);
             return callInfo;
         }
 

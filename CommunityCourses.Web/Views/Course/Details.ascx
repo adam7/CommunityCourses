@@ -1,4 +1,5 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.ViewModel.CourseViewModel>" %>
+<%@ Import Namespace="CommunityCourses.Web.Model" %>
 <fieldset>
 	<p>
 		Name:
@@ -6,11 +7,11 @@
 	</p>
 	<p>
 		Unit:
-		<%: Model.UnitName%>
+		<%: Model.Unit.Name%>
 	</p>
 	<p>
 		Centre:
-		<%: Model.CentreName %>
+		<%: Model.Centre.Name %>
 	</p>
 	<p>
 		Start Date:
@@ -26,17 +27,17 @@
 	</p>
 	<p>
 		Tutor:
-		<%: Model.TutorPersonName %>
+		<%: Model.Tutor.Name %>
 	</p>
 	<p>
 		Verifier:
-		<%: Model.VerifierPersonName %>
+		<%: Model.Verifier.Name %>
 	</p>
-<%--	<h3>Students</h3>
+	<h3>Students</h3>
 	<ul>
-	<% foreach (CourseStudentViewModel student in Model.Students)
+	<% foreach (Person student in Model.Students)
 		{ %>
 			<li><%: student.Name %></li>
 	<%} %>
-	</ul>--%>
+	</ul>
 </fieldset>

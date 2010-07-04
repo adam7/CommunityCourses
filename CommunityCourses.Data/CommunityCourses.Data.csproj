@@ -8,8 +8,8 @@
     <ProjectGuid>{41B15876-653D-4889-804A-07354081AAC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentTracking.Data</RootNamespace>
-    <AssemblyName>StudentTracking.Data</AssemblyName>
+    <RootNamespace>CommunityCourses.Data</RootNamespace>
+    <AssemblyName>CommunityCourses.Data</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

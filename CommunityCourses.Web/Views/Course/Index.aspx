@@ -44,10 +44,10 @@
 					<%: item.Name %>
 				</td>
 				<td>
-					<%: item.UnitName %>
+					<%: item.Unit.Name %>
 				</td>
 				<td>
-					<%: item.CentreName %>
+					<%: item.Centre.Name %>
 				</td>
 				<td>
 					<%: String.Format("{0:d}", item.StartDate) %>

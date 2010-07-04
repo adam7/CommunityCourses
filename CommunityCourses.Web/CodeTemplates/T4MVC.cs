@@ -29,9 +29,7 @@ public static class MVC {
     public static CommunityCourses.Web.Controllers.ErrorController Error = new CommunityCourses.Web.Controllers.T4MVC_ErrorController();
     public static CommunityCourses.Web.Controllers.HomeController Home = new CommunityCourses.Web.Controllers.T4MVC_HomeController();
     public static CommunityCourses.Web.Controllers.PersonController Person = new CommunityCourses.Web.Controllers.T4MVC_PersonController();
-    public static CommunityCourses.Web.Controllers.StudentController Student = new CommunityCourses.Web.Controllers.T4MVC_StudentController();
     public static CommunityCourses.Web.Controllers.TasterSessionController TasterSession = new CommunityCourses.Web.Controllers.T4MVC_TasterSessionController();
-    public static CommunityCourses.Web.Controllers.UnitController Unit = new CommunityCourses.Web.Controllers.T4MVC_UnitController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -209,9 +207,6 @@ namespace Links {
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string CommunityCourses_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CommunityCourses.min.js") ? Url("CommunityCourses.min.js") : Url("CommunityCourses.js");
-        public static readonly string jquery_1_4_1_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.1-vsdoc.min.js") ? Url("jquery-1.4.1-vsdoc.min.js") : Url("jquery-1.4.1-vsdoc.js");
-        public static readonly string jquery_1_4_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.1.min.js") ? Url("jquery-1.4.1.min.js") : Url("jquery-1.4.1.js");
-        public static readonly string jquery_1_4_1_min_js = Url("jquery-1.4.1.min.js");
         public static readonly string jquery_1_4_2_min_js = Url("jquery-1.4.2.min.js");
         public static readonly string jquery_ui_1_8_custom_min_js = Url("jquery-ui-1.8.custom.min.js");
         public static readonly string jquery_tablesorter_min_js = Url("jquery.tablesorter.min.js");
@@ -224,8 +219,6 @@ namespace Links {
         public static readonly string MicrosoftMvcAjax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcAjax.min.js") ? Url("MicrosoftMvcAjax.min.js") : Url("MicrosoftMvcAjax.js");
         public static readonly string MicrosoftMvcValidation_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.debug.min.js") ? Url("MicrosoftMvcValidation.debug.min.js") : Url("MicrosoftMvcValidation.debug.js");
         public static readonly string MicrosoftMvcValidation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.min.js") ? Url("MicrosoftMvcValidation.min.js") : Url("MicrosoftMvcValidation.js");
-        public static readonly string xVal_AspNetNative_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/xVal.AspNetNative.min.js") ? Url("xVal.AspNetNative.min.js") : Url("xVal.AspNetNative.js");
-        public static readonly string xVal_jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/xVal.jquery.validate.min.js") ? Url("xVal.jquery.validate.min.js") : Url("xVal.jquery.validate.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

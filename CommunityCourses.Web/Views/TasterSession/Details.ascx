@@ -1,19 +1,19 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Data.Model.TasterSession>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<CommunityCourses.Web.Model.TasterSession>" %>
 <fieldset>
 	<p>
 		Name:
-		<%= Html.Encode(Model.Name) %>
+		<%: Model.Name %>
 	</p>
 	<p>
 		Centre:
-		<%= Html.Encode(Model.Centre.Name) %>
+		<%: Model.Centre.Name %>
 	</p>
 	<p>
 		Tutor:
-		<%= Html.Encode(Model.Tutor.Person.Name) %>
+		<%: Model.Tutor.Name %>
 	</p>
 	<p>
 		Date And Time:
-		<%= Html.Encode(String.Format("{0:g}", Model.DateAndTime)) %>
+		<%: String.Format("{0:g}", Model.DateAndTime) %>
 	</p>
 </fieldset>

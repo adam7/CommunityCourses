@@ -3,6 +3,9 @@ using System.Globalization;
 using System.Security.Principal;
 using System.Web.Mvc;
 using System.Web.Security;
+using CommunityCourses.Web.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -10,7 +13,7 @@ namespace CommunityCourses.Web.Controllers
   public partial class AccountController : Controller
   {
 		public virtual ActionResult LogOn()
-		{
+		{			
 			return View();
 		}
 
