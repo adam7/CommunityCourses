@@ -81,7 +81,7 @@
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentSession.Complete, new { onClick = "updateSessionComplete('" + Model.Id + "','" + student.Id + "','" + studentSession.Name + "'," + (!studentSession.Complete).ToString().ToLower() + ");" })%>
+								Html.CheckBox("CheckBox", studentSession.Complete, new { onClick = "updateSessionComplete('" + Model.Id + "','" + student.Id + "',\"" + Url.Encode(studentSession.Name) + "\"," + (!studentSession.Complete).ToString().ToLower() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -101,7 +101,7 @@
 							</td>
 							<td>
 								<%= 
-								Html.CheckBox("CheckBox", studentModule.Complete, new { onClick = "updateModuleComplete('" + Model.Id + "','" + student.Id + "','" + studentModule.Name + "'," + (!studentModule.Complete).ToString().ToLower() + ");" })%>
+								Html.CheckBox("CheckBox", studentModule.Complete, new { onClick = "updateModuleComplete('" + Model.Id + "','" + student.Id + "',\"" + Url.Encode(studentModule.Name) + "\"," + (!studentModule.Complete).ToString().ToLower() + ");" })%>
 							</td>
 						</tr>
 						<%} %>
@@ -110,7 +110,7 @@
 				<div style="float: left">
 					<ul>
 						<li>
-							<%= Ajax.ShowDetailsActionLink("Student", student.Id, "DetailsDialog", "ShowDetailsDialog")%>
+							<%= Ajax.ShowDetailsActionLink("Person", student.Id, "DetailsDialog", "ShowDetailsDialog")%>
 						</li>
 					</ul>
 				</div>

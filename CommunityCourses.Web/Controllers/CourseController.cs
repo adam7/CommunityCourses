@@ -32,10 +32,7 @@ namespace CommunityCourses.Web.Controllers
 				courseViewModel.Verifier = MvcApplication.CurrentSession.Load<Person>(course.VerifierId);
 			}
 
-			foreach (string studentId in course.StudentIds)
-			{
-				courseViewModel.Students.Add(MvcApplication.CurrentSession.Load<Person>(studentId));
-			}
+			courseViewModel.Students = MvcApplication.CurrentSession.Load<Person>(course.StudentIds.ToArray()).ToList();
 
 			return courseViewModel;
 		}
@@ -79,7 +76,7 @@ namespace CommunityCourses.Web.Controllers
 			}
 			else
 			{
-				return View();
+				return View(ConvertToCourseViewModel(course));
 			}
 		}
 
@@ -166,17 +163,18 @@ namespace CommunityCourses.Web.Controllers
 			}
 			else
 			{
-				return View();
+				return View(ConvertToCourseViewModel(course));
 			}
 		}
 
 		void PopulateViewData(string courseId)
 		{
+			List<Person> people = MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList();
+
 			ViewData.SetPotentialStudents(
-				MvcApplication.CurrentSession.Query<Person>("AllPeople")
-					.ToList()
-					.Where(p => p.Roles.Contains(Roles.Student) && 
-						!p.CourseSessions.Any(courseSesion => courseSesion.CourseId != courseId)));
+					people.Where(p => p.Roles.Contains(Roles.Student) 
+						&& !p.CourseSessions.Any(courseSesion => courseSesion.CourseId == courseId)
+						).OrderBy(p => p.Name));
 		}
 
 		protected void CreateUnits()
