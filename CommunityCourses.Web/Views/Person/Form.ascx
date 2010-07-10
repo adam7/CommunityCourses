@@ -62,6 +62,11 @@
 			<%= Html.ValidationMessageFor(m => m.CriminalRecordsBureauReferenceNumber)%>
 	</p>
 	<p>
+			<%= Html.LabelFor(m => m.CriminalRecordsBureauExpiryDate)%>
+			<%= Html.TextBoxFor(m => m.CriminalRecordsBureauExpiryDate, new { @class = "st-date" })%>
+			<%= Html.ValidationMessageFor(m => m.CriminalRecordsBureauExpiryDate)%>
+	</p>
+	<p>
 			<%= Html.LabelFor(m => m.Notes)%>
 			<%= Html.TextAreaFor(m => m.Notes, new { rows = "8" })%>
 			<%= Html.ValidationMessageFor(m => m.Notes)%>

@@ -119,10 +119,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommunityCourses.Data\CommunityCourses.Data.csproj">
-      <Project>{41B15876-653D-4889-804A-07354081AAC6}</Project>
-      <Name>CommunityCourses.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CommunityCourses.Web\CommunityCourses.Web.csproj">
       <Project>{01005D98-8902-4685-BDA0-146D6DA096C6}</Project>
       <Name>CommunityCourses.Web</Name>

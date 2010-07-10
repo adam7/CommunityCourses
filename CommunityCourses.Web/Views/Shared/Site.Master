@@ -30,7 +30,7 @@
 			<div id="menucontainer">
 				<ul id="menu">
 					<li>
-						<%: Html.ActionLink("Home", MVC.Home.Index())%>
+						<%: Html.ActionLink("Dashboard", MVC.Home.Index())%>
 					</li>
 					<li>
 						<%: Html.ActionLink("Centres", MVC.Centre.Index())%></li>

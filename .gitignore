@@ -4,6 +4,7 @@ CommunityCourses.Web/bin
 CommunityCourses.Web/obj
 CommunityCourses.Data/bin
 CommunityCourses.Data/obj
+CommunityCourses.Web/App_Data
 TestResults
 *.user
 *.suo

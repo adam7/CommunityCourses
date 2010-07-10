@@ -52,7 +52,7 @@ ul#menu li.selected a {color:#000;}
 
 /* Making Faces specific
 ----------------------------------------------------------*/
-td, th { padding: 2px 10px }
+td, th { padding: 2px }
 
 /* Background colours for course status */
 td.upcoming { background-color: transparent; }

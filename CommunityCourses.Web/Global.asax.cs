@@ -106,14 +106,16 @@ namespace CommunityCourses.Web
 			//  new IndexDefinition<Person>()
 			//  {
 			//    Map = people => from person in people
-			//                    where person.Roles.Contains<string>(Roles.Student)
-			//                    select new { person }
+			//                    from role in person.Roles
+			//                    where role == "Student"
+			//                    select new { role }
+
 			//  });
 
 			//_documentStore.DatabaseCommands.PutIndex(
 			//  "AllVolunteers",
 			//  new IndexDefinition<Person>()
-			//  {
+			//  {	
 			//    Map = people => from person in people
 			//                    where person.Roles.Contains<string>(Roles.Volunteer)
 			//                    select new { person }

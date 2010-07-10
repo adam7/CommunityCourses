@@ -33,6 +33,11 @@ namespace CommunityCourses.Web.Model
 		[RegularExpression("[0-9]{12}")]
 		[DisplayName("CRB number")]
 		public string CriminalRecordsBureauReferenceNumber { get; set; }
+		
+		[DataType(DataType.Date)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+		[DisplayName("CRB expiry date")]
+		public DateTime? CriminalRecordsBureauExpiryDate { get; set; }
 
 		[Required]
 		[DataType(DataType.Date)]

@@ -12,7 +12,10 @@
 				<th>
 				</th>
 				<th>
-					Name
+					First name
+				</th>
+				<th>
+					Last name
 				</th>
 				<th>
 					Postcode
@@ -42,7 +45,10 @@
 					<%= Ajax.ShowDetailsActionLink("Person", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
 				</td>
 				<td>
-					<%: item.Name%>
+					<%: item.FirstName %>
+				</td>
+				<td>
+					<%: item.LastName %>
 				</td>
 				<td>
 					<%: item.Address.Postcode %>
