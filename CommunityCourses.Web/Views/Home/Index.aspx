@@ -6,8 +6,5 @@
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%= Html.Encode(ViewData["Message"]) %></h2>
-<%--    <p>
-        <input type="text" value="L83SB" />
-        <input type="submit" value="Show map" />
-    </p>--%>
+		<img id="PeoplePieChart" src="/Home/PeopleChart" alt="People pie chart" />
 </asp:Content>

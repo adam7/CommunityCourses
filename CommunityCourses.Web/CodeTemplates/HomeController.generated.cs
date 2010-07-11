@@ -69,12 +69,6 @@ namespace CommunityCourses.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
-
-        public override System.Web.Mvc.ActionResult About() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.About);
-            return callInfo;
-        }
-
     }
 }
 

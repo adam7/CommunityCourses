@@ -86,6 +86,15 @@ namespace CommunityCourses.Web
 			//    });
 
 			//_documentStore.DatabaseCommands.PutIndex(
+			//  "AllRoles",
+			//  new IndexDefinition<Person>()
+			//  {
+			//    Map = people => from person in people
+			//                    from role in person.Roles
+			//                    select new { role }
+			//  });
+
+			//_documentStore.DatabaseCommands.PutIndex(
 			//    "AllPeople",
 			//    new IndexDefinition<Person>()
 			//    {
@@ -97,7 +106,7 @@ namespace CommunityCourses.Web
 			//  new IndexDefinition<Person>()
 			//  {
 			//    Map = people => from person in people
-			//                    where person.Roles.Contains(Roles.Tutor)
+			//                    where Enumerable.Contains(person.Roles, Roles.Tutor)
 			//                    select new { person }
 			//  });
 
