@@ -8,6 +8,8 @@ using CommunityCourses.Web.ViewModel;
 using Raven.Client;
 using Raven.Client.Document;
 using System.Collections.Generic;
+using Raven.Client.Indexes;
+using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web
 {
@@ -71,35 +73,12 @@ namespace CommunityCourses.Web
 
 		void CreateIndexes()
 		{
-			//_documentStore.DatabaseCommands.PutIndex(
-			//    "AllCentres",
-			//    new IndexDefinition<Centre>()
-			//    {
-			//      Map = centres => from centre in centres select new { centre }
-			//    });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//    "AllTasterSessions",
-			//    new IndexDefinition<TasterSession>()
-			//    {
-			//      Map = tasterSessions => from tasterSession in tasterSessions select new { tasterSession }
-			//    });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllRoles",
-			//  new IndexDefinition<Person>()
-			//  {
-			//    Map = people => from person in people
-			//                    from role in person.Roles
-			//                    select new { role }
-			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//    "AllPeople",
-			//    new IndexDefinition<Person>()
-			//    {
-			//      Map = people => from person in people select new { person }
-			//    });
+			IndexCreation.CreateIndexes(typeof(Centres_All).Assembly, _documentStore);
+			IndexCreation.CreateIndexes(typeof(Courses_All).Assembly, _documentStore);
+			IndexCreation.CreateIndexes(typeof(People_All).Assembly, _documentStore);
+			IndexCreation.CreateIndexes(typeof(Roles_All).Assembly, _documentStore);
+			IndexCreation.CreateIndexes(typeof(TasterSessions_All).Assembly, _documentStore);
+			IndexCreation.CreateIndexes(typeof(Units_All).Assembly, _documentStore);
 
 			//_documentStore.DatabaseCommands.PutIndex(
 			//  "AllTutors",
@@ -138,13 +117,6 @@ namespace CommunityCourses.Web
 			//                    where person.Roles.Contains<string>(Roles.Verifier)
 			//                    select new { person }
 			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//    "AllCourses",
-			//    new IndexDefinition<Course>()
-			//    {
-			//      Map = courses => from course in courses select new { course }
-			//    });
 
 			//_documentStore.DatabaseCommands.PutIndex(
 			//  "AllUnits",

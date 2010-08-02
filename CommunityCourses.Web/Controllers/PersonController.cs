@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using CommunityCourses.Web.Model;
+using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -19,7 +20,7 @@ namespace CommunityCourses.Web.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(MvcApplication.CurrentSession.Query<Person>("AllPeople"));
+			return View(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName));
 		}
 
 		//

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using CommunityCourses.Web.Model;
+using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -72,13 +73,13 @@ namespace CommunityCourses.Web.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(MvcApplication.CurrentSession.Query<TasterSession>("AllTasterSessions"));
+			return View(MvcApplication.CurrentSession.Query<TasterSession>(new TasterSessions_All().IndexName));
 		}
 		// Private Methods (1) 
 
 		void PopulateViewData(string tasterSessionId)
 		{
-			ViewData.SetPotentialStudents(MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList());
+			ViewData.SetPotentialStudents(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList());
 		}
 
 		#endregion Methods 

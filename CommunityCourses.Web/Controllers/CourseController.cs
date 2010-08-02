@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CommunityCourses.Web.Model;
 using CommunityCourses.Web.ViewModel;
+using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -43,7 +44,7 @@ namespace CommunityCourses.Web.Controllers
 			// CreateUnits();
 
 			List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
-			foreach (Course course in MvcApplication.CurrentSession.Query<Course>("AllCourses"))
+			foreach (Course course in MvcApplication.CurrentSession.Query<Course>(new Courses_All().IndexName))
 			{
 				courseViewModels.Add(ConvertToCourseViewModel(course));
 			}
@@ -169,7 +170,7 @@ namespace CommunityCourses.Web.Controllers
 
 		void PopulateViewData(string courseId)
 		{
-			List<Person> people = MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList();
+			List<Person> people = MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList();
 
 			ViewData.SetPotentialStudents(
 					people.Where(p => p.Roles.Contains(Roles.Student) 

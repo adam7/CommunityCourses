@@ -47,7 +47,7 @@
 					<%: item.Unit.Name %>
 				</td>
 				<td>
-					<%: item.Centre.Name %>
+					<%: item.Centre != null ? item.Centre.Name : string.Empty %>
 				</td>
 				<td>
 					<%: String.Format("{0:d}", item.StartDate) %>

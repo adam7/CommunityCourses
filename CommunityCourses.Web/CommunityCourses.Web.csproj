@@ -58,6 +58,7 @@
       <HintPath>..\StudentTracking.Dependencies\SubSonic.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -132,6 +133,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Indexes\Centres_All.cs" />
+    <Compile Include="Indexes\Courses_All.cs" />
+    <Compile Include="Indexes\PeopleCount_ByRole.cs" />
+    <Compile Include="Indexes\People_All.cs" />
+    <Compile Include="Indexes\Roles_All.cs" />
+    <Compile Include="Indexes\TasterSessions_All.cs" />
+    <Compile Include="Indexes\Units_All.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Centre.cs" />
     <Compile Include="Model\Course.cs" />

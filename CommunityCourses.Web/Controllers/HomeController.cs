@@ -6,6 +6,7 @@ using System.Drawing;
 using CommunityCourses.Web.Model;
 using System.Linq;
 using System.Collections.Generic;
+using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -20,7 +21,7 @@ namespace CommunityCourses.Web.Controllers
 		
 		public FileContentResult PeopleChart()
 		{
-			IList<Person> people = MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList();
+			IList<Person> people = MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList();
 			
 			int peopleCount = people.Count;
 			int studentCount = people.Where(person => person.Roles.Contains(Roles.Student)).Count();
