@@ -35,16 +35,16 @@
 					<%= Ajax.ShowDetailsActionLink("TasterSession", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
 				</td>
 				<td>
-					<%= Html.Encode(item.Name) %>
+					<%: item.Name %>
 				</td>
 				<td>
-					<%= Html.Encode(item.Centre.Name) %>
+					<%: item.CentreName %>
 				</td>
 				<td>
-					<%= Html.Encode(item.Tutor.Name) %>
+					<%: item.TutorName %>
 				</td>
 				<td>
-					<%= Html.Encode(String.Format("{0:d}", item.DateAndTime)) %>
+					<%: String.Format("{0:d}", item.DateAndTime) %>
 				</td>
 			</tr>
 			<% } %>

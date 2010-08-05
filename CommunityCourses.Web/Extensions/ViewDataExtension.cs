@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using CommunityCourses.Web.Model;
 using CommunityCourses.Web;
+using CommunityCourses.Web.Indexes;
 
 namespace System.Web.Mvc
 {
@@ -26,7 +27,7 @@ namespace System.Web.Mvc
 
 		public static IEnumerable<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
 		{
-			return MvcApplication.CurrentSession.Query<Centre>("AllCentres");
+			return MvcApplication.CurrentSession.Query<Centre>(new Centres_All().IndexName);
 		}
 
 		public static IEnumerable<Person> GetPotentialStudents(this ViewDataDictionary viewDataDictionary)
@@ -36,17 +37,17 @@ namespace System.Web.Mvc
 
 		public static IEnumerable<Person> GetTutors(this ViewDataDictionary viewDataDictionary)
 		{
-			return MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList().Where(p => p.Roles.Contains(Roles.Tutor));
+			return MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList().Where(p => p.Roles.Contains(Roles.Tutor));
 		}
 
 		public static IEnumerable<Unit> GetUnits(this ViewDataDictionary viewDataDictionary)
 		{
-			return MvcApplication.CurrentSession.Query<Unit>("AllUnits");
+			return MvcApplication.CurrentSession.Query<Unit>(new Units_All().IndexName);
 		}
 
 		public static IEnumerable<Person> GetVerifiers(this ViewDataDictionary viewDataDictionary)
 		{
-			return MvcApplication.CurrentSession.Query<Person>("AllPeople").ToList().Where(p => p.Roles.Contains(Roles.Verifier));
+			return MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList().Where(p => p.Roles.Contains(Roles.Verifier));
 		}
 
 		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, IEnumerable<Person> students)

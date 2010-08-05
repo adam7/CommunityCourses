@@ -2,11 +2,11 @@
 
 <%@ Import Namespace="CommunityCourses.Web.Model" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Edit Student
+	Edit Person
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 	<h2>
-		Edit Student</h2>
+		Edit Person</h2>
 	<% Html.EnableClientValidation(); %>
 	<% 
 		using (Html.BeginForm())

@@ -19,9 +19,7 @@ namespace CommunityCourses.Web.Model
 		[DisplayName("Centre")]
 		public string CentreId { get; set; }
 
-		public Person Tutor { get; set; }
-
-		public Centre Centre { get; set; }
+		public string CentreName { get; set; }
 
 		[Required]
 		public string Name { get; set; }
@@ -30,7 +28,11 @@ namespace CommunityCourses.Web.Model
 		[DisplayName("Tutor")]
 		public string TutorId { get; set; }
 
+		public string TutorName { get; set; }
+
 		[Required]
+		[DataType(DataType.Date)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
 		[DisplayName("Date")]
 		public DateTime? DateAndTime { get; set; }
 

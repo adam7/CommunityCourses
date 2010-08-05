@@ -35,16 +35,16 @@
 					<%= Ajax.ShowDetailsActionLink("Centre", item.Id, "DetailsDialog", "ShowDetailsDialog")%>
 				</td>
 				<td>
-					<%= Html.Encode(item.Name) %>
+					<%: item.Name %>
 				</td>
 				<td>
-					<%= Html.Encode(item.Phone) %>
+					<%: item.Phone %>
 				</td>
 				<td>
-					<%= Html.Encode(item.Address.ToSingleLine()) %>
+					<%: item.Address.ToSingleLine() %>
 				</td>
 				<td>
-					<%= "" /* Html.Encode(item.Contact.FirstName) */ %>
+					<%--<%: Html.Encode(item.ContactName) %>--%>
 				</td>
 			</tr>
 			<% } %>

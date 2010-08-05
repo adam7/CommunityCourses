@@ -8,27 +8,29 @@ using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.Indexes
 {
-	// TODO: Make this work !
-	//public class RoleCount
-	//{
-	//  public string Role { get; set; }
-	//  public int Count { get; set; }
-	//}
+	public class RoleCount
+	{
+		public string Role { get; set; }
+		public int Count { get; set; }
+	}
 
-	//public class PeopleCount_ByRole: AbstractIndexCreationTask
-	//{
-	//  public override IndexDefinition CreateIndexDefinition()
-	//  {
-	//    return new IndexDefinition<RoleCount>
-	//    {
-	//      Map = from person in people
-	//            from role in person.Roles
-	//            select new RoleCount { Role = role, Count = 1 },
-	//      Reduce = from result in results
-	//               group results by result.Role into g
-	//               select new RoleCount { Role = g.Key, Count = g.Sum(x => x.Count) }
-	//    }
-	//    .ToIndexDefinition(DocumentStore.Conventions);
-	//  }
-	//}
+	// TODO: Make this index strongly typed!
+	public class PeopleCount_ByRole : AbstractIndexCreationTask
+	{
+		public override IndexDefinition CreateIndexDefinition()
+		{
+			return new IndexDefinition//<RoleCount>
+			{
+				Map = "from person in docs.People from role in person.Roles select new { Role = role, Count = 1 }",
+				//people => from person in people
+				//          from role in person.Role
+				//          select new { Role = role, Count = 1 },
+				Reduce = "from result in results group result by result.Role into g select new { Role = g.Key, Count = g.Sum(x=>x.Count) }"
+				//results => from result in results
+				//           group result by result into g
+				//           select new { Role = g.Key, Count = g.Count() }
+			};
+			//.ToIndexDefinition(DocumentStore.Conventions);
+		}
+	}
 }

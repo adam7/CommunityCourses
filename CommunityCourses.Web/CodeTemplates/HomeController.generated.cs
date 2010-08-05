@@ -47,7 +47,7 @@ namespace CommunityCourses.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string About = "About";
+            public readonly string PeopleChart = "PeopleChart";
         }
 
 
@@ -56,7 +56,6 @@ namespace CommunityCourses.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string About = "~/Views/Home/About.aspx";
             public readonly string Index = "~/Views/Home/Index.aspx";
         }
     }
@@ -69,6 +68,12 @@ namespace CommunityCourses.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
+
+        public override System.Web.Mvc.FileContentResult PeopleChart() {
+            var callInfo = new T4MVC_FileContentResult(Area, Name, ActionNames.PeopleChart);
+            return callInfo;
+        }
+
     }
 }
 

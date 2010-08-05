@@ -1,12 +1,11 @@
-﻿using System.Web.Mvc;
-using System.Web.UI.DataVisualization.Charting;
-using System.IO;
-using System;
-using System.Drawing;
-using CommunityCourses.Web.Model;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.UI.DataVisualization.Charting;
 using CommunityCourses.Web.Indexes;
+using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -18,16 +17,18 @@ namespace CommunityCourses.Web.Controllers
 		{
 			return View();
 		}
-		
-		public FileContentResult PeopleChart()
+
+		public virtual FileContentResult PeopleChart()
 		{
-			IList<Person> people = MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList();
-			
-			int peopleCount = people.Count;
-			int studentCount = people.Where(person => person.Roles.Contains(Roles.Student)).Count();
-			int volunteerCount = people.Where(person => person.Roles.Contains(Roles.Volunteer)).Count();
-			int verifierCount = people.Where(person => person.Roles.Contains(Roles.Verifier)).Count();
-			int tutorCount = people.Where(person => person.Roles.Contains(Roles.Tutor)).Count();
+			int peopleCount = MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).Count();
+			int studentCount = MvcApplication.CurrentSession.LuceneQuery<RoleCount>(new PeopleCount_ByRole().IndexName)
+				.Where("Role:" + Roles.Student).First().Count;
+			int volunteerCount = MvcApplication.CurrentSession.LuceneQuery<RoleCount>(new PeopleCount_ByRole().IndexName)
+				.Where("Role:" + Roles.Volunteer).First().Count;
+			int verifierCount = MvcApplication.CurrentSession.LuceneQuery<RoleCount>(new PeopleCount_ByRole().IndexName)
+				.Where("Role:" + Roles.Verifier).First().Count;
+			int tutorCount = MvcApplication.CurrentSession.LuceneQuery<RoleCount>(new PeopleCount_ByRole().IndexName)
+				.Where("Role:" + Roles.Tutor).First().Count;			
 
 			int[] yValues = { peopleCount, studentCount, volunteerCount, verifierCount, tutorCount };
 			string[] xValues = { "All people", "Students", " Volunteers", " Verifiers", " Tutors" };
@@ -53,7 +54,7 @@ namespace CommunityCourses.Web.Controllers
 			return GetChartResultAsImage(chart);
 		}
 
-		public static Chart CreateStandardChart(string title, int width, int height)
+		static Chart CreateStandardChart(string title, int width, int height)
 		{
 			var chart = new Chart();
 			chart.RenderType = RenderType.BinaryStreaming;
@@ -65,15 +66,15 @@ namespace CommunityCourses.Web.Controllers
 			
 			return chart;
 		}
-		
-		public static FileContentResult GetChartResultAsImage(Chart chart)
+
+		static FileContentResult GetChartResultAsImage(Chart chart)
 		{
 			var imageStream = new MemoryStream();
 			chart.SaveImage(imageStream, ChartImageFormat.Png);
 			return new FileContentResult(imageStream.ToArray(), "image/png");
 		}
 
-		public static void SetLegend(string legendPosition, Chart chart)
+		void SetLegend(string legendPosition, Chart chart)
 		{
 			if (!String.IsNullOrWhiteSpace(legendPosition))
 			{
@@ -102,35 +103,5 @@ namespace CommunityCourses.Web.Controllers
 				}
 			}
 		}
-
-
-		public static SeriesChartType GetChartType(string strChart)
-		{
-			SeriesChartType chartType;
-			switch (strChart)
-			{
-				case "Bar":
-					chartType = SeriesChartType.Bar;
-					break;
-
-				case "Column":
-					chartType = SeriesChartType.Column;
-					break;
-
-				case "Pie":
-					chartType = SeriesChartType.Pie;
-					break;
-
-				case "Line":
-					chartType = SeriesChartType.Line;
-					break;
-
-				default:
-					chartType = SeriesChartType.Bar;
-					break;
-			}
-			return chartType;
-		}
-
 	}
 }

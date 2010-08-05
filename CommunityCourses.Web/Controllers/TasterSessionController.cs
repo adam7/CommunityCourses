@@ -32,9 +32,10 @@ namespace CommunityCourses.Web.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				tasterSession.Centre = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId);
-				tasterSession.Tutor = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId);
+				tasterSession.CentreName = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId).Name;
+				tasterSession.TutorName = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId).Name;
 				MvcApplication.CurrentSession.Store(tasterSession);
+				TempData.SetMessage("Taster session updated");
 				return RedirectToAction(MVC.TasterSession.Actions.Index());
 			}
 			else
@@ -59,8 +60,8 @@ namespace CommunityCourses.Web.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				tasterSession.Centre = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId);
-				tasterSession.Tutor = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId);
+				tasterSession.CentreName = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId).Name;
+				tasterSession.TutorName = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId).Name;
 				MvcApplication.CurrentSession.Store(tasterSession);
 				TempData.SetMessage("Taster session updated");
 				return RedirectToAction(MVC.TasterSession.Actions.Index());

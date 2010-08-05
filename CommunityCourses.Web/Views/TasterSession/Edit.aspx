@@ -9,7 +9,6 @@
      {%>
 	<% Html.EnableClientValidation(); %>
   <fieldset>
-    <%= Html.Hidden("Id", Model.Id) %>
     <p>
 			<%= Html.LabelFor(m => m.Name) %>
 			<%= Html.TextBoxFor(m => m.Name) %>

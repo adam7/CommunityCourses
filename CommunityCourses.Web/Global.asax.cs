@@ -63,22 +63,17 @@ namespace CommunityCourses.Web
 		protected void Application_Start()
 		{
 			_documentStore = new DocumentStore { Url = "http://localhost:8080/" };
-			_documentStore.Conventions.IdentityPartsSeparator = "-";
+			_documentStore.Conventions.IdentityPartsSeparator = "_";
 			_documentStore.Initialize();
 
 			CreateIndexes();
-
+									
 			RegisterRoutes(RouteTable.Routes);
 		}
 
 		void CreateIndexes()
 		{
 			IndexCreation.CreateIndexes(typeof(Centres_All).Assembly, _documentStore);
-			IndexCreation.CreateIndexes(typeof(Courses_All).Assembly, _documentStore);
-			IndexCreation.CreateIndexes(typeof(People_All).Assembly, _documentStore);
-			IndexCreation.CreateIndexes(typeof(Roles_All).Assembly, _documentStore);
-			IndexCreation.CreateIndexes(typeof(TasterSessions_All).Assembly, _documentStore);
-			IndexCreation.CreateIndexes(typeof(Units_All).Assembly, _documentStore);
 
 			//_documentStore.DatabaseCommands.PutIndex(
 			//  "AllTutors",
@@ -116,13 +111,6 @@ namespace CommunityCourses.Web
 			//    Map = people => from person in people
 			//                    where person.Roles.Contains<string>(Roles.Verifier)
 			//                    select new { person }
-			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllUnits",
-			//  new IndexDefinition<Unit>()
-			//  {
-			//    Map = units => from unit in units select new { unit }
 			//  });
 		}
 	}

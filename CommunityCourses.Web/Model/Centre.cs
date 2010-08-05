@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace CommunityCourses.Web.Model
 {
@@ -13,9 +14,11 @@ namespace CommunityCourses.Web.Model
 		[Required]
 		public string Name { get; set; }
 
-		[Required]		
+		[Required]
 		public string Phone { get; set; }
-		public Person Contact { get; set; }
+		[DisplayName("Contact")]
+		public string ContactId { get; set; }
+		public string ContactName { get; set; }
 		public Address Address { get; set; }
 	}
 }

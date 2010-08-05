@@ -6,14 +6,14 @@
 	</p>
 	<p>
 		Centre:
-		<%: Model.Centre.Name %>
+		<%: Model.CentreName %>
 	</p>
 	<p>
 		Tutor:
-		<%: Model.Tutor.Name %>
+		<%: Model.TutorName %>
 	</p>
 	<p>
-		Date And Time:
-		<%: String.Format("{0:g}", Model.DateAndTime) %>
+		Date:
+		<%: String.Format("{0:d}", Model.DateAndTime) %>
 	</p>
 </fieldset>

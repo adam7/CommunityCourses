@@ -1,22 +1,21 @@
+using System.Linq;
 using System.Web.Mvc;
 using CommunityCourses.Web.Model;
 using CommunityCourses.Web.Indexes;
+using Raven.Client.Linq;
 
 namespace CommunityCourses.Web.Controllers
 {
 	[Authorize]
 	public partial class PersonController : Controller
 	{
-		const int pageSize = 50;
-		//
-		// GET: /Student/
+		const int pageSize = 20;
 
-		//public virtual ActionResult Index(int page)
+		//public virtual ActionResult Index(int? page)
 		//{
-		//  return View(new StudentRepository().GetPaged(page));
+		//  return View(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName)
+		//    .Skip(page ?? 0 * pageSize).Take(pageSize));
 		//}
-
-
 
 		public virtual ActionResult Index()
 		{

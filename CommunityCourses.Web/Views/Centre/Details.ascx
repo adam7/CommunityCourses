@@ -2,18 +2,18 @@
 <fieldset>
 	<p>
 		Name:
-		<%= Html.Encode(Model.Name) %>
+		<%: Model.Name %>
 	</p>
 	<p>
 		Phone:
-		<%= Html.Encode(Model.Phone) %>
+		<%: Model.Phone %>
 	</p>
 	<p>
 		Address:
-		<%= Html.Encode(Model.Address.ToSingleLine()) %>
+		<%: Model.Address.ToSingleLine() %>
 	</p>
 <%--	<p>
       Contact:
-      <%= Html.Encode(Model.ContactId) %>
+      <%: Model.ContactName %>
   </p>--%>
 </fieldset>
