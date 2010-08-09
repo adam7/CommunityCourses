@@ -74,7 +74,9 @@ namespace CommunityCourses.Web.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(MvcApplication.CurrentSession.Query<TasterSession>(new TasterSessions_All().IndexName));
+			return View(MvcApplication.CurrentSession
+				.Query<TasterSession>(new TasterSessions_All().IndexName)
+				.Customize(customize => customize.WaitForNonStaleResults()));
 		}
 		// Private Methods (1) 
 

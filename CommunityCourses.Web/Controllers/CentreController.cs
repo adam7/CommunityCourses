@@ -9,7 +9,9 @@ namespace CommunityCourses.Web.Controllers
 	{
 		public virtual ActionResult Index()
 		{
-			return View(MvcApplication.CurrentSession.Query<Centre>(new Centres_All().IndexName));
+			return View(MvcApplication.CurrentSession
+				.Query<Centre>(new Centres_All().IndexName)
+				.Customize(customize => customize.WaitForNonStaleResults()));
 		}
 
 		public virtual ActionResult Details(string id)

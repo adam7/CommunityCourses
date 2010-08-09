@@ -2,7 +2,8 @@ using System.Linq;
 using System.Web.Mvc;
 using CommunityCourses.Web.Model;
 using CommunityCourses.Web.Indexes;
-using Raven.Client.Linq;
+using Raven.Client;
+using Raven.Database.Extensions;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -19,7 +20,9 @@ namespace CommunityCourses.Web.Controllers
 
 		public virtual ActionResult Index()
 		{
-			return View(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName));
+			return View(MvcApplication.CurrentSession
+				.Query<Person>(new People_All().IndexName)
+				.Customize(customize => customize.WaitForNonStaleResults()));
 		}
 
 		//

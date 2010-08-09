@@ -42,9 +42,11 @@ namespace CommunityCourses.Web.Controllers
 		public virtual ActionResult Index()
 		{
 			// CreateUnits();
-
 			List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
-			foreach (Course course in MvcApplication.CurrentSession.Query<Course>(new Courses_All().IndexName))
+
+			foreach (Course course in MvcApplication.CurrentSession
+				.Query<Course>(new Courses_All().IndexName)
+				.Customize(customize => customize.WaitForNonStaleResults()))
 			{
 				courseViewModels.Add(ConvertToCourseViewModel(course));
 			}
