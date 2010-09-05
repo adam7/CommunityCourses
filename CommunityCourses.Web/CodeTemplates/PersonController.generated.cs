@@ -35,6 +35,11 @@ namespace CommunityCourses.Web.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Index() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Details() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Details);
         }
@@ -80,8 +85,9 @@ namespace CommunityCourses.Web.Controllers {
     public class T4MVC_PersonController: CommunityCourses.Web.Controllers.PersonController {
         public T4MVC_PersonController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
+        public override System.Web.Mvc.ActionResult Index(int page) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("page", page);
             return callInfo;
         }
 

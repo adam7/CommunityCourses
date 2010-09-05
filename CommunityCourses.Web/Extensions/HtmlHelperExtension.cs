@@ -9,7 +9,7 @@ namespace System.Web.Mvc
 
   public static class HtmlHelperExtension
   {
-		  /// <summary>
+		/// <summary>
   /// This helper method renders a link within an HTML LI tag.
   /// A class="selected" attribute is added to the tag when
   /// the link being rendered corresponds to the current
@@ -46,6 +46,22 @@ namespace System.Web.Mvc
 				// Add the checkbox
 				stringBuilder.AppendFormat("<input name=\"{0}\" id=\"{0}\" type=\"checkbox\" value=\"{1}\" {2}>{1}</input><br />",
 					propertyName, item, selected ? "checked" : "");
+			}
+
+			return stringBuilder.ToString();
+		}
+
+		public static string PageLinks(this HtmlHelper helper, int currentPage, int totalPages, Func<int, string> pageUrl)
+		{
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int count = 1; count <= totalPages; count++)
+			{
+				TagBuilder tagBuilder = new TagBuilder("a"); // Construct an <a> tag
+				tagBuilder.MergeAttribute("href", pageUrl(count));
+				tagBuilder.InnerHtml = count.ToString();
+				if (count == currentPage)
+					tagBuilder.AddCssClass("selected");
+				stringBuilder.AppendLine(tagBuilder.ToString());
 			}
 
 			return stringBuilder.ToString();

@@ -1,17 +1,26 @@
+using System.Linq;
 using System.Web.Mvc;
-using CommunityCourses.Web.Model;
 using CommunityCourses.Web.Indexes;
+using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.Controllers
 {
 	[Authorize]
 	public partial class CentreController : Controller
 	{
-		public virtual ActionResult Index()
+		const int pageSize = 20;
+
+		public virtual ActionResult Index(int page)
 		{
-			return View(MvcApplication.CurrentSession
-				.Query<Centre>(new Centres_All().IndexName)
-				.Customize(customize => customize.WaitForNonStaleResults()));
+			var query = MvcApplication.CurrentSession
+				.Query<Centre, Centres_All>()
+				.Customize(customize => customize.WaitForNonStaleResults())
+				.OrderBy(centre => centre.Name);
+			
+			ViewData.SetPageNumber(page);
+			ViewData.SetTotalPages(query, pageSize);
+
+			return View(query.Skip((page - 1) * pageSize).Take(pageSize));
 		}
 
 		public virtual ActionResult Details(string id)
@@ -27,15 +36,15 @@ namespace CommunityCourses.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Create(Centre centre)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 				MvcApplication.CurrentSession.Store(centre);
-				TempData.SetMessage("New centre created");
-				return RedirectToAction(MVC.Centre.Actions.Index());
+				TempData.SetMessage(string.Format("Centre {0} created"));
+				return RedirectToAction(MVC.Centre.Actions.Index(1));
 			}
 			else
 			{
-				return View(MVC.Centre.Views.Edit, centre);
+				return View(centre);
 			}
 		}
 
@@ -51,8 +60,8 @@ namespace CommunityCourses.Web.Controllers
 			if(ModelState.IsValid)
 			{
 				MvcApplication.CurrentSession.Store(centre);
-				TempData.SetMessage("Centre updated");
-				return RedirectToAction(MVC.Centre.Actions.Index());
+				TempData.SetMessage(string.Format("Centre {0} updated"));
+				return RedirectToAction(MVC.Centre.Actions.Index(1));
 			}
 			else
 			{

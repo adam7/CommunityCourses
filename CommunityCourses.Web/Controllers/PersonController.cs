@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Web.Mvc;
-using CommunityCourses.Web.Model;
 using CommunityCourses.Web.Indexes;
-using Raven.Client;
-using Raven.Database.Extensions;
+using CommunityCourses.Web.Model;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -12,46 +10,38 @@ namespace CommunityCourses.Web.Controllers
 	{
 		const int pageSize = 20;
 
-		//public virtual ActionResult Index(int? page)
-		//{
-		//  return View(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName)
-		//    .Skip(page ?? 0 * pageSize).Take(pageSize));
-		//}
-
-		public virtual ActionResult Index()
+		public virtual ActionResult Index(int page)
 		{
-			return View(MvcApplication.CurrentSession
-				.Query<Person>(new People_All().IndexName)
-				.Customize(customize => customize.WaitForNonStaleResults()));
-		}
+			var query = MvcApplication.CurrentSession
+				.Query<Person, People_All>()
+				.Customize(customize => customize.WaitForNonStaleResults())
+				.OrderBy(person => person.FirstName);
+				
+			ViewData.SetPageNumber(page);
+			ViewData.SetTotalPages(query, pageSize);
 
-		//
-		// GET: /Student/Details/5
+			return View(query.Skip((page-1) * pageSize).Take(pageSize));
+		}
 
 		public virtual ActionResult Details(string id)
 		{
 			return PartialView(MvcApplication.CurrentSession.Load<Person>(id));
 		}
 
-		//
-		// GET: /Student/Create
-
 		public virtual ActionResult Create()
 		{
 			return View(Views.Edit, new Person());
 		}
 
-		//
-		// POST: /Student/Create
-
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Create(Person person)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 				MvcApplication.CurrentSession.Store(person);
-				TempData.SetMessage("Student created");
-				return RedirectToAction(MVC.Person.Actions.Index());
+
+				TempData.SetMessage(string.Format("Person {0} created", person.Name));
+				return RedirectToAction(MVC.Person.Actions.Index(1));
 			}
 			else
 			{
@@ -59,16 +49,12 @@ namespace CommunityCourses.Web.Controllers
 			}
 		}
 
-		//
-		// GET: /Student/Edit/5
 		[AcceptVerbs(HttpVerbs.Get)]
 		public virtual ActionResult Edit(string id)
 		{
 			return View(MvcApplication.CurrentSession.Load<Person>(id));
 		}
 
-		//
-		// POST: /Student/Edit/5
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Edit(Person person)
 		{
@@ -76,8 +62,8 @@ namespace CommunityCourses.Web.Controllers
 			{
 				MvcApplication.CurrentSession.Store(person);
 
-				TempData.SetMessage("Student updated");
-				return RedirectToAction(MVC.Person.Actions.Index());
+				TempData.SetMessage(string.Format("Person {0} updated", person.Name));
+				return RedirectToAction(MVC.Person.Actions.Index(1));
 			}
 			else
 			{

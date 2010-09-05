@@ -10,19 +10,18 @@ namespace System.Web.Mvc
 {
 	public static class ViewDataExtension
 	{
-		#region Fields (7) 
-
 		static readonly string potentialStudentsKey = "potentialStudents";
+		static readonly string pageNumberKey = "pageNumberKey";
+		static readonly string totalPagesKey = "totalPagesKey";
 
-		#endregion Fields 
-
-		#region Methods (14) 
-
-		// Public Methods (14) 
-
-		public static IEnumerable<string> GetRoles(this ViewDataDictionary viewDataDictionary)
+		public static int GetPageNumber(this ViewDataDictionary viewDataDictionary)
 		{
-			return Roles.All();
+			return (int)viewDataDictionary[pageNumberKey];
+		}
+
+		public static int GetTotalPages(this ViewDataDictionary viewDataDictionary)
+		{
+			return (int)viewDataDictionary[totalPagesKey];
 		}
 
 		public static IEnumerable<Centre> GetCentres(this ViewDataDictionary viewDataDictionary)
@@ -53,7 +52,16 @@ namespace System.Web.Mvc
 		public static void SetPotentialStudents(this ViewDataDictionary viewDataDictionary, IEnumerable<Person> students)
 		{
 			viewDataDictionary[potentialStudentsKey] = students;
-		}		
-		#endregion Methods 
+		}
+
+		public static void SetPageNumber(this ViewDataDictionary viewDataDictionary, int pageNumber)
+		{
+			viewDataDictionary[pageNumberKey] = pageNumber;
+		}
+
+		public static void SetTotalPages(this ViewDataDictionary viewDataDictionary, IQueryable<object> query, int pageSize)
+		{
+			viewDataDictionary[totalPagesKey] = (int)Math.Ceiling((double)query.Count() / pageSize);
+		}
 	}
 }

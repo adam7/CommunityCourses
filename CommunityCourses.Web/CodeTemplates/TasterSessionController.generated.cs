@@ -48,6 +48,11 @@ namespace CommunityCourses.Web.Controllers {
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Index() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TasterSessionController Actions { get { return MVC.TasterSession; } }
@@ -120,8 +125,9 @@ namespace CommunityCourses.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Index() {
+        public override System.Web.Mvc.ActionResult Index(int page) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("page", page);
             return callInfo;
         }
 

@@ -24,7 +24,7 @@
 	</p>
 	<p>
 		<label for="Roles">Roles</label>
-		<%= Html.CheckBoxList(Model.Roles, ViewData.GetRoles(), "Roles")%>
+		<%= Html.CheckBoxList(Model.Roles, CommunityCourses.Web.Model.Roles.All(), "Roles")%>
 	</p>
 	<p>
 			<%= Html.LabelFor(m => m.DateOfBirth)%>

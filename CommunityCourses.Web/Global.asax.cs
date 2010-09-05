@@ -40,30 +40,36 @@ namespace CommunityCourses.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
-					"Default",                                                  // Route name
-					"{controller}/{action}/{id}",                               // URL with parameters
-					new { controller = "TasterSession", action = "Index", id = "" }   // Parameter defaults
+				null,
+				"{controller}/Create/",
+				new { action = "Create" }
 			);
 
-			//routes.MapRoute(
-			//  null,                                                       // Route name
-			//  "",                                                         // Matches the root URL, i.e. ~/
-			//  new { controller = "Student", action = "Index", page = 1 }  // Parameter defaults
-			//);
+			routes.MapRoute(
+				null,
+				"{controller}/Edit/",
+				new { action = "Edit" }
+			);
 
-			//routes.MapRoute(
-			//    null,                                                     // Route name
-			//    "{controller}/{action}/{id}/Page{page}",                  // URL pattern e.g. ~/Page683
-			//    new { controller = "Student", action = "Index", id = "" },// Parameter defaults
-			//    new { page = @"\d+" }                                     // Constraints: page must be numercal
-			//);
+			routes.MapRoute(
+				null,                                                     // Route name
+				"{controller}/{action}/Page{page}",												// URL pattern e.g. ~/Page683
+				new { controller = "Home", action = "Index", page = 1 },  // Parameter defaults
+				new { page = @"\d+" }                                     // Constraints: page must be numercal
+			);
 
+			routes.MapRoute(
+				null,                                                     // Route name
+				"{controller}/{action}/{id}",															// URL pattern e.g. ~/Page683
+				new { controller = "Home", action = "Index", id = "" }    // Parameter defaults
+			);
 		}
 
 		protected void Application_Start()
 		{
 			_documentStore = new DocumentStore { Url = "http://localhost:8080/" };
 			_documentStore.Conventions.IdentityPartsSeparator = "_";
+			_documentStore.Conventions.MaxNumberOfRequestsPerSession = 300; // This is bad, but need it for Course Index right now ... will fix
 			_documentStore.Initialize();
 
 			CreateIndexes();

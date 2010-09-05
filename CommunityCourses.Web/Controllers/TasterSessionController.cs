@@ -8,9 +8,8 @@ namespace CommunityCourses.Web.Controllers
 	[Authorize]
 	public partial class TasterSessionController : Controller
 	{
-		#region Methods (7) 
+		const int pageSize = 20;
 
-		// Public Methods (6) 
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult AddStudent(string id, string studentId)
 		{
@@ -30,17 +29,17 @@ namespace CommunityCourses.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Create(TasterSession tasterSession)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 				tasterSession.CentreName = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId).Name;
 				tasterSession.TutorName = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId).Name;
 				MvcApplication.CurrentSession.Store(tasterSession);
-				TempData.SetMessage("Taster session updated");
-				return RedirectToAction(MVC.TasterSession.Actions.Index());
+				TempData.SetMessage(string.Format("Taster session {0} created", tasterSession.Name));
+				return RedirectToAction(MVC.TasterSession.Actions.Index(1));
 			}
 			else
 			{
-				return View(MVC.TasterSession.Views.Edit, tasterSession);
+				return View(tasterSession);
 			}
 		}
 
@@ -63,8 +62,8 @@ namespace CommunityCourses.Web.Controllers
 				tasterSession.CentreName = MvcApplication.CurrentSession.Load<Centre>(tasterSession.CentreId).Name;
 				tasterSession.TutorName = MvcApplication.CurrentSession.Load<Person>(tasterSession.TutorId).Name;
 				MvcApplication.CurrentSession.Store(tasterSession);
-				TempData.SetMessage("Taster session updated");
-				return RedirectToAction(MVC.TasterSession.Actions.Index());
+				TempData.SetMessage(string.Format("Taster session {0} updated", tasterSession.Name));
+				return RedirectToAction(MVC.TasterSession.Actions.Index(1));
 			}
 			else
 			{
@@ -72,19 +71,22 @@ namespace CommunityCourses.Web.Controllers
 			}
 		}
 
-		public virtual ActionResult Index()
+		public virtual ActionResult Index(int page)
 		{
-			return View(MvcApplication.CurrentSession
-				.Query<TasterSession>(new TasterSessions_All().IndexName)
-				.Customize(customize => customize.WaitForNonStaleResults()));
+			var query = MvcApplication.CurrentSession
+				.Query<TasterSession, TasterSessions_All>()
+				.Customize(customize => customize.WaitForNonStaleResults())
+				.OrderBy(tasterSession => tasterSession.Name);
+			
+			ViewData.SetPageNumber(page);
+			ViewData.SetTotalPages(query, pageSize);
+
+			return View(query.Skip((page-1) * pageSize).Take(pageSize));
 		}
-		// Private Methods (1) 
 
 		void PopulateViewData(string tasterSessionId)
 		{
 			ViewData.SetPotentialStudents(MvcApplication.CurrentSession.Query<Person>(new People_All().IndexName).ToList());
 		}
-
-		#endregion Methods 
 	}
 }

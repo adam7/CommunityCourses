@@ -76,6 +76,9 @@
 	<div id="DetailsDialog">
 	</div>
 	<p>
+		<%=Html.PageLinks(ViewData.GetPageNumber(), ViewData.GetTotalPages(), x => Url.Action("Index", new { page = x })) %>
+	</p>
+	<p>
 		<%= Html.ActionLink("Create New", "Create", null, new { @class = "st-button" })%>
 	</p>
 </asp:Content>

@@ -10,6 +10,8 @@ namespace CommunityCourses.Web.Controllers
 	[Authorize]
 	public partial class CourseController : Controller
 	{
+		const int pageSize = 20;
+
 		CourseViewModel ConvertToCourseViewModel(Course course)
 		{
 			CourseViewModel courseViewModel = new CourseViewModel
@@ -39,14 +41,20 @@ namespace CommunityCourses.Web.Controllers
 		}
 
 
-		public virtual ActionResult Index()
+		public virtual ActionResult Index(int page)
 		{
 			// CreateUnits();
+			var query = MvcApplication.CurrentSession
+				.Query<Course, Courses_All>()
+				.Customize(customize => customize.WaitForNonStaleResults())
+				.OrderBy(course => course.Name);
+
+			ViewData.SetPageNumber(page);
+			ViewData.SetTotalPages(query, pageSize);
+
 			List<CourseViewModel> courseViewModels = new List<CourseViewModel>();
 
-			foreach (Course course in MvcApplication.CurrentSession
-				.Query<Course>(new Courses_All().IndexName)
-				.Customize(customize => customize.WaitForNonStaleResults()))
+			foreach (Course course in query.Skip((page - 1) * pageSize).Take(pageSize))
 			{
 				courseViewModels.Add(ConvertToCourseViewModel(course));
 			}
@@ -69,12 +77,11 @@ namespace CommunityCourses.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public virtual ActionResult Create(Course course)
 		{
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
 				MvcApplication.CurrentSession.Store(course);
-				MvcApplication.CurrentSession.SaveChanges();
-				
-				TempData.SetMessage("New course created");
+
+				TempData.SetMessage(string.Format("Course {0} created", course.Name));
 				return RedirectToAction("Index");
 			}
 			else
@@ -161,7 +168,7 @@ namespace CommunityCourses.Web.Controllers
 			{
 				MvcApplication.CurrentSession.Store(course);
 
-				TempData.SetMessage("Course updated");
+				TempData.SetMessage(string.Format("Course {0} updated", course.Name));
 				return RedirectToAction("Index");
 			}
 			else
