@@ -17,6 +17,7 @@ namespace CommunityCourses.Web.Indexes
 			{
 				Map = people => from person in people
 												from role in person.Roles
+												orderby role
 												select new { role }
 			}
 			.ToIndexDefinition(DocumentStore.Conventions);

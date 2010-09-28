@@ -80,5 +80,6 @@
 	</p>
 	<p>
 		<%= Html.ActionLink("Create New", "Create", null, new { @class = "st-button" })%>
+		<button type="button" value="Search" class="st-button" id="Search" disabled="disabled" />
 	</p>
 </asp:Content>

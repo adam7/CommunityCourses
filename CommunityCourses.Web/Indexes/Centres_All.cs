@@ -14,7 +14,7 @@ namespace CommunityCourses.Web.Indexes
 		{
 			return new IndexDefinition<Centre>
 			{
-				Map = centres => from centre in centres select new { centre }
+				Map = centres => from centre in centres orderby centre.Name select new { centre }
 			}
 			.ToIndexDefinition(DocumentStore.Conventions);
 		}

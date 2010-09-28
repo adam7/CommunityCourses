@@ -15,7 +15,7 @@ namespace CommunityCourses.Web.Indexes
 		{
 			return new IndexDefinition<TasterSession>
 			{
-				Map = tasterSessions => from tasterSession in tasterSessions select new { tasterSession }
+				Map = tasterSessions => from tasterSession in tasterSessions orderby tasterSession.Name select new { tasterSession }
 			}
 			.ToIndexDefinition(DocumentStore.Conventions);
 		}

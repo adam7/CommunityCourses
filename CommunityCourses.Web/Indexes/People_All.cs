@@ -15,7 +15,7 @@ namespace CommunityCourses.Web.Indexes
 		{
 			return new IndexDefinition<Person>
 			{
-				Map = people => from person in people select new { person }
+				Map = people => from person in people orderby person.FirstName select new { person }
 			}
 			.ToIndexDefinition(DocumentStore.Conventions);
 		}

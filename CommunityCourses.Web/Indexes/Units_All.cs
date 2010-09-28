@@ -15,7 +15,7 @@ namespace CommunityCourses.Web.Indexes
 		{
 			return new IndexDefinition<Unit>
 			{
-				Map = units => from unit in units select new { unit }
+				Map = units => from unit in units orderby unit.Name select new { unit }
 			}
 			.ToIndexDefinition(DocumentStore.Conventions);
 		}
