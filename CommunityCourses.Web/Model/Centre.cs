@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 
 namespace CommunityCourses.Web.Model
 {
@@ -19,6 +15,6 @@ namespace CommunityCourses.Web.Model
 		[DisplayName("Contact")]
 		public string ContactId { get; set; }
 		public string ContactName { get; set; }
-		public Address Address { get; set; }
+        public Address Address { get; set; }
 	}
 }

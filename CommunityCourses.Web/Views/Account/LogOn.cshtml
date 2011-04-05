@@ -1,0 +1,26 @@
+﻿@{
+	ViewBag.Title = "Log On";
+	Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+	<div>
+		<fieldset>
+			<legend>Account Information</legend>
+			<p>
+				<label for="username">
+					Username:</label>
+				@Html.TextBox("username") @Html.ValidationMessage("username")
+			</p>
+			<p>
+				<label for="password">
+					Password:</label>
+				@Html.Password("password") @Html.ValidationMessage("password")
+			</p>
+			<p>
+				<input type="submit" value="Log On" class="st-button" />
+			</p>
+		</fieldset>
+	</div>
+}

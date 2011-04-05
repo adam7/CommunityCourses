@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using CommunityCourses.Web.ExportModels;
+using CommunityCourses.Web.Indexes;
 using CommunityCourses.Web.Model;
 using CommunityCourses.Web.ViewModel;
-using CommunityCourses.Web.Indexes;
+using FileHelpers;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -44,10 +48,9 @@ namespace CommunityCourses.Web.Controllers
 		public virtual ActionResult Index(int page)
 		{
 			// CreateUnits();
-			var query = MvcApplication.CurrentSession
-				.Query<Course, Courses_All>()
-				.Customize(customize => customize.WaitForNonStaleResults())
-				.OrderBy(course => course.Name);
+            var query = MvcApplication.CurrentSession
+                .Query<Course, Courses_All>()
+                .Customize(customize => customize.WaitForNonStaleResults());
 
 			ViewData.SetPageNumber(page);
 			ViewData.SetTotalPages(query, pageSize);
@@ -61,6 +64,28 @@ namespace CommunityCourses.Web.Controllers
 
 			return View(courseViewModels);
 		}
+        
+        public virtual ActionResult Download(int page)
+        {
+            var query = MvcApplication.CurrentSession
+                .Query<Course, Courses_All>()
+                .Customize(customize => customize.WaitForNonStaleResults());
+
+            FileHelperEngine<CourseExport> engine = new FileHelperEngine<CourseExport>()
+            {
+                HeaderText = @"Name, Start Date , End Date"
+            };
+
+            string filename = "courses.csv";
+            string filePath = Path.Combine(new[] { Server.MapPath("~/App_Data"), filename });
+
+            IEnumerable<CourseExport> centres =
+                    Mapper.Map<IEnumerable<Course>, IEnumerable<CourseExport>>(query.Skip((page - 1) * pageSize).Take(pageSize));
+
+            engine.WriteFile(filePath, centres);
+
+            return File(filePath, "text/plain", filename);
+        }
 
 		public virtual ActionResult Details(string id)
 		{

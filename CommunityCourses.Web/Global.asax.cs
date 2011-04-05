@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
+using CommunityCourses.Web.ExportModels;
+using CommunityCourses.Web.Indexes;
 using CommunityCourses.Web.Model;
-using CommunityCourses.Web.ViewModel;
 using Raven.Client;
 using Raven.Client.Document;
-using System.Collections.Generic;
 using Raven.Client.Indexes;
-using CommunityCourses.Web.Indexes;
 
 namespace CommunityCourses.Web
 {
@@ -72,52 +71,23 @@ namespace CommunityCourses.Web
 			_documentStore.Conventions.MaxNumberOfRequestsPerSession = 300; // This is bad, but need it for Course Index right now ... will fix
 			_documentStore.Initialize();
 
-			CreateIndexes();
-									
+            // Create Raven indexes
+            IndexCreation.CreateIndexes(typeof(Centres_All).Assembly, _documentStore);
+
+            ConfigureAutoMapper();
+
 			RegisterRoutes(RouteTable.Routes);
 		}
 
-		void CreateIndexes()
+		void ConfigureAutoMapper()
 		{
-			IndexCreation.CreateIndexes(typeof(Centres_All).Assembly, _documentStore);
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllTutors",
-			//  new IndexDefinition<Person>()
-			//  {
-			//    Map = people => from person in people
-			//                    where Enumerable.Contains(person.Roles, Roles.Tutor)
-			//                    select new { person }
-			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllStudents",
-			//  new IndexDefinition<Person>()
-			//  {
-			//    Map = people => from person in people
-			//                    from role in person.Roles
-			//                    where role == "Student"
-			//                    select new { role }
-
-			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllVolunteers",
-			//  new IndexDefinition<Person>()
-			//  {	
-			//    Map = people => from person in people
-			//                    where person.Roles.Contains<string>(Roles.Volunteer)
-			//                    select new { person }
-			//  });
-
-			//_documentStore.DatabaseCommands.PutIndex(
-			//  "AllVerifiers",
-			//  new IndexDefinition<Person>()
-			//  {
-			//    Map = people => from person in people
-			//                    where person.Roles.Contains<string>(Roles.Verifier)
-			//                    select new { person }
-			//  });
+            Mapper.CreateMap<Centre, CentreExport>()
+                .ForMember(member => member.Address, option => option.MapFrom(member => member.Address.ToSingleLine()));
+            Mapper.CreateMap<Person, PersonExport>()
+                .ForMember(member => member.Address, option => option.MapFrom(member => member.Address.ToSingleLine()))
+                .ForMember(member => member.Roles, option => option.MapFrom(member => string.Join(",", member.Roles)))
+                .ForMember(member => member.Disabilities, option => option.MapFrom(member => string.Join(",", member.Disabilities)));
+            Mapper.CreateMap<Course, CourseExport>();
 		}
 	}
 }

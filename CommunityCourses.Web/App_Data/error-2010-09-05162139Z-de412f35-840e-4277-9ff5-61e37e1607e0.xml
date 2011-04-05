@@ -1,0 +1,168 @@
+﻿<error errorId="de412f35-840e-4277-9ff5-61e37e1607e0" host="IMAC-WINDOWS7" type="System.NullReferenceException" message="Object reference not set to an instance of an object." source="CommunityCourses.Web" detail="System.Web.HttpException (0x80004005): Error executing child request for handler 'System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerWrapper'. ---&gt; System.Web.HttpUnhandledException (0x80004005): Exception of type 'System.Web.HttpUnhandledException' was thrown. ---&gt; System.NullReferenceException: Object reference not set to an instance of an object.&#xD;&#xA;   at System.Web.Mvc.ViewDataExtension.GetPageNumber(ViewDataDictionary viewDataDictionary) in C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Extensions\ViewDataExtension.cs:line 19&#xD;&#xA;   at ASP.views_course_index_aspx.__RenderContent2(HtmlTextWriter __w, Control parameterContainer) in c:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Views\Course\Index.aspx:line 68&#xD;&#xA;   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)&#xD;&#xA;   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.Render(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)&#xD;&#xA;   at ASP.views_shared_site_master.__Render__control1(HtmlTextWriter __w, Control parameterContainer) in c:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Views\Shared\Site.Master:line 57&#xD;&#xA;   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)&#xD;&#xA;   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.Render(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)&#xD;&#xA;   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Page.Render(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.Mvc.ViewPage.Render(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)&#xD;&#xA;   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.HandleError(Exception e)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest()&#xD;&#xA;   at System.Web.UI.Page.ProcessRequestWithNoAssert(HttpContext context)&#xD;&#xA;   at System.Web.UI.Page.ProcessRequest(HttpContext context)&#xD;&#xA;   at System.Web.Mvc.ViewPage.ProcessRequest(HttpContext context)&#xD;&#xA;   at ASP.views_course_index_aspx.ProcessRequest(HttpContext context) in c:\Users\Adam Cooper\AppData\Local\Temp\Temporary ASP.NET Files\root\139448e7\d154bc41\App_Web_uobj5355.1.cs:line 0&#xD;&#xA;   at System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.&lt;&gt;c__DisplayClass1.&lt;ProcessRequest&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.&lt;&gt;c__DisplayClass4.&lt;Wrap&gt;b__3()&#xD;&#xA;   at System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)&#xD;&#xA;   at System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap(Action action)&#xD;&#xA;   at System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.ProcessRequest(HttpContext context)&#xD;&#xA;   at System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)&#xD;&#xA;   at System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)&#xD;&#xA;   at System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)&#xD;&#xA;   at System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)&#xD;&#xA;   at System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)&#xD;&#xA;   at System.Web.Mvc.ViewPage.RenderView(ViewContext viewContext)&#xD;&#xA;   at System.Web.Mvc.WebFormView.RenderViewPage(ViewContext context, ViewPage page)&#xD;&#xA;   at System.Web.Mvc.WebFormView.Render(ViewContext viewContext, TextWriter writer)&#xD;&#xA;   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass14.&lt;InvokeActionResultWithFilters&gt;b__11()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass14.&lt;&gt;c__DisplayClass16.&lt;InvokeActionResultWithFilters&gt;b__13()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass8.&lt;BeginProcessRequest&gt;b__4()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="test" time="2010-09-05T16:21:39.1497842Z" statusCode="500" webHostHtmlMessage="&lt;html&gt;&#xD;&#xA;    &lt;head&gt;&#xD;&#xA;        &lt;title&gt;Object reference not set to an instance of an object.&lt;/title&gt;&#xD;&#xA;        &lt;style&gt;&#xD;&#xA;         body {font-family:&quot;Verdana&quot;;font-weight:normal;font-size: .7em;color:black;} &#xD;&#xA;         p {font-family:&quot;Verdana&quot;;font-weight:normal;color:black;margin-top: -5px}&#xD;&#xA;         b {font-family:&quot;Verdana&quot;;font-weight:bold;color:black;margin-top: -5px}&#xD;&#xA;         H1 { font-family:&quot;Verdana&quot;;font-weight:normal;font-size:18pt;color:red }&#xD;&#xA;         H2 { font-family:&quot;Verdana&quot;;font-weight:normal;font-size:14pt;color:maroon }&#xD;&#xA;         pre {font-family:&quot;Lucida Console&quot;;font-size: .9em}&#xD;&#xA;         .marker {font-weight: bold; color: black;text-decoration: none;}&#xD;&#xA;         .version {color: gray;}&#xD;&#xA;         .error {margin-bottom: 10px;}&#xD;&#xA;         .expandable { text-decoration:underline; font-weight:bold; color:navy; cursor:hand; }&#xD;&#xA;        &lt;/style&gt;&#xD;&#xA;    &lt;/head&gt;&#xD;&#xA;&#xD;&#xA;    &lt;body bgcolor=&quot;white&quot;&gt;&#xD;&#xA;&#xD;&#xA;            &lt;span&gt;&lt;H1&gt;Server Error in '/' Application.&lt;hr width=100% size=1 color=silver&gt;&lt;/H1&gt;&#xD;&#xA;&#xD;&#xA;            &lt;h2&gt; &lt;i&gt;Object reference not set to an instance of an object.&lt;/i&gt; &lt;/h2&gt;&lt;/span&gt;&#xD;&#xA;&#xD;&#xA;            &lt;font face=&quot;Arial, Helvetica, Geneva, SunSans-Regular, sans-serif &quot;&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Description: &lt;/b&gt;An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code.&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Exception Details: &lt;/b&gt;System.NullReferenceException: Object reference not set to an instance of an object.&lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt;Source Error:&lt;/b&gt; &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;table width=100% bgcolor=&quot;#ffffcc&quot;&gt;&#xD;&#xA;               &lt;tr&gt;&#xD;&#xA;                  &lt;td&gt;&#xD;&#xA;                      &lt;code&gt;&lt;pre&gt;&#xD;&#xA;&#xD;&#xA;Line 17: 		public static int GetPageNumber(this ViewDataDictionary viewDataDictionary)&#xD;&#xA;Line 18: 		{&#xD;&#xA;&lt;font color=red&gt;Line 19: 			return (int)viewDataDictionary[pageNumberKey];&#xD;&#xA;&lt;/font&gt;Line 20: 		}&#xD;&#xA;Line 21: &lt;/pre&gt;&lt;/code&gt;&#xD;&#xA;&#xD;&#xA;                  &lt;/td&gt;&#xD;&#xA;               &lt;/tr&gt;&#xD;&#xA;            &lt;/table&gt;&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt; Source File: &lt;/b&gt; C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Extensions\ViewDataExtension.cs&lt;b&gt; &amp;nbsp;&amp;nbsp; Line: &lt;/b&gt; 19&#xD;&#xA;            &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;b&gt;Stack Trace:&lt;/b&gt; &lt;br&gt;&lt;br&gt;&#xD;&#xA;&#xD;&#xA;            &lt;table width=100% bgcolor=&quot;#ffffcc&quot;&gt;&#xD;&#xA;               &lt;tr&gt;&#xD;&#xA;                  &lt;td&gt;&#xD;&#xA;                      &lt;code&gt;&lt;pre&gt;&#xD;&#xA;&#xD;&#xA;[NullReferenceException: Object reference not set to an instance of an object.]&#xD;&#xA;   System.Web.Mvc.ViewDataExtension.GetPageNumber(ViewDataDictionary viewDataDictionary) in C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Extensions\ViewDataExtension.cs:19&#xD;&#xA;   ASP.views_course_index_aspx.__RenderContent2(HtmlTextWriter __w, Control parameterContainer) in c:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Views\Course\Index.aspx:68&#xD;&#xA;   System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children) +109&#xD;&#xA;   System.Web.UI.Control.RenderChildren(HtmlTextWriter writer) +8&#xD;&#xA;   System.Web.UI.Control.Render(HtmlTextWriter writer) +10&#xD;&#xA;   System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter) +27&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter) +100&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer) +25&#xD;&#xA;   ASP.views_shared_site_master.__Render__control1(HtmlTextWriter __w, Control parameterContainer) in c:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Views\Shared\Site.Master:57&#xD;&#xA;   System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children) +109&#xD;&#xA;   System.Web.UI.Control.RenderChildren(HtmlTextWriter writer) +8&#xD;&#xA;   System.Web.UI.Control.Render(HtmlTextWriter writer) +10&#xD;&#xA;   System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter) +27&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter) +100&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer) +25&#xD;&#xA;   System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children) +208&#xD;&#xA;   System.Web.UI.Control.RenderChildren(HtmlTextWriter writer) +8&#xD;&#xA;   System.Web.UI.Page.Render(HtmlTextWriter writer) +29&#xD;&#xA;   System.Web.Mvc.ViewPage.Render(HtmlTextWriter writer) +56&#xD;&#xA;   System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter) +27&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter) +100&#xD;&#xA;   System.Web.UI.Control.RenderControl(HtmlTextWriter writer) +25&#xD;&#xA;   System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint) +3060&#xD;&#xA;&lt;/pre&gt;&lt;/code&gt;&#xD;&#xA;&#xD;&#xA;                  &lt;/td&gt;&#xD;&#xA;               &lt;/tr&gt;&#xD;&#xA;            &lt;/table&gt;&#xD;&#xA;&#xD;&#xA;            &lt;br&gt;&#xD;&#xA;&#xD;&#xA;    &lt;/body&gt;&#xD;&#xA;&lt;/html&gt;&#xD;&#xA;">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_KEEP_ALIVE:115&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip,deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-gb,en;q=0.5&#xD;&#xA;HTTP_COOKIE:.ASPXAUTH=CDE5A48C294397815EB05928D24F8A73EF2419CE6D317C74221A44149A7D3BF941E1555D9F5B53F6E54257AE28B75320A2A9663433AF7C6A8CA86C832367931EE56FF97491E37A5C9A392B459508504A&#xD;&#xA;HTTP_HOST:localhost:1187&#xD;&#xA;HTTP_REFERER:http://localhost:1187/Person/Index/Page1&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Keep-Alive: 115&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7&#xD;&#xA;Accept-Encoding: gzip,deflate&#xD;&#xA;Accept-Language: en-gb,en;q=0.5&#xD;&#xA;Cookie: .ASPXAUTH=CDE5A48C294397815EB05928D24F8A73EF2419CE6D317C74221A44149A7D3BF941E1555D9F5B53F6E54257AE28B75320A2A9663433AF7C6A8CA86C832367931EE56FF97491E37A5C9A392B459508504A&#xD;&#xA;Host: localhost:1187&#xD;&#xA;Referer: http://localhost:1187/Person/Index/Page1&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="test" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="iMac-Windows7\Adam Cooper" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="test" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="" />
+    </item>
+    <item name="HTTPS">
+      <value string="" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Course/Index" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Users\Adam Cooper\Documents\Visual Studio 2008\Projects\CommunityCourses\CommunityCourses.Web\Course\Index" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="127.0.0.1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Course/Index" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="1187" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="" />
+    </item>
+    <item name="URL">
+      <value string="/Course/Index" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_KEEP_ALIVE">
+      <value string="115" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.7" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip,deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-gb,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string=".ASPXAUTH=CDE5A48C294397815EB05928D24F8A73EF2419CE6D317C74221A44149A7D3BF941E1555D9F5B53F6E54257AE28B75320A2A9663433AF7C6A8CA86C832367931EE56FF97491E37A5C9A392B459508504A" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:1187" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:1187/Person/Index/Page1" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.6) Gecko/20100625 Firefox/3.6.6" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name=".ASPXAUTH">
+      <value string="CDE5A48C294397815EB05928D24F8A73EF2419CE6D317C74221A44149A7D3BF941E1555D9F5B53F6E54257AE28B75320A2A9663433AF7C6A8CA86C832367931EE56FF97491E37A5C9A392B459508504A" />
+    </item>
+  </cookies>
+</error>

@@ -1,7 +1,12 @@
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using CommunityCourses.Web.ExportModels;
 using CommunityCourses.Web.Indexes;
 using CommunityCourses.Web.Model;
+using FileHelpers;
 
 namespace CommunityCourses.Web.Controllers
 {
@@ -12,16 +17,37 @@ namespace CommunityCourses.Web.Controllers
 
 		public virtual ActionResult Index(int page)
 		{
-			var query = MvcApplication.CurrentSession
-				.Query<Person, People_All>()
-				.Customize(customize => customize.WaitForNonStaleResults())
-				.OrderBy(person => person.FirstName);
+            var query = MvcApplication.CurrentSession
+                .Query<Person, People_All>()
+                .Customize(customize => customize.WaitForNonStaleResults());
 				
 			ViewData.SetPageNumber(page);
 			ViewData.SetTotalPages(query, pageSize);
 
 			return View(query.Skip((page-1) * pageSize).Take(pageSize));
 		}
+
+        public virtual ActionResult Download(int page)
+        {
+            var query = MvcApplication.CurrentSession
+                .Query<Person, People_All>()
+                .Customize(customize => customize.WaitForNonStaleResults());
+
+            FileHelperEngine<PersonExport> engine = new FileHelperEngine<PersonExport> 
+            { 
+                HeaderText = @"Name, Roles, CRB Number, CRB Expiry, DOB, Disabilities, Email, Ethnicity, Gender, Mobile, Notes, Phone, Address" 
+            };
+
+            string filename = "people.csv";
+            string filePath = Path.Combine(new[] { Server.MapPath("~/App_Data"), filename });
+
+            IEnumerable<PersonExport> people =
+                    Mapper.Map<IEnumerable<Person>, IEnumerable<PersonExport>>(query.Skip((page - 1) * pageSize).Take(pageSize));
+
+            engine.WriteFile(filePath, people);
+
+            return File(filePath, "text/plain", filename);
+        }
 
 		public virtual ActionResult Details(string id)
 		{

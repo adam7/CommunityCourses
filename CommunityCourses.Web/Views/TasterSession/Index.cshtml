@@ -1,0 +1,20 @@
+﻿@model IEnumerable<CommunityCourses.Web.Model.TasterSession>
+@{
+	ViewBag.Title = "Taster Sessions";
+	Layout = "~/Views/Shared/SiteLayout.cshtml";
+
+	var grid = new WebGrid(source: Model, rowsPerPage: 2);
+}
+<h2>@ViewBag.Title</h2>
+@grid.GetHtml(
+columns: grid.Columns()
+)
+<div id="DetailsDialog">
+</div>
+<p>
+	@Html.PageLinks(ViewData.GetPageNumber(), ViewData.GetTotalPages(), x => Url.Action("Index", new { page = x }))
+</p>
+<p>
+	@Html.ActionLink("Create New", "Create", null, new { @class = "st-button" })
+</p>
+
